@@ -1,12 +1,14 @@
 const { Client, Collection } = require("discord.js");
-const { promisify } = require('util')
-const klaw = require('klaw')
-const path = require('path')
-const guildDB = require('../models/guildDB')
-const userDB = require('../models/userDB')
-const botDB = require('../models/botDB')
+const { promisify } = require('util');
+const klaw = require('klaw');
+const path = require('path');
+const guildDB = require('../models/guildDB');
+const userDB = require('../models/userDB');
+const botDB = require('../models/botDB');
 
 const readdir = promisify(require("fs").readdir);
+
+const Embed = require('../structures/ClientEmbed');
 
 module.exports = class SukiClient extends Client {
     constructor(options) {
@@ -16,6 +18,8 @@ module.exports = class SukiClient extends Client {
       this.guildDB = guildDB;
       this.userDB = userDB;
       this.botDB = botDB;
+
+      this.embed = Embed;
     }
 
     load(commandPath, commandName) {

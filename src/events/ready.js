@@ -21,5 +21,6 @@ async execute() {
   }, 25 * 1000)
 
     console.log(c.green('✅ [Suki] - Está online!'))
+    console.log(c.green(`✅ [Suki] - Online em ${this.client.guilds.cache.size} servidores.`))
   }
 }

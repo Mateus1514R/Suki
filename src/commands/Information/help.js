@@ -38,14 +38,12 @@ module.exports = class Help extends Command {
         });
       }
 
-      const AJUDA = new MessageEmbed()
+      const AJUDA = new this.client.embed(message.author)
         .setAuthor({
           name: `${this.client.user.username} - Central de Ajuda`,
           iconURL: this.client.user.displayAvatarURL({ size: 2048 })
         })
         .setColor("PURPLE")
-        .setTimestamp()
-        .setFooter({text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({dynamic: true, size: 2048})})
 
       if (!args[0]) return await this.menu({ menuOptions, message });
 
@@ -145,14 +143,13 @@ module.exports = class Help extends Command {
         }
       });
 
-      const EMBED = new MessageEmbed()
+      const EMBED = new this.client.embed(message.author)
 
       .setAuthor({
         name: `${this.client.user.username} - Central de Ajuda`,
         iconURL: this.client.user.displayAvatarURL({ size: 2048 })
       })
       .setColor("PURPLE")
-      .setTimestamp()
       .setFooter({text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({dynamic: true, size: 2048})})
         .setDescription(
           `Seja bem vindo a minha central de ajuda.`

@@ -31,7 +31,7 @@ module.exports = class BotInfo extends Command {
     const stopDB = process.hrtime(startDB);
     const pingDB = Math.round((stopDB[0] * 1e9 + stopDB[1]) / 1e6) + "ms";
 
-    const embed = new MessageEmbed()
+    const embed = new this.client.embed(message.author)
       .setAuthor({
         name: `${this.client.user.username}`,
         iconURL: this.client.user.avatarURL({ size: 2048 }),
@@ -43,11 +43,6 @@ module.exports = class BotInfo extends Command {
         },
       ])
       .setColor("#7A0BC0")
-      .setTimestamp()
-      .setFooter({
-        text: `${message.author.tag}`,
-        iconURL: message.author.avatarURL({ dynamic: true, size: 2048 }),
-      });
 
     message.reply({ embeds: [embed] });
   }

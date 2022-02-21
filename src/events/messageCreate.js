@@ -1,5 +1,3 @@
-const { MessageEmbed } = require("discord.js");
-
 module.exports = class messageCreate {
   constructor(client) {
     this.client = client;
@@ -30,11 +28,9 @@ module.exports = class messageCreate {
     try {
       cmd.execute({ message, args });
     } catch (err) {
-      const erro = new MessageEmbed()
+      const erro = new this.client.embed(message.author)
       .setTitle(`❌ Ocorreu um Erro!`)
       .setDescription(`Desculpe, um erro foi encontrado e o comando não foi executado corretamente. Peço que reporte o Bug aos meus desenvolvedores e aguarde o mesmo ser resolvido.]nObrigado.`)
-      .setColor("PURPLE")
-      .setTimestamp()
       await message.reply({embeds: [erro]})
       console.log(err)
     }

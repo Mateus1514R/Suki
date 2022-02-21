@@ -1,5 +1,4 @@
 const Command = require('../../structures/Command')
-const { MessageEmbed } = require('discord.js')
 
 module.exports = class Ping extends Command {
     constructor(client) {
@@ -14,18 +13,16 @@ module.exports = class Ping extends Command {
 
     async execute({message, args}) {
 
-        const embed = new MessageEmbed()
+        const embed = new this.client.embed(message.author)
         .setAuthor({name: `${this.client.user.username} - Ping`, iconURL: this.client.user.avatarURL()})
         .setColor(`PURPLE`)
-        .setTimestamp()
-        .setFooter({text: `${message.author.tag}`, iconURL: message.author.avatarURL({ dynamic: true })})
         .addFields([
             {
                 name: `Conexões`,
                 value: `Ping da API: **${this.client.ws.ping}**ms`
             }
         ])
-        message.reply({embeds: [embed]})
 
+        message.reply({embeds: [embed]})
     }
 }
