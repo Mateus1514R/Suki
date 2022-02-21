@@ -43,7 +43,7 @@ module.exports = class Help extends Command {
           name: `${this.client.user.username} - Central de Ajuda`,
           iconURL: this.client.user.displayAvatarURL({ size: 2048 })
         })
-        .setColor("PURPLE")
+        .setColor("#7A0BC0")
 
       if (!args[0]) return await this.menu({ menuOptions, message });
 
@@ -149,7 +149,7 @@ module.exports = class Help extends Command {
         name: `${this.client.user.username} - Central de Ajuda`,
         iconURL: this.client.user.displayAvatarURL({ size: 2048 })
       })
-      .setColor("PURPLE")
+      .setColor("#7A0BC0")
       .setFooter({text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({dynamic: true, size: 2048})})
         .setDescription(
           `Seja bem vindo a minha central de ajuda.`

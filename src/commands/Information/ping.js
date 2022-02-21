@@ -15,7 +15,7 @@ module.exports = class Ping extends Command {
 
         const embed = new this.client.embed(message.author)
         .setAuthor({name: `${this.client.user.username} - Ping`, iconURL: this.client.user.avatarURL()})
-        .setColor(`PURPLE`)
+        .setColor(`#7A0BC0`)
         .addFields([
             {
                 name: `Conexões`,

@@ -1,4 +1,5 @@
 const { MessageEmbed, Guild } = require('discord.js')
+const e = require('../utils/Emojis')
 
 module.exports = class guildCreate {
   constructor(client) {
@@ -17,19 +18,17 @@ module.exports = class guildCreate {
     .setTimestamp()
     .addFields(
       {
-          name: `Nome:`,
+          name: `${e.ID} Nome:`,
           value: `${guild.name}`,
           inline: true,
         },
         {
-          name: `ID do Servidor`,
-          value: `${guild.id}`,
-          inline: true,
+          name: `${e.ID} ID do Servidor`,
+          value: `> ${guild.id}`
         },
         {
-          name: `Total de Usuários`,
-          value: `${guild.memberCount}`,
-          inline: true,
+          name: `${e.User} Total de Usuários`,
+          value: `> ${guild.memberCount}`
         },
     )
 
