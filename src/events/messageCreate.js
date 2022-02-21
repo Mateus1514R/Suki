@@ -33,6 +33,7 @@ module.exports = class messageCreate {
       if (!existsSync('./logs'))
       mkdirSync('./logs');
 
+      if(message.channel.type === 'GUILD_TEXT')
       appendFileSync('./logs/commands.txt', `Comando executado no servidor ${message.guild.name}\nAutor do Comando: ${message.author.tag} (${message.author.id})\nComando: \`${cmd.name} ${args.join(' ')}\`\n\n`);
     } catch (err) {
       const erro = new this.client.embed(message.author)
