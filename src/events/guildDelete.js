@@ -10,6 +10,8 @@ module.exports = class guildDelete {
 
     const embed = new MessageEmbed()
     .setTitle('Fui removido de um servidor')
+    .setColor("#7A0BC0")
+    .setTimestamp()
     .addFields(
       {
           name: `Nome:`,

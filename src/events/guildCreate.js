@@ -13,6 +13,8 @@ module.exports = class guildCreate {
     
     const embed = new MessageEmbed()
     .setTitle('Fui adicionado em um novo servidor')
+    .setColor("#7A0BC0")
+    .setTimestamp()
     .addFields(
       {
           name: `Nome:`,
