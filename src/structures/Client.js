@@ -2,6 +2,9 @@ const { Client, Collection } = require("discord.js");
 const { promisify } = require('util')
 const klaw = require('klaw')
 const path = require('path')
+const guildDB = require('../models/guildDB')
+const userDB = require('../models/userDB')
+const botDB = require('../models/botDB')
 
 const readdir = promisify(require("fs").readdir);
 
@@ -10,6 +13,9 @@ module.exports = class SukiClient extends Client {
       super(options);
       this.commands = new Collection();
       this.aliases = new Collection();
+      this.guildDB = guildDB;
+      this.userDB = userDB;
+      this.botDB = botDB;
     }
 
     load(commandPath, commandName) {

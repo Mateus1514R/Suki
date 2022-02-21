@@ -15,10 +15,10 @@ module.exports = class Ping extends Command {
     async execute({message, args}) {
 
         const embed = new MessageEmbed()
-        .setAuthor(`${this.client.user.username} - Ping`, this.client.user.avatarURL())
+        .setAuthor({name: `${this.client.user.username} - Ping`, iconURL: this.client.user.avatarURL()})
         .setColor(`PURPLE`)
         .setTimestamp()
-        .setFooter(`${message.author.tag}`)
+        .setFooter({text: `${message.author.tag}`, iconURL: message.author.iconURL({ dynamic: true })})
         .addFields([
             {
                 name: `Conexões`,
