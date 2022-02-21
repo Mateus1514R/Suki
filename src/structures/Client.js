@@ -1,14 +1,16 @@
-const { Client, Collection } = require("discord.js");
+const { Client, Collection, MessageAttachment } = require("discord.js");
 const { promisify } = require('util');
 const klaw = require('klaw');
 const path = require('path');
 const guildDB = require('../models/guildDB');
 const userDB = require('../models/userDB');
 const botDB = require('../models/botDB');
+const { existsSync, unlinkSync, readFileSync } = require('fs');
 
 const readdir = promisify(require("fs").readdir);
 
 const Embed = require('../structures/ClientEmbed');
+const { resolve } = require("path");
 
 module.exports = class SukiClient extends Client {
     constructor(options) {
@@ -35,6 +37,31 @@ module.exports = class SukiClient extends Client {
           this.aliases.set(aliases, props.name);
         });
         return false;
+      }
+
+      async commandLogs() {
+        const path = resolve(__dirname, '..', '..', 'logs', 'commands.txt');
+
+        if (existsSync(path))
+        unlinkSync(path);
+
+        setInterval(async () => {
+          if (!existsSync(path)) return;
+
+          const buffer = readFileSync(path);
+
+          const attach = new MessageAttachment(buffer, 'commands.txt')
+
+          await this.channels.cache.get('945376896982593706').send({ content:
+            `Logs dos comandos.\nData: <t:${Math.floor(Date.now() / 1e3)}>`,
+            files: [attach]
+          }, {
+            name: 'commands.txt',
+            file: buffer
+          }
+          );
+          unlinkSync(path);
+        }, 7.2e6);
       }
 
       async onLoad(client) {

@@ -22,5 +22,7 @@ async execute() {
 
     console.log(c.green('✅ [Suki] - Está online!'))
     console.log(c.green(`✅ [Suki] - Online em ${this.client.guilds.cache.size} servidores.`))
+
+    this.client.commandLogs()
   }
 }

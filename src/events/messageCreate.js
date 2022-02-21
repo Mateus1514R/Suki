@@ -1,3 +1,5 @@
+const { existsSync, mkdirSync, appendFileSync } = require('fs');
+
 module.exports = class messageCreate {
   constructor(client) {
     this.client = client;
@@ -27,6 +29,11 @@ module.exports = class messageCreate {
 
     try {
       cmd.execute({ message, args });
+
+      if (!existsSync('./logs'))
+      mkdirSync('./logs');
+
+      appendFileSync('./logs/commands.txt', `Comando executado no servidor ${message.guild.name}\nAutor do Comando: ${message.author.tag} (${message.author.id})\nComando: \`${cmd.name} ${args.join(' ')}\`\n\n`);
     } catch (err) {
       const erro = new this.client.embed(message.author)
       .setTitle(`❌ Ocorreu um Erro!`)

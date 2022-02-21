@@ -32,4 +32,6 @@ process.on('uncaughtException', (err) => {
 
 client.onLoad(client)
 
+client.commandLogs();
+
 client.login(process.env.TOKEN)
