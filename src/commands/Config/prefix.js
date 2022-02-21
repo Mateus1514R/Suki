@@ -7,7 +7,7 @@ module.exports = class Prefix extends Command {
 
     this.name = "prefix";
     this.category = "Config";
-    this.description = "Muda o prefixo do bot";
+    this.description = "Altere o prefixo do BOT em seu servidor.";
     this.aliases = ["setprefix", "prefixo"];
   }
 

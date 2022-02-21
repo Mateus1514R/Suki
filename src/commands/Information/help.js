@@ -39,13 +39,13 @@ module.exports = class Help extends Command {
       }
 
       const AJUDA = new MessageEmbed()
-        .setAuthor(
-          `${this.client.user.username} - Central de Ajuda`,
-          this.client.user.displayAvatarURL({ size: 2048 })
-        )
+        .setAuthor({
+          name: `${this.client.user.username} - Central de Ajuda`,
+          iconURL: this.client.user.displayAvatarURL({ size: 2048 })
+        })
         .setColor("PURPLE")
         .setTimestamp()
-        .setFooter(`${message.author.tag}`)
+        .setFooter({text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({dynamic: true, size: 2048})})
 
       if (!args[0]) return await this.menu({ menuOptions, message });
 
@@ -62,11 +62,11 @@ module.exports = class Help extends Command {
 
       AJUDA.addFields({
         name: `Informações do Comando:`,
-        value: `> Nome do Comando: **${command.name}**\n>Aliases: **${
+        value: `> Nome do Comando: **${command.name}**\n> Aliases: **${
           !command.aliases.length
             ? "Este comando não tem aliases."
             : command.aliases.join(", ")
-        }**\n>Descrição: **${
+        }**\n> Descrição: **${
           !command.description.length
             ? "Este comando não tem descrição."
             : command.description
@@ -93,7 +93,7 @@ module.exports = class Help extends Command {
               description:
                 "Comandos relacionados a configuração do bot na guilda.",
               value: option.value,
-              emoji: ``,
+              emoji: `🔧`,
             });
             break;
           }
@@ -106,7 +106,7 @@ module.exports = class Help extends Command {
             });
             break;
           }
-          case "Info": {
+          case "Information": {
             menu.addOptions({
               label: option.label ? option.label : option.value,
               description: "Comandos de algumas uteis informações diversas.",
@@ -147,13 +147,13 @@ module.exports = class Help extends Command {
 
       const EMBED = new MessageEmbed()
 
-      .setAuthor(
-        `${this.client.user.username} - Central de Ajuda`,
-        this.client.user.displayAvatarURL({ size: 2048 })
-      )
+      .setAuthor({
+        name: `${this.client.user.username} - Central de Ajuda`,
+        iconURL: this.client.user.displayAvatarURL({ size: 2048 })
+      })
       .setColor("PURPLE")
       .setTimestamp()
-      .setFooter(`${message.author.tag}`)
+      .setFooter({text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({dynamic: true, size: 2048})})
         .setDescription(
           `Seja bem vindo a minha central de ajuda.`
         )

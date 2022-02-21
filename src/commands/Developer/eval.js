@@ -7,7 +7,7 @@ module.exports = class Eval extends Command {
     this.client = client;
 
     this.name = "eval";
-    this.category = "Dev";
+    this.category = "Developer";
     this.description = "Executa código";
     this.aliases = ["ev", "e"];
   }

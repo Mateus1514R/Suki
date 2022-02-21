@@ -9,7 +9,7 @@ module.exports = class Shell extends Command {
     this.client = client;
 
     this.name = "shell";
-    this.category = "Dev";
+    this.category = "Developer";
     this.description = "Executa código na sua máquina";
     this.aliases = ["sh"];
   }
