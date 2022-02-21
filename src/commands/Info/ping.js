@@ -18,7 +18,7 @@ module.exports = class Ping extends Command {
         .setAuthor({name: `${this.client.user.username} - Ping`, iconURL: this.client.user.avatarURL()})
         .setColor(`PURPLE`)
         .setTimestamp()
-        .setFooter({text: `${message.author.tag}`, iconURL: message.author.iconURL({ dynamic: true })})
+        .setFooter({text: `${message.author.tag}`, iconURL: message.author.avatarURL({ dynamic: true })})
         .addFields([
             {
                 name: `Conexões`,
