@@ -22,6 +22,7 @@ module.exports = class SukiClient extends Client {
       this.botDB = botDB;
 
       this.embed = Embed;
+      this.getUser = this.findUser;
     }
 
     load(commandPath, commandName) {
@@ -38,6 +39,36 @@ module.exports = class SukiClient extends Client {
         });
         return false;
       }
+
+      async findUser(args, message) {
+        if (!args) return message.author;
+        if (args.startsWith("<@") && args.endsWith(">")) {
+          let mention = args;
+          mention = mention.slice(2, -1);
+      
+          if (mention.startsWith("!")) {
+            mention = mention.slice(1);
+          }
+      
+          return await message.client.users.fetch(mention);
+        } else {
+          let user;
+          try {
+            user = await message.guild.members
+              .search({ query: args })
+              .then(async (x) => await message.client.users.fetch(x.first().user.id));
+          } catch {
+            let user2;
+            try {
+              user2 = await this.client.users.fetch(args);
+            } catch {
+              return;
+            }
+            return user2;
+          }
+          return user;
+        }
+      };
 
       async commandLogs() {
         const path = resolve(__dirname, '..', '..', 'logs', 'commands.txt');
