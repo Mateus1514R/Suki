@@ -1,5 +1,6 @@
 /* eslint-disable no-var */
-const { existsSync, mkdirSync, appendFileSync } = require('fs');
+const moment = require('moment');
+
 
 module.exports = class messageCreate {
 	constructor (client) {
@@ -32,22 +33,22 @@ module.exports = class messageCreate {
 
 		if(!cmd) return;
 
-		try {
-			cmd.execute({ message, args });
+		if(command) {
+			this.client.sendLogs(`\`---\`\nData: **${moment(Date.now()).format('L LT')}**\nComando **${cmd.name}** executado no servidor **${message.guild.name}** (\`${message.guild.id}\`)\nUsuário: **${message.author.tag}** (\`${message.author.id}\`)\n\`---\``);
 
-			if (!existsSync('./logs')) {mkdirSync('./logs');}
+			try {
+				cmd.execute({ message, args });
 
-			if(message.channel.type === 'GUILD_TEXT') {appendFileSync('./logs/commands.txt', `Comando executado no servidor ${message.guild.name}\nAutor do Comando: ${message.author.tag} (${message.author.id})\nComando: \`${cmd.name} ${args.join(' ')}\`\n\n`);}
-
+			}
+			catch (err) {
+				const erro = new this.client.embed(message.author)
+					.setTitle('❌ Ocorreu um Erro!')
+					.setDescription('Desculpe, um erro foi encontrado e o comando não foi executado corretamente. Peço que reporte o Bug aos meus desenvolvedores e aguarde o mesmo ser resolvido.]nObrigado.');
+				await message.reply({ embeds: [erro] });
+				console.log(err);
+			}
+			const user = await this.client.userDB.findOne({ _id: message.author.id });
+			if(!user) await this.client.userDB.create({ _id: message.author.id });
 		}
-		catch (err) {
-			const erro = new this.client.embed(message.author)
-				.setTitle('❌ Ocorreu um Erro!')
-				.setDescription('Desculpe, um erro foi encontrado e o comando não foi executado corretamente. Peço que reporte o Bug aos meus desenvolvedores e aguarde o mesmo ser resolvido.]nObrigado.');
-			await message.reply({ embeds: [erro] });
-			console.log(err);
-		}
-		const user = await this.client.userDB.findOne({ _id: message.author.id });
-		if(!user) await this.client.userDB.create({ _id: message.author.id });
 	}
 };

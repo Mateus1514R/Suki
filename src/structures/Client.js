@@ -1,18 +1,16 @@
 /* eslint-disable no-useless-return */
 /* eslint-disable no-return-await */
-const { Client, Collection, MessageAttachment } = require('discord.js');
+const { Client, Collection, WebhookClient } = require('discord.js');
 const { promisify } = require('util');
 const klaw = require('klaw');
 const path = require('path');
+
 const guildDB = require('../models/guildDB');
 const userDB = require('../models/userDB');
 const botDB = require('../models/botDB');
-const { existsSync, unlinkSync, readFileSync } = require('fs');
+const Embed = require('../structures/ClientEmbed');
 
 const readdir = promisify(require('fs').readdir);
-
-const Embed = require('../structures/ClientEmbed');
-const { resolve } = require('path');
 
 module.exports = class SukiClient extends Client {
 	constructor (options) {
@@ -25,6 +23,7 @@ module.exports = class SukiClient extends Client {
 
 		this.embed = Embed;
 		this.getUser = this.findUser;
+		this.sendLogs = this.commandLogs;
 	}
 
 	load (commandPath, commandName) {
@@ -75,29 +74,15 @@ module.exports = class SukiClient extends Client {
 		}
 	};
 
-	async commandLogs () {
-		const path = resolve(__dirname, '..', '..', 'logs', 'commands.txt');
-
-		if (existsSync(path)) {unlinkSync(path);}
-
-		setInterval(async () => {
-			if (!existsSync(path)) return;
-
-			const buffer = readFileSync(path);
-
-			const attach = new MessageAttachment(buffer, 'commands.txt');
-
-			await this.channels.cache.get('945376896982593706').send({ content:
-            `Logs dos comandos.\nData: <t:${Math.floor(Date.now() / 1e3)}>`,
-			files: [attach]
-			}, {
-				name: 'commands.txt',
-				file: buffer
-			}
-			);
-			unlinkSync(path);
-		}, 7.2e6);
-	}
+	async commandLogs (content) {
+		const webhookClient = new WebhookClient({
+		  token: process.env.LOGS_TOKEN,
+		  id: process.env.LOGS_ID
+		});
+		webhookClient.send({
+		  content: String(content)
+		});
+	  }
 
 	async onLoad (client) {
 		klaw('src/commands').on('data', (item) => {

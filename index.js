@@ -32,6 +32,4 @@ process.on('unhandledRejection', (err) => {
 
 client.onLoad(client);
 
-client.commandLogs();
-
 client.login(process.env.TOKEN);
