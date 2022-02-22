@@ -42,7 +42,6 @@ module.exports = class BotInfo extends Command {
           value: `${e.Owner} Donos: **[Vxk](https://github.com/VCScript)** | **[Niskii](https://github.com/Niskii3)**\nPrefixo: **${server.prefix}**\nUsuários: **${users}**\nServidores: **${servers}**`,
         },
       ])
-      .setColor("#7A0BC0")
 
     message.reply({ embeds: [embed] });
   }

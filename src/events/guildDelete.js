@@ -1,4 +1,4 @@
-const { MessageEmbed, Guild } = require('discord.js')
+const { MessageEmbed, Guild } = require("discord.js");
 
 module.exports = class guildDelete {
   constructor(client) {
@@ -9,27 +9,29 @@ module.exports = class guildDelete {
     this.client.guildDB.findOneAndDelete({ guildID: guild.id });
 
     const embed = new MessageEmbed()
-    .setTitle('Fui removido de um servidor')
-    .setColor("#7A0BC0")
-    .setTimestamp()
-    .addFields(
-      {
-          name: `Nome:`,
-          value: `${guild.name}`,
-          inline: true,
+      .setAuthor({
+        name: `${this.client.user.username} - Removido`,
+        iconURL: this.client.user.avatarURL(),
+      })
+      .setColor("#7A0BC0")
+      .setTimestamp()
+      .addFields(
+        {
+          name: `${e.Cloud} Nome:`,
+          value: `> ${guild.name}`,
         },
         {
-          name: `ID do Servidor`,
-          value: `${guild.id}`,
-          inline: true,
+          name: `${e.ID} ID do Servidor`,
+          value: `> ${guild.id}`,
         },
         {
-          name: `Total de Usuários`,
-          value: `${guild.memberCount}`,
-          inline: true,
-        },
-    )
+          name: `${e.User} Total de Usuários`,
+          value: `> ${guild.memberCount}`,
+        }
+      );
 
-    this.client.channels.cache.get('945345278754582578').send({ embeds: [embed] })
+    this.client.channels.cache
+      .get("945345278754582578")
+      .send({ embeds: [embed] });
   }
-}
+};

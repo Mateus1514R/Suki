@@ -1,5 +1,5 @@
-const { MessageEmbed, Guild } = require('discord.js')
-const e = require('../utils/Emojis')
+const { MessageEmbed, Guild } = require("discord.js");
+const e = require("../utils/Emojis");
 
 module.exports = class guildCreate {
   constructor(client) {
@@ -8,30 +8,34 @@ module.exports = class guildCreate {
 
   async execute(guild = Guild) {
     this.client.guildDB.create({
-        guildID: guild.id,
-        prefix: 's!'
-    })
-    
+      guildID: guild.id,
+      prefix: "s!",
+    });
+
     const embed = new MessageEmbed()
-    .setTitle('Fui adicionado em um novo servidor')
-    .setColor("#7A0BC0")
-    .setTimestamp()
-    .addFields(
-      {
-          name: `${e.ID} Nome:`,
-          value: `${guild.name}`,
-          inline: true,
+      .setAuthor({
+        name: `${this.client.user.username} - Adicionado`,
+        iconURL: this.client.user.avatarURL(),
+      })
+      .setColor("#7A0BC0")
+      .setTimestamp()
+      .addFields(
+        {
+          name: `${e.Cloud} Nome:`,
+          value: `> ${guild.name}`,
         },
         {
           name: `${e.ID} ID do Servidor`,
-          value: `> ${guild.id}`
+          value: `> ${guild.id}`,
         },
         {
           name: `${e.User} Total de Usuários`,
-          value: `> ${guild.memberCount}`
-        },
-    )
+          value: `> ${guild.memberCount}`,
+        }
+      );
 
-    this.client.channels.cache.get('945345278754582578').send({ embeds: [embed] })
+    this.client.channels.cache
+      .get("945345278754582578")
+      .send({ embeds: [embed] });
   }
-}
+};

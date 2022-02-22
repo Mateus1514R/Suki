@@ -9,10 +9,13 @@ module.exports = class messageCreate {
     const GetMention = (id) => new RegExp(`^<@!?${id}>( |)$`);
 
     const server = await this.client.guildDB.findOne({ guildID: message.guild.id });
-    if(!server) await this.client.guildDB.create({ guildID: message.guild.id })
 
     var prefix = prefix;
-    prefix = server.prefix;
+    if(!server) {
+      prefix = "s!"
+    } else {
+      prefix = server.prefix;
+    }
 
     if (message.content.match(GetMention(this.client.user.id))) {
       message.reply(`Olá ${message.author}, meu prefixo é **${prefix}**`);
@@ -35,6 +38,7 @@ module.exports = class messageCreate {
 
       if(message.channel.type === 'GUILD_TEXT')
       appendFileSync('./logs/commands.txt', `Comando executado no servidor ${message.guild.name}\nAutor do Comando: ${message.author.tag} (${message.author.id})\nComando: \`${cmd.name} ${args.join(' ')}\`\n\n`);
+    
     } catch (err) {
       const erro = new this.client.embed(message.author)
       .setTitle(`❌ Ocorreu um Erro!`)
