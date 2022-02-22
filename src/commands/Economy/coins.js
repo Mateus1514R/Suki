@@ -19,9 +19,9 @@ module.exports = class Coins extends Command {
     let USER = await this.client.getUser(args[0], message)
     if(!USER) USER = message.author
 
-    const user = this.client.userDB.findOne({_id: USER.id})
+    const user = await this.client.userDB.findOne({_id: USER.id})
 
-    return message.reply(`${e.Crystal} | ${message.author}, você possui **${user.coins}** coins.`)
+    return message.reply(`${e.Crystal} | ${message.author}, ${USER == message.author ? "você possui" : `o(a) ${USER.username} possui`} **${(user.coins)}** coins.`)
 
   }
 };
