@@ -38,12 +38,12 @@ module.exports = class BotInfo extends Command {
 			.addFields([
 				{
 					name: 'Informações Básicas:',
-					value: `${e.Owner} | Criadores: **[Vxk](https://github.com/VCScript)** - **[Niskii](https://github.com/Niskii3)**\n${e.Prefix} | Prefixo: **${server.prefix}**\n${e.User} | Usuários: **${users}**\n${e.World} | Servidores: **${servers}**\n${e.Archive} | Comandos: **${commands}**`,
+					value: `${e.Bot} | Nome: **[Suki](https://github.com/Niskii3/Suki)**\n${e.Owner} | Criadores: **[Vxk](https://github.com/VCScript)** - **[Niskii](https://github.com/Niskii3)**\n${e.Prefix} | Prefixo: **${server.prefix}**\n${e.User} | Usuários: **${users}**\n${e.World} | Servidores: **${servers}**\n${e.Info} Criada em: **<t:1637891973:d>**`,
 					inline: true
 				},
 				{
 					name: 'Informações Técnicas:',
-					value: `${e.Loading} | RAM: **${memory}MB**\n${e.Time} | Uptime: **${uptime}**\n${e.NodeJS} | Node.js: **${version}**\n${e.Discord} | Discord.js: **v${Discord.version}**\n${e.Version} | Plataforma: **${system}**`,
+					value: `${e.Archive} | Comandos: **${commands}**\n${e.Loading} | RAM: **${memory}MB**\n${e.Time} | Uptime: **${uptime}**\n${e.NodeJS} | Node.js: **${version}**\n${e.Discord} | Discord.js: **v${Discord.version}**\n${e.Version} | Plataforma: **${system}**`,
 					inline: true
 				}
 			]);
@@ -59,7 +59,12 @@ module.exports = class BotInfo extends Command {
 					.setLabel('Suporte')
 					.setStyle('LINK')
 					.setURL('https://discord.gg/xBe7hABxMD')
-					.setEmoji(e.Rules)
+					.setEmoji(e.Rules),
+				new MessageButton()
+					.setLabel('Repositório')
+					.setStyle('LINK')
+					.setURL('https://github.com/Niskii3/Suki')
+					.setEmoji(e.Bot)
 			);
 
 		message.reply({ embeds: [embed], components: [row] });

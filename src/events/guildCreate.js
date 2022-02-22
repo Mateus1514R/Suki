@@ -35,7 +35,7 @@ module.exports = class guildCreate {
 			);
 
 		this.client.channels.cache
-			.get('945345278754582578')
+			.get(process.env.SERVER_LOGS)
 			.send({ embeds: [embed] });
 	}
 };
