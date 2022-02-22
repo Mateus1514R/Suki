@@ -1,4 +1,5 @@
-const { MessageSelectMenu, MessageActionRow, MessageEmbed } = require("discord.js");
+const { MessageSelectMenu, MessageActionRow } = require("discord.js");
+const e = require('../../utils/Emojis')
 
 const Command = require("../../structures/Command");
 
@@ -33,8 +34,8 @@ module.exports = class Help extends Command {
           commandList: commands
             .filter((x) => x.category === value)
             .sort((a, b) => a.name.localeCompare(b.name))
-            .map((f) => `・${f.name}`)
-            .join("\n"),
+            .map((f) => `**${f.name}**`)
+            .join(" | "),
         });
       }
 
@@ -54,17 +55,17 @@ module.exports = class Help extends Command {
 
         if (!command) {
           return message.reply(
-            `Desculpe, não encontrei este comando.`
+            `${e.Error} | ${message.author}, não encontrei o comando solicitado.`
           );
         }
 
       AJUDA.addFields({
         name: `Informações do Comando:`,
-        value: `> Nome do Comando: **${command.name}**\n> Aliases: **${
+        value: `> ${e.Dev} | Nome do Comando: **${command.name}**\n> ${e.Link} | Aliases: **${
           !command.aliases.length
             ? "Este comando não tem aliases."
             : command.aliases.join(", ")
-        }**\n> Descrição: **${
+        }**\n> ${e.Archive} | Descrição: **${
           !command.description.length
             ? "Este comando não tem descrição."
             : command.description
@@ -91,7 +92,7 @@ module.exports = class Help extends Command {
               description:
                 "Comandos relacionados a configuração do bot na guilda.",
               value: option.value,
-              emoji: `🔧`,
+              emoji: e.Bot,
             });
             break;
           }
@@ -109,7 +110,7 @@ module.exports = class Help extends Command {
               label: option.label ? option.label : option.value,
               description: "Comandos de algumas uteis informações diversas.",
               value: option.value,
-              emoji: `📚`,
+              emoji: e.Archive,
             });
             break;
           }
@@ -143,6 +144,8 @@ module.exports = class Help extends Command {
         }
       });
 
+      const server = await this.client.guildDB.findOne({guildID: message.guild.id})
+
       const EMBED = new this.client.embed(message.author)
 
       .setAuthor({
@@ -152,7 +155,7 @@ module.exports = class Help extends Command {
       .setColor("#7A0BC0")
       .setFooter({text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({dynamic: true, size: 2048})})
         .setDescription(
-          `Seja bem vindo a minha central de ajuda.`
+          `Olá ${message.author}, seja bem vindo a minha central de ajuda, aqui você terá acesso a todas as minhas funcionalidades disponíveis para seu uso!\n\nPara receber mais informação de algum comando, utilize **${!server.prefix ? "s!" : server.prefix}ajuda <comando>**.\nSelecione no menu abaixo a categoria que deseja ver.`
         )
 
       row.addComponents(menu);
@@ -174,7 +177,7 @@ module.exports = class Help extends Command {
       collector.on("collect", async (r) => {
         if (r.user.id !== message.author.id)
           return r.reply({
-            content: `Desculpe, você precisa executar o comando para isso.`,
+            content: `${e.Error} | ${message.author}, você precisa executar o comando para isso.`,
             ephemeral: true,
           });
 

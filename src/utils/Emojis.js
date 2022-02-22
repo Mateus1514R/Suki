@@ -17,5 +17,7 @@ module.exports = {
     Rules: "<:Rules:945677376594018404>",
     NodeJS: "<:NodeJS:945678818658631710>",
     Discord: "<:Discord:945679796925526026>",
-    Version: "<:Version:945680889231343707>"
+    Version: "<:Version:945680889231343707>",
+    Dev: "<:Dev:945747642573520936>",
+    Bot: "<:Bot:945748531594014752>"
 }
