@@ -1,3 +1,0 @@
-Comando executado no servidor Suki's Cave
-Autor do Comando: vxk 🖤#1834 (689265428769669155)
-Comando: `help `
