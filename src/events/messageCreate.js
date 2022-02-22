@@ -1,52 +1,53 @@
+/* eslint-disable no-var */
 const { existsSync, mkdirSync, appendFileSync } = require('fs');
 
 module.exports = class messageCreate {
-  constructor(client) {
-    this.client = client;
-  }
+	constructor (client) {
+		this.client = client;
+	}
 
-  async execute(message) {
-    const GetMention = (id) => new RegExp(`^<@!?${id}>( |)$`);
+	async execute (message) {
+		const GetMention = (id) => new RegExp(`^<@!?${id}>( |)$`);
 
-    const server = await this.client.guildDB.findOne({ guildID: message.guild.id });
+		const server = await this.client.guildDB.findOne({ guildID: message.guild.id });
 
-    var prefix = prefix;
-    if(!server) {
-      prefix = "s!"
-    } else {
-      prefix = server.prefix;
-    }
+		var prefix = prefix;
+		if(!server) {
+			prefix = 's!';
+		}
+		else {
+			prefix = server.prefix;
+		}
 
-    if (message.content.match(GetMention(this.client.user.id))) {
-      message.reply(`Olá ${message.author}, meu prefixo é **${prefix}**`);
-    }
+		if (message.content.match(GetMention(this.client.user.id))) {
+			message.reply(`Olá ${message.author}, meu prefixo é **${prefix}**`);
+		}
 
-    if (message.content.indexOf(prefix) !== 0) return;
-    const args = message.content.slice(prefix.length).split(/ +/);
-    const command = args.shift().toLowerCase();
-    const cmd =
+		if (message.content.indexOf(prefix) !== 0) return;
+		const args = message.content.slice(prefix.length).split(/ +/);
+		const command = args.shift().toLowerCase();
+		const cmd =
       this.client.commands.get(command) ||
       this.client.commands.get(this.client.aliases.get(command));
 
-    if(!cmd) return;
+		if(!cmd) return;
 
-    try {
-      cmd.execute({ message, args });
+		try {
+			cmd.execute({ message, args });
 
-      if (!existsSync('./logs'))
-      mkdirSync('./logs');
+			if (!existsSync('./logs')) {mkdirSync('./logs');}
 
-      if(message.channel.type === 'GUILD_TEXT')
-      appendFileSync('./logs/commands.txt', `Comando executado no servidor ${message.guild.name}\nAutor do Comando: ${message.author.tag} (${message.author.id})\nComando: \`${cmd.name} ${args.join(' ')}\`\n\n`);
-    
-    } catch (err) {
-      const erro = new this.client.embed(message.author)
-      .setTitle(`❌ Ocorreu um Erro!`)
-      .setDescription(`Desculpe, um erro foi encontrado e o comando não foi executado corretamente. Peço que reporte o Bug aos meus desenvolvedores e aguarde o mesmo ser resolvido.]nObrigado.`)
-      await message.reply({embeds: [erro]})
-      console.log(err)
-    }
-    const user = await this.client.userDB.findOne({_id: message.author.id})
-    if(!user) await this.client.userDB.create({_id: message.author.id})
-  }
+			if(message.channel.type === 'GUILD_TEXT') {appendFileSync('./logs/commands.txt', `Comando executado no servidor ${message.guild.name}\nAutor do Comando: ${message.author.tag} (${message.author.id})\nComando: \`${cmd.name} ${args.join(' ')}\`\n\n`);}
+
+		}
+		catch (err) {
+			const erro = new this.client.embed(message.author)
+				.setTitle('❌ Ocorreu um Erro!')
+				.setDescription('Desculpe, um erro foi encontrado e o comando não foi executado corretamente. Peço que reporte o Bug aos meus desenvolvedores e aguarde o mesmo ser resolvido.]nObrigado.');
+			await message.reply({ embeds: [erro] });
+			console.log(err);
+		}
+		const user = await this.client.userDB.findOne({ _id: message.author.id });
+		if(!user) await this.client.userDB.create({ _id: message.author.id });
+	}
 };

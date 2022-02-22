@@ -1,14 +1,14 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
 let botDB = new Schema({
-    botID: {
-        required: true,
-        type: String
-      },
-      blacklist: {
-        type: Array
-      }
+	botID: {
+		required: true,
+		type: String
+	},
+	blacklist: {
+		type: Array
+	}
 });
 
-let Bot = model("Bot", botDB);
+let Bot = model('Bot', botDB);
 module.exports = Bot;
