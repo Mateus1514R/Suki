@@ -23,11 +23,11 @@ module.exports = class Welcome extends Command {
         `${e.Error} | ${message.author}, você precisa da permissão \`Gerenciar Servidor\` para usar este comando.`
       );
 
-    if (!args[0]) {
-      const guildDBData = await this.client.guildDB.findOne({
-        guildID: message.guild.id,
-      });
+    const guildDBData = await this.client.guildDB.findOne({
+      guildID: message.guild.id,
+    });
 
+    if (!args[0]) {
       const embed = new this.client.embed(message.author)
         .setAuthor({
           name: message.guild.name,
@@ -42,7 +42,7 @@ module.exports = class Welcome extends Command {
             }**\n> ${e.World} | Chat: **${
               guildDBData.welcome.channel == "null"
                 ? "Sem canal definido."
-                : guildDBData.welcome.channel
+                : `<#${guildDBData.welcome.channel}>`
             }**\n> ${e.Chat} | Mensagem: \`\`\` ${
               guildDBData.welcome.message == "null"
                 ? "# Nenhuma mensagem definida."
@@ -58,7 +58,7 @@ module.exports = class Welcome extends Command {
         .setLabel("")
         .setEmoji(e.Left)
         .setStyle("SECONDARY")
-        .setDisabled(true)
+        .setDisabled(true);
 
       const right = new MessageButton()
         .setCustomId("right")
@@ -109,9 +109,9 @@ module.exports = class Welcome extends Command {
 
               right.setDisabled(true);
               left.setDisabled(false);
-              await r.deferUpdate()
-              await msg.edit({ embeds: [info] });
-
+              await r.deferUpdate();
+              await msg.edit({ embeds: [info], components: [row] });
+              break;
             case "left":
               const embed = new this.client.embed(message.author)
                 .setAuthor({
@@ -129,7 +129,7 @@ module.exports = class Welcome extends Command {
                     }**\n> ${e.World} | Chat: **${
                       guildDBData.welcome.channel == "null"
                         ? "Sem canal definido."
-                        : guildDBData.welcome.channel
+                        : `<#${guildDBData.welcome.channel}>`
                     }**\n> ${e.Chat} | Mensagem: \`\`\` ${
                       guildDBData.welcome.message == "null"
                         ? "# Nenhuma mensagem definida."
@@ -140,20 +140,104 @@ module.exports = class Welcome extends Command {
 
               right.setDisabled(false);
               left.setDisabled(true);
-              await r.deferUpdate()
-              await msg.edit({ embeds: [embed] });
+              await r.deferUpdate();
+              await msg.edit({ embeds: [embed], components: [row] });
+              break;
           }
         });
+      return;
     }
 
-    /*if (guildDBData) {
-      guildDBData.prefix = args[0];
-      await guildDBData.save();
-    } else {
-      await this.client.guildDB.create({
-        guildID: message.guild.id,
-        prefix: args[0],
-      });
-    }*/
-  }
+    if (["set", "channel", "chat", "canal"].includes(args[0].toLowerCase())) {
+      const channel =
+        message.mentions.channels.first() ||
+        message.guild.channels.cache.get(args[1]);
+
+      if (!channel) {
+        return message.reply(
+          `${e.Error} | ${message.author}, você precisa inserir o canal.`
+        );
+      } else if (channel.id == guildDBData.welcome.channel) {
+        return message.reply(
+          `${e.Error} | ${message.author}, o canal inserido é o mesmo definido atualmente.`
+        );
+      } else if (!channel.type === "text") {
+        return message.reply(
+          `${e.Error} | ${message.author}, você precisa inserir um canal de texto.`
+        );
+      } else {
+        if (guildDBData) {
+          guildDBData.welcome.channel = channel.id;
+          await guildDBData.save();
+        } else {
+          await this.client.guildDB.create({
+            guildID: message.guild.id,
+            "welcome.channel": channel,
+          });
+        }
+        await message.reply(
+          `${e.Correct} | ${message.author}, canal de entrada definido com sucesso para ${channel}.`
+        );
+      }
+      return;
+    }
+
+    if (["message", "msg"].includes(args[0].toLowerCase())) {
+        let msg = args.slice(1).join(" ");
+
+      if (!msg) {
+        return message.reply(
+          `${e.Error} | ${message.author}, você precisa inserir a mensagem.`
+        );
+      } else if (msg == guildDBData.welcome.message) {
+        return message.reply(
+          `${e.Error} | ${message.author}, a mensagem inserida é o mesma definida atualmente.`
+        );
+      } else if (msg.length > 200) {
+        return message.reply(
+          `${e.Error} | ${message.author}, a mensagem deve ter no máximo 200 caracteres.`
+        );
+      } else {
+        if (guildDBData) {
+          guildDBData.welcome.message = msg;
+          await guildDBData.save();
+        } else {
+          await this.client.guildDB.create({
+            guildID: message.guild.id,
+            "welcome.message": msg,
+          });
+        }
+        await message.reply(
+          `${e.Correct} | ${message.author}, mensagem de boas-vindas definida com sucesso para \`\`\`${msg}\`\`\``
+        );
+      }
+      return;
+    }
+
+    if (["stats", "status", "on", "off"].includes(args[0].toLowerCase())) {
+      if (guildDBData.welcome.status == false) {
+        if (guildDBData.welcome.channel == "null") {
+          return message.reply(
+            `${e.Error} | ${message.author}, você precisa definir o canal de entrada para ligar o sistema.`
+          );
+        } else if (guildDBData.welcome.message == "null") {
+          return message.reply(
+            `${e.Error} | ${message.author}, você precisa definir a mensagem de boas-vindas para ligar o sistema.`
+          );
+        } else {
+          guildDBData.welcome.status = true;
+          await guildDBData.save();
+
+          return message.reply(`${e.Correct} | ${message.author}, sistema ligado com sucesso!`)
+        }
+      }
+      if (guildDBData.welcome.status == true) {
+          guildDBData.welcome.status = false;
+          await guildDBData.save();
+
+          return message.reply(`${e.Correct} | ${message.author}, sistema desligado com sucesso!`)
+        }
+      }
+      return;
+    }
 };
