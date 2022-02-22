@@ -1,8 +1,20 @@
 {
   "name": "suki",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
+  "version": "1.2",
+  "description": "An open source bot made with discord.js using javascript.",
+  "main": "src/index.js",
+	"contributors": [
+		"Niskii <psychoniskii2@gmail.com>",
+		"Vxk <vcodescript@gmail.com>"
+	],
+  "repository": {
+		"type": "git",
+		"url": "https://github.com/Niskii3/Suki.git"
+	},
+	"bugs": {
+		"url": "https://github.com/Niskii3/Suki/issues"
+	},
+  "license": "Apache-2.0",
   "scripts": {
     "dev": "nodemon",
     "start": "node --max_old_space_size=512 --optimize_for_size --expose-gc --gc-interval=1 index.js",

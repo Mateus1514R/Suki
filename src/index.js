@@ -1,5 +1,5 @@
 const { config } = require('dotenv');
-const Client = require('./src/structures/Client');
+const Client = require('./structures/Client');
 const { connect } = require('mongoose');
 const c = require('colors');
 
