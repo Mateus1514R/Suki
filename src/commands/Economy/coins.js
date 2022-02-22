@@ -7,7 +7,7 @@ module.exports = class Coins extends Command {
 		this.client = client;
 
 		this.name = 'coins';
-		this.category = 'Information';
+		this.category = 'Economy';
 		this.description = 'Veja quanto de dinheiro você possui.';
 		this.aliases = ['atm'];
 	}

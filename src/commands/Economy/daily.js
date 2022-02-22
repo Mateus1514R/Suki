@@ -9,7 +9,7 @@ module.exports = class Daily extends Command {
 		this.client = client;
 
 		this.name = 'daily';
-		this.category = 'Information';
+		this.category = 'Economy';
 		this.description = 'Ganhe seu dinheiro diário.';
 		this.aliases = ['diario'];
 	}

@@ -102,7 +102,7 @@ module.exports = class Help extends Command {
 						label: option.label ? option.label : option.value,
 						description: 'Comandos para utilizar a economia do bot.',
 						value: option.value,
-						emoji: '',
+						emoji: e.Crystal,
 					});
 					break;
 				}
@@ -112,33 +112,6 @@ module.exports = class Help extends Command {
 						description: 'Comandos de algumas uteis informações diversas.',
 						value: option.value,
 						emoji: e.Archive,
-					});
-					break;
-				}
-				case 'Miscellaneous': {
-					menu.addOptions({
-						label: option.label ? option.label : option.value,
-						description: 'Comandos sem categoria definida.',
-						value: option.value,
-						emoji: '',
-					});
-					break;
-				}
-				case 'Moderation': {
-					menu.addOptions({
-						label: option.label ? option.label : option.value,
-						description: 'Comandos para moderadores do servidor.',
-						value: option.value,
-						emoji: '',
-					});
-					break;
-				}
-				case 'Music': {
-					menu.addOptions({
-						label: option.label ? option.label : option.value,
-						description: 'Comandos para escutar música utilizando o bot.',
-						value: option.value,
-						emoji: '',
 					});
 					break;
 				}
