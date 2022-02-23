@@ -1,4 +1,3 @@
-/* eslint-disable no-case-declarations */
 const Command = require('../../structures/Command');
 const e = require('../../utils/Emojis');
 const { MessageActionRow, MessageButton } = require('discord.js');
@@ -90,7 +89,7 @@ module.exports = class Welcome extends Command {
 
 				.on('collect', async (r) => {
 					switch (r.customId) {
-						case 'right':
+						case 'right': {
 							const info = new this.client.embed(message.author)
 								.setAuthor({
 									name: message.guild.name,
@@ -113,7 +112,8 @@ module.exports = class Welcome extends Command {
 							await r.deferUpdate();
 							await msg.edit({ embeds: [info], components: [row] });
 							break;
-						case 'left':
+						}
+						case 'left': {
 							const embed = new this.client.embed(message.author)
 								.setAuthor({
 									name: message.guild.name,
@@ -144,6 +144,7 @@ module.exports = class Welcome extends Command {
 							await r.deferUpdate();
 							await msg.edit({ embeds: [embed], components: [row] });
 							break;
+						}
 					}
 				});
 			return;

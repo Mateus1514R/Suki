@@ -1,5 +1,3 @@
-/* eslint-disable no-useless-return */
-/* eslint-disable no-return-await */
 const { Client, Collection, WebhookClient } = require('discord.js');
 const { promisify } = require('util');
 const klaw = require('klaw');
@@ -41,6 +39,31 @@ module.exports = class SukiClient extends Client {
 		return false;
 	}
 
+	async onLoad (client) {
+		klaw('src/commands').on('data', (item) => {
+			const cmdFile = path.parse(item.path);
+			if (!cmdFile.ext || cmdFile.ext !== '.js') return;
+			const response = client.load(cmdFile.dir, `${cmdFile.name}${cmdFile.ext}`);
+			if (response) return;
+		});
+
+		const discordFiles = await readdir('./src/events/Discord');
+		discordFiles.forEach((file) => {
+			const eventName = file.split('.')[0];
+			const event = new (require(`../events/Discord/${file}`))(client);
+			client.on(eventName, (...args) => event.execute(...args));
+			delete require.cache[require.resolve(`../events/Discord/${file}`)];
+		});
+
+		const musicFiles = await readdir('./src/events/Music');
+		musicFiles.forEach((file) => {
+			const eventName = file.split('.')[0];
+			const event = new (require(`../events/Music/${file}`))(client);
+			client.music.on(eventName, (...args) => event.execute(...args));
+			delete require.cache[require.resolve(`../events/Music/${file}`)];
+		});
+	}
+
 	async findUser (args, message) {
 		if (!args || !message) return;
 
@@ -74,29 +97,4 @@ module.exports = class SukiClient extends Client {
 		  content: String(content)
 		});
 	  }
-
-	async onLoad (client) {
-		klaw('src/commands').on('data', (item) => {
-			const cmdFile = path.parse(item.path);
-			if (!cmdFile.ext || cmdFile.ext !== '.js') return;
-			const response = client.load(cmdFile.dir, `${cmdFile.name}${cmdFile.ext}`);
-			if (response) return;
-		});
-
-		const discordFiles = await readdir('./src/events/Discord');
-		discordFiles.forEach((file) => {
-			const eventName = file.split('.')[0];
-			const event = new (require(`../events/Discord/${file}`))(client);
-			client.on(eventName, (...args) => event.execute(...args));
-			delete require.cache[require.resolve(`../events/Discord/${file}`)];
-		});
-
-		const musicFiles = await readdir('./src/events/Music');
-		musicFiles.forEach((file) => {
-			const eventName = file.split('.')[0];
-			const event = new (require(`../events/Music/${file}`))(client);
-			client.music.on(eventName, (...args) => event.execute(...args));
-			delete require.cache[require.resolve(`../events/Music/${file}`)];
-		});
-	}
 };

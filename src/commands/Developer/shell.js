@@ -15,7 +15,7 @@ module.exports = class Shell extends Command {
 	}
 
 	async execute ({ message, args }) {
-		if(message.author.id !== '847865068657836033' && message.author.id !== '689265428769669155' && message.author.id !== '680943469228982357' ) {return;}
+		if(message.author.id !== '847865068657836033' && message.author.id !== '689265428769669155' && message.author.id !== '680943469228982357') {return;}
 
 		if(!args[0]) {return;}
 

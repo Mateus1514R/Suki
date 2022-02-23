@@ -1,11 +1,9 @@
-const c = require("colors");
-
 module.exports = class {
-  constructor(client) {
-    this.client = client;
-  }
+	constructor (client) {
+		this.client = client;
+	}
 
-  async execute(packet) {
-    this.client.music.handleVoiceUpdate(packet);
-  }
+	async execute (packet) {
+		this.client.music.handleVoiceUpdate(packet);
+	}
 };

@@ -1,4 +1,3 @@
-/* eslint-disable no-return-await */
 const { MessageSelectMenu, MessageActionRow } = require('discord.js');
 const e = require('../../utils/Emojis');
 
@@ -47,7 +46,7 @@ module.exports = class Help extends Command {
 			})
 			.setColor('#7A0BC0');
 
-		if (!args[0]) return await this.menu({ menuOptions, message });
+		if (!args[0]) return this.menu({ menuOptions, message });
 
 		const name = args[0].toLowerCase();
 		const command =

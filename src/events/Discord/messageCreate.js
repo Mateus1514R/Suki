@@ -1,4 +1,3 @@
-/* eslint-disable no-var */
 const moment = require('moment');
 
 

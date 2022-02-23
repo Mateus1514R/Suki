@@ -71,7 +71,7 @@
       "no-empty-function": "off",
       "no-floating-decimal": "error",
       "dot-notation": "error",
-      "no-useless-return": "error",
+      "no-useless-return": "off",
       "no-useless-concat": "error",
       "no-useless-escape": "warn",
       "no-dupe-else-if": "error",
@@ -99,7 +99,7 @@
       "no-trailing-spaces": [
         "error"
       ],
-      "no-var": "error",
+      "no-var": "off",
       "object-curly-spacing": [
         "error",
         "always"
