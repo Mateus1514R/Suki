@@ -99,7 +99,7 @@ module.exports = class Help extends Command {
 				case 'Economy': {
 					menu.addOptions({
 						label: option.label ? option.label : option.value,
-						description: 'Comandos para utilizar a economia do bot.',
+						description: 'Comandos para utilizar a economia do Bot.',
 						value: option.value,
 						emoji: e.Crystal,
 					});
@@ -111,6 +111,15 @@ module.exports = class Help extends Command {
 						description: 'Comandos de algumas uteis informações diversas.',
 						value: option.value,
 						emoji: e.Archive,
+					});
+					break;
+				}
+				case 'Music': {
+					menu.addOptions({
+						label: option.label ? option.label : option.value,
+						description: 'Comandos para ouvir música utilizando o Bot.',
+						value: option.value,
+						emoji: e.Music,
 					});
 					break;
 				}

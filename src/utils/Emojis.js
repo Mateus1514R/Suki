@@ -26,5 +26,6 @@ module.exports = {
 	Lock: '<:Lock:945774705904857128>',
 	Crystal: '<a:Crystal:945777633545830421>',
 	Info: '<:Info:945820037468520529>',
-	Contributor: '<:Contributor:946117867005415454>'
+	Contributor: '<:Contributor:946117867005415454>',
+	Music: '<a:Music:946176382814261358>'
 };
