@@ -3,10 +3,11 @@
   "version": "1.2",
   "description": "An open source bot made with discord.js using javascript.",
   "main": "src/index.js",
-  "contributors": [
-    "Niskii <psychoniskii2@gmail.com>",
-    "Vxk <vcodescript@gmail.com>"
-  ],
+	"contributors": [
+		"Niskii https://github.com/Niskii3",
+		"Vxk https://github.com/VCScript",
+    "yJon4s_ https://github.com/yJon4ss"
+	],
   "repository": {
     "type": "git",
     "url": "https://github.com/Niskii3/Suki.git"
