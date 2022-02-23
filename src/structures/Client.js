@@ -42,24 +42,27 @@ module.exports = class SukiClient extends Client {
 	}
 
 	async findUser (args, message) {
- if (!args || !message) return;
+		if (!args || !message) return;
 
-  let user;
+		let user;
 
-  if(/<@!?\d{17,18}>/.test(args)) {
-    user = await message.client.users.fetch(args.match(/\d{17,18}/)?.[0])
+		if(/<@!?\d{17,18}>/.test(args)) {
+			user = await message.client.users.fetch(args.match(/\d{17,18}/)?.[0]);
 
-  } else {
+		}
+		else {
 
-    try {
-      user = await message.guild.members.search({ query: args }).then((x) => x.first().user);
+			try {
+				user = await message.guild.members.search({ query: args }).then((x) => x.first().user);
 
-    } catch {};
-    try {
-     user = await message.client.users.fetch(args).catch(null); 
-    } catch {}
-    }
-  if(user) return user
+			}
+			catch {};
+			try {
+				user = await message.client.users.fetch(args).catch(null);
+			}
+			catch {}
+		}
+		if(user) return user;
 	};
 
 	async commandLogs (content) {
