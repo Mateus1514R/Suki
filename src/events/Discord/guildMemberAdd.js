@@ -1,5 +1,5 @@
 const { MessageActionRow, MessageButton } = require('discord.js');
-const e = require('../utils/Emojis');
+const e = require('../../utils/Emojis');
 
 module.exports = class {
 	constructor (client) {

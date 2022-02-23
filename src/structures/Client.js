@@ -83,12 +83,20 @@ module.exports = class SukiClient extends Client {
 			if (response) return;
 		});
 
-		const eventFiles = await readdir('./src/events');
-		eventFiles.forEach((file) => {
+		const discordFiles = await readdir('./src/events/Discord');
+		discordFiles.forEach((file) => {
 			const eventName = file.split('.')[0];
-			const event = new (require(`../events/${file}`))(client);
+			const event = new (require(`../events/Discord/${file}`))(client);
 			client.on(eventName, (...args) => event.execute(...args));
-			delete require.cache[require.resolve(`../events/${file}`)];
+			delete require.cache[require.resolve(`../events/Discord/${file}`)];
+		});
+
+		const musicFiles = await readdir('./src/events/Music');
+		musicFiles.forEach((file) => {
+			const eventName = file.split('.')[0];
+			const event = new (require(`../events/Music/${file}`))(client);
+			client.music.on(eventName, (...args) => event.execute(...args));
+			delete require.cache[require.resolve(`../events/Music/${file}`)];
 		});
 	}
 };
