@@ -1,4 +1,4 @@
-const ClientEmbed = require('../../structures/ClientEmbed');
+const e = require('../../utils/Emojis');
 
 module.exports = class {
 	constructor (client) {
@@ -8,12 +8,7 @@ module.exports = class {
 	async run (player) {
 		const channel = this.client.channels.cache.get(player.textChannelId);
 
-		const Embed = new ClientEmbed(this.client.user)
-			.setDescription(
-				'A fila de músicas acabou e eu saí do canal !'
-			);
-
 		player.destroy();
-		await channel.send({ embeds: [Embed] });
+		await channel.send(`${e.Music} A fila de música acabou, portanto eu sai do canal de voz.`);
 	}
 };

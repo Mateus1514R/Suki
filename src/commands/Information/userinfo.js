@@ -19,11 +19,10 @@ module.exports = class UserInfo extends Command {
 
 		const userI = message.guild.members.cache.get(USER.id);
 
-		const status = userI.presence.status
+		const status = !userI.presence.status ? 'Invisível' : userI.presence.status
 			.replace('dnd', 'Ocupado')
 			.replace('idle', 'Ausente')
-			.replace('online', 'Disponível')
-			.replace('invisible', 'Invisível');
+			.replace('online', 'Disponível');
 
 		var nickname;
 		if (userI.nickname == null) {
@@ -59,7 +58,7 @@ module.exports = class UserInfo extends Command {
 				},
 				{
 					name: 'Informações no Servidor',
-					value: `${e.Info} | Apelido: **${nickname}**\n${e.World} | Entrou em: **${joined}**\n${e.Archive} | Maior Cargo: **${userI.roles.highest}**\n${e.Crystal} | Booster: **${boosted}**`,
+					value: `${e.Info} | Apelido: **${nickname}**\n${e.World} | Entrou em: **${joined}**\n${e.Crystal} | Booster: **${boosted}**${e.Archive} | Maior Cargo: **${userI.roles.highest}**`,
 					inline: true,
 				}
 			)
