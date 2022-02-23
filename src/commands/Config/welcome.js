@@ -84,6 +84,9 @@ module.exports = class Welcome extends Command {
 				})
 
 				.on('collect', async (r) => {
+					if(r.user.id !== message.author.id) {
+						return r.deferUpdate();
+					}
 					switch (r.customId) {
 						case 'right': {
 							const info = new this.client.embed(message.author)
