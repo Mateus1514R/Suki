@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const Command = require('../../structures/Command');
 const e = require('../../utils/Emojis');
 
@@ -14,6 +15,7 @@ module.exports = class Ping extends Command {
 
 	async execute ({ message }) {
 		const startDB = process.hrtime();
+		await this.client.userDB.findOne({ idU: message.author.id });
 		const stopDB = process.hrtime(startDB);
 
 		const pingDB = Math.round((stopDB[0] * 1e9 + stopDB[1]) / 1e6);
