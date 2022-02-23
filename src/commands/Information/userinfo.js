@@ -17,23 +17,6 @@ module.exports = class UserInfo extends Command {
 		let USER = await this.client.getUser(args[0], message);
 		if (!args[0]) USER = message.author;
 
-		const Roles = message.guild.members.cache
-			.get(USER.id)
-			.roles.cache.filter((r) => r.id !== message.guild.id)
-			.map((roles) => roles);
-
-		let roles;
-		if (!Roles.length) {roles = 'Este membro não possui cargos.';}
-		else {
-			roles =
-        Roles.length > 10
-        	? Roles.map((r) => r)
-        		.slice(0, 10)
-        		.join(', ') +
-            `E mais **${Roles.length - 10}** cargos.`
-        	: Roles.map((r) => r).join(', ');
-		}
-
 		const userI = message.guild.members.cache.get(USER.id);
 
 		var nickname;
@@ -50,7 +33,7 @@ module.exports = class UserInfo extends Command {
 		)}:d>`;
 
 		const UserInfo = new this.client.embed(message.author)
-			.setAuthor(USER.tag, USER.displayAvatarURL({ dynamic: true }))
+			.setAuthor({ name: USER.tag, iconURL: USER.displayAvatarURL({ dynamic: true }) })
 			.addFields(
 				{
 					name: 'Informações Pessoais',
@@ -59,7 +42,7 @@ module.exports = class UserInfo extends Command {
 				},
 				{
 					name: 'Informações no Servidor',
-					value: `${e.Server} Apelido: **${nickname}**\n${e.World} Entrou em: **${joined}**\n${e.Archive} Cargos:\n**${roles}**`,
+					value: `${e.Info} Apelido: **${nickname}**\n${e.World} Entrou em: **${joined}**\n${e.Archive} Maior Cargo: **${userI.roles.highest}**`,
 					inline: true
 				}
 			)
