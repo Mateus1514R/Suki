@@ -12,7 +12,7 @@ module.exports = class Test extends Command {
 	}
 
 	async execute ({ message, args }) {
-		if(message.author.id !== '847865068657836033' && message.author.id !== '689265428769669155') {return;}
+		if(!this.client.developers.some(x => x === message.author.id)) {return;}
 
 		const user = await this.client.getUser(args[0], message);
 

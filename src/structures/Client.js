@@ -22,6 +22,7 @@ module.exports = class SukiClient extends Client {
 		this.embed = Embed;
 		this.getUser = this.findUser;
 		this.sendLogs = this.commandLogs;
+		this.developers = ['847865068657836033', '689265428769669155', '431768491759239211', '680943469228982357'];
 	}
 
 	load (commandPath, commandName) {
