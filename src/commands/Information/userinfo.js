@@ -54,7 +54,7 @@ module.exports = class UserInfo extends Command {
 			.addFields(
 				{
 					name: 'Informações Pessoais',
-					value: `${e.User} | Nome de Usuário: **${USER.username}**\n${e.ID} | ID: **${USER.id}**\n${e.Time} | Conta criada: **${created}**\n${e.On} | Status: **gu${status}**`,
+					value: `${e.User} | Nome de Usuário: **${USER.username}**\n${e.ID} | ID: **${USER.id}**\n${e.Time} | Conta criada: **${created}**\n${e.On} | Status: **${status}**`,
 					inline: true,
 				},
 				{
