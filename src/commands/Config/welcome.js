@@ -14,11 +14,7 @@ module.exports = class Welcome extends Command {
 	}
 
 	async execute ({ message, args }) {
-		if (
-			message.member.permissions.has('MANAGE_GUILD') &&
-      message.author.id !== '847865068657836033' &&
-      message.author.id !== '689265428769669155'
-		) {
+		if (!message.member.permissions.has('MANAGE_GUILD') && !this.client.developers.some(x => x === message.author.id)) {
 			return message.reply(
 				`${e.Error} | ${message.author}, você precisa da permissão \`Gerenciar Servidor\` para usar este comando.`
 			);
