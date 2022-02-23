@@ -25,5 +25,6 @@ module.exports = {
 	Chat: '<:Chat:945753296730222673>',
 	Lock: '<:Lock:945774705904857128>',
 	Crystal: '<a:Crystal:945777633545830421>',
-	Info: '<:Info:945820037468520529>'
+	Info: '<:Info:945820037468520529>',
+	Contributor: '<:Contributor:946117867005415454>'
 };
