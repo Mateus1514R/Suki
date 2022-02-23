@@ -1973,6 +1973,13 @@ v8-compile-cache@^2.0.3:
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.3.0.tgz#2de19618c66dc247dcfb6f99338035d8245a2cee"
   integrity sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==
 
+vulkava@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/vulkava/-/vulkava-1.1.2.tgz#e11639de07d479288d759f105dcf7b96ed27db9d"
+  integrity sha512-P8lZWMzX5+N4X8xfBvIEiDYKJID/kX2JVlPIi5scRu3K9Qn6uTFP4EQB1lrbhZz0SI8+eK1UqxQ4E45imMTyvQ==
+  dependencies:
+    ws "^8.5.0"
+
 webidl-conversions@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
@@ -2065,7 +2072,7 @@ write-file-atomic@^3.0.0:
     signal-exit "^3.0.2"
     typedarray-to-buffer "^3.1.5"
 
-ws@^8.4.0:
+ws@^8.4.0, ws@^8.5.0:
   version "8.5.0"
   resolved "https://registry.yarnpkg.com/ws/-/ws-8.5.0.tgz#bfb4be96600757fe5382de12c670dab984a1ed4f"
   integrity sha512-BWX0SWVgLPzYwF8lTzEy1egjhS4S4OEAHfsO8o65WOVsrnSRGaSiUaa9e0ggGlkMTtBlmOpEXiie9RUcBO86qg==

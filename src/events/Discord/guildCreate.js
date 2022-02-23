@@ -1,5 +1,5 @@
 const { MessageEmbed, Guild } = require('discord.js');
-const e = require('../utils/Emojis');
+const e = require('../../utils/Emojis');
 
 module.exports = class guildCreate {
 	constructor (client) {
