@@ -9,15 +9,22 @@ module.exports = class messageCreate {
 	async execute (message) {
 		const GetMention = (id) => new RegExp(`^<@!?${id}>( |)$`);
 
+		let prefix;
+
 		const server = await this.client.guildDB.findOne({ guildID: message.guild.id });
 
-		var prefix = prefix;
-		if(!server) {
-			prefix = 's!';
+		const mentionRegex = message.content.match(new RegExp(`^<@!?(${client.user.id})>`, 'gi'));
+
+		if (message.content.match(new RegExp(`^<@!?(${this.client.user.id})>`, 'gi'))) {
+			prefix = String(mentionRegex);
+		}
+		else if (message.content.toLowerCase().startsWith('suki')) {
+			prefix = 'suki';
 		}
 		else {
 			prefix = server.prefix;
 		}
+		if (!message.content.toLowerCase().startsWith(prefix)) return;
 
 		if (message.content.match(GetMention(this.client.user.id))) {
 			message.reply(`Olá ${message.author}, meu prefixo é **${prefix}**`);

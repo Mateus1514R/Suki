@@ -16,7 +16,7 @@ module.exports = class Reload extends Command {
 	async execute ({ message }) {
 		if(!this.client.developers.some(x => x === message.author.id)) {return;}
 
-		client.commands.sweep(() => true);
+		this.client.commands.sweep(() => true);
 
 		glob(`${__dirname}/../**/*js`, async (err, filePaths) => {
 			if (err) return console.log(err);
