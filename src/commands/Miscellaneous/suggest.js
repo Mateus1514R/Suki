@@ -14,7 +14,7 @@ module.exports = class Suggest extends Command {
 
 	async execute ({ message, args }) {
 
-		const suggest = args.slice(1).join(' ');
+		const suggest = args.slice(0).join(' ');
 		if(!suggest) return message.reply(`${e.Error} | ${message.author}, você precisa inserir a sugestão que deseja enviar.`);
 
 		const channel = this.client.channels.cache.get(process.env.SUGGEST_ID);
