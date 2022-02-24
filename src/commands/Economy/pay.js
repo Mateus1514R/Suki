@@ -31,16 +31,12 @@ module.exports = class Daily extends Command {
 		if(alvoDB) {
 			alvoDB.coins = alvoDB.coins + money;
 			await alvoDB.save();
-			user.coins = user.coins - money;
-			await user.save();
 		}
 		else {
 			await this.client.userDB.create({
 				_id: USER.id,
 				coins: money,
 			});
-			user.coins = user.coins - money;
-			await user.save();
 		}
 
 		return message.reply(`${e.Correct} | ${message.author}, pagamento de **${money.toLocaleString()} coins** feito com sucesso para \`${USER.username}\`.`);
