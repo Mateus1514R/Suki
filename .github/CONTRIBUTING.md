@@ -11,7 +11,6 @@ is a great boon to your development process.
 To get ready to work on the codebase, please do the following:
 
 1. Fork & clone the repository, and make sure you're on the **main** branch
-2. Put your name and github in the contributors part of package.json
 3. Run `yarn` ([install](https://yarnpkg.com/getting-started/install))
 4. Code your heart out!
 5. Run `yarn lint` to run ESLint and ensure any JSDoc changes are valid
