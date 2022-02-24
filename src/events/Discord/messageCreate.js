@@ -33,7 +33,7 @@ module.exports = class messageCreate {
 		if(!cmd) return;
 
 		if(command) {
-			this.client.sendLogs(`\`---\`\nData: **${moment(Date.now()).format('L LT')}**\nComando **${cmd.name}** executado no servidor **${message.guild.name}** (\`${message.guild.id}\`)\nUsuário: **${message.author.tag}** (\`${message.author.id}\`)\n\`---\``);
+			this.client.sendLogs(`\`---\`\nData: **${moment(Date.now()).format('L LT')}**\nComando **${cmd.name}** executado no servidor **${message.guild.name}** (\`${message.guild.id}\`)\nArgs: **${args.join(' ')}**\nUsuário: **${message.author.tag}** (\`${message.author.id}\`)\n\`---\``);
 
 			try {
 				cmd.execute({ message, args });
