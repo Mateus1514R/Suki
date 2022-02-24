@@ -7,24 +7,21 @@ module.exports = class messageCreate {
 	}
 
 	async execute (message) {
+		const GetMention = (id) => new RegExp(`^<@!?${id}>( |)$`);
 
-		let prefix;
 		const server = await this.client.guildDB.findOne({ guildID: message.guild.id });
 
-		const mentionRegex = message.content.match(new RegExp(`^<@!?(${client.user.id})>`, 'gi'));
-
-		if (message.content.match(new RegExp(`^<@!?(${this.client.user.id})>`, 'gi'))) {
-			prefix = String(mentionRegex);
-		}
-		else if (message.content.toLowerCase().startsWith('suki')) {
-			prefix = 'suki';
+		var prefix = prefix;
+		if(!server) {
+			prefix = 's!';
 		}
 		else {
 			prefix = server.prefix;
 		}
-		if (!message.content.toLowerCase().startsWith(prefix)) return;
 
-		if (message.content == `<@${this.client.user.id}>` || message.content == `<@!${this.client.user.id}>`) return message.reply(`Olá ${message.author}! Meu prefixo aqui é **${server.prefix}**.`);
+		if (message.content.match(GetMention(this.client.user.id))) {
+			message.reply(`Olá ${message.author}, Eu sou a **Suki**. Meu prefixo aqui é **${prefix}**. Caso precise de ajuda, utilize o comando **${prefix}help**!`);
+		}
 
 		if (message.content.indexOf(prefix) !== 0) return;
 		const args = message.content.slice(prefix.length).split(/ +/);
