@@ -35,6 +35,8 @@ yarn start
 ### 🥳 Contributing:
 Ah! So you would like to contribute to my repository, right? Great! We love new contributors who help us!
 - Fork this repository and make your desired changes
+- Add your name in the contributors part of package.json
+- Read [CONTRIBUTING.md](https://github.com/sukicorp/Suki/blob/main/.github/CONTRIBUTING.md) to make the pull request correctly
 - Once they're done, make a pull request to the master branch if you are contributing to the new version or the main branch if you are contributing to the stable and running version
 
 ### ⛔ Issues:
