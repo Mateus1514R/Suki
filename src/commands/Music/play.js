@@ -1,5 +1,5 @@
 const Command = require('../../structures/Command');
-const ClientEmbed = require('../../structures/ClientEmbed');
+const e = require('../../utils/Emojis');
 
 module.exports = class Play extends Command {
 	constructor (client) {
@@ -8,7 +8,7 @@ module.exports = class Play extends Command {
 
 		this.name = 'play';
 		this.category = 'Music';
-		this.description = ' ';
+		this.description = 'Peça uma música para eu tocar.';
 		this.aliases = ['p'];
 	}
 
@@ -18,7 +18,7 @@ module.exports = class Play extends Command {
       message.member.voice.channel.id != message.guild.me.voice.channel.id
 		) {
 			return message.reply(
-				'Você precisa estar no mesmo canal que eu estou para modificar a fila!'
+				`${e.Error} | ${message.author}, você precisa estar no mesmo canal de voz que eu para modificar a fila.`
 			);
 		}
 
@@ -26,20 +26,21 @@ module.exports = class Play extends Command {
 
 		if (!music) {
 			return message.reply(
-				'Você precisa estar inserir um link/nome de música!'
+				`${e.Error} | ${message.author}, você precisa inserir a música que deseja que eu toque.`
 			);
 		}
 
 		const result = await message.client.music.search(music, message.author);
+		var msg = await message.reply(`${e.Music} | ${message.author}, pesquisando \`${music}\`...`);
 
 		if (result.loadType === 'LOAD_FAILED') {
 			return message.reply(
-				'Você precisa estar inserir um link/nome de música válido!'
+				`${e.Error} | ${message.author}, desculpe, mas o link/nome que você inseriu não é válido.`
 			);
 		}
 		if (result.loadType === 'NO_MATCHES') {
 			return message.reply(
-				'Não encontrei uma música com as opções que você mandou!'
+				`${e.Error} | ${message.author}, não encontrei a música que você deseja.`
 			);
 		}
 
@@ -60,7 +61,7 @@ module.exports = class Play extends Command {
 
 			if (!player.playing) player.play();
 
-			const embed = new ClientEmbed(message.author)
+			const embed = new this.client.embed(message.author)
 				.setDescription(`[${result.playlistInfo.name}](${args[0]})`)
 				.addFields({
 					name: 'Duração:',
@@ -71,7 +72,7 @@ module.exports = class Play extends Command {
 					inline: true,
 				});
 
-			message.reply({ embeds: [embed] });
+			msg.edit({ content: ' ', embeds: [embed] });
 		}
 		else {
 			const tracks = result.tracks;
@@ -80,14 +81,29 @@ module.exports = class Play extends Command {
 			player.queue.push(msc);
 
 			if (message.client.music.players.get(message.guild.id)) {
-				const embed = new ClientEmbed(message.author)
-					.setThumbnail(msc.thumbnailUrl)
-					.setDescription(
-						`**[${msc.title}](${msc.uri})**`
+
+				  const startingMusic = new this.client.embed(message.author)
+					.setAuthor({ name: 'Começando a tocar', iconURL: message.guild.iconURL() })
+					.addFields(
+				  {
+							name: `${e.Music} | Música:`,
+							value: `> [${tracks[0].title}](${tracks[0].uri})`,
+				  },
+				  {
+							name: `${e.Time} | Duração:`,
+							value: `> ${formatTime(
+					  convertMilliseconds(tracks[0].duration),
+					  'mm:ss'
+							)}`,
+				  },
+				  {
+							name: `${e.User} | Pedido por:`,
+							value: `> ${message.author}`,
+				  }
 					);
 
-				message.reply({ embeds: [embed] });
-			}
+				msg.edit({ content: ' ', embeds: [startingMusic] });
+			  }
 
 			if (!player.playing) player.play();
 		}

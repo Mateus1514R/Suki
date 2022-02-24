@@ -1,29 +1,42 @@
-const Command = require('../../structures/Command')
+const Command = require('../../structures/Command');
+const e = require('../../utils/Emojis');
 
 module.exports = class Stop extends Command {
 	constructor (client) {
-		super(client)
+		super(client);
 		this.client = client;
 
-		this.name = 'stop'
-		this.category = 'Music'
-		this.description = ''
-		this.aliases = ['']
+		this.name = 'stop';
+		this.category = 'Music';
+		this.description = 'Pare a música que está tocando no momento.';
+		this.aliases = ['reset', 'disconnect'];
 	}
 
 	async execute ({ message }) {
+		if (message.guild.me.voice.channel != null) {
+			if (
+				message.member.voice.channel.id !=
+                message.guild.me.voice.channel.id ===
+              true
+			) {
+				return message.reply(
+					`${e.Error} | ${message.author}, você precisa estar no mesmo canal de voz que eu para modificar a fila.`
+				);
+			}
+		}
+		const player = message.client.music.players.get(message.guild.id);
 
-    const player = this.client.music.players.get(message.guild.id)
+		const { channel } = message.member.voice;
 
-		if(!player) return message.reply('Não tem nada tocando neste servidor!')
+		if (!channel) {
+			return message.reply(
+				`${e.Error} | ${message.author}, você precisa estar em um \`Canal de Voz\` para isso.`
+			);
+		}
 
-		if(!message.member.voice.channel) return message.reply('Você não está em um canal de voz')
-    
-		if(message.client.music.players.get(message.guild.id) != null && message.member.voice.channel.id != message.guild.me.voice.channel.id) return message.reply('Você precisa estar no mesmo canal que eu estou para modificar a fila!')
-
-    player.destroy()
-
-    message.reply('Deletei toda a queue com sucesso')
-
-  }
-}
+		if (player) {
+			player.destroy();
+			await message.react(e.Right);
+		}
+	}
+};

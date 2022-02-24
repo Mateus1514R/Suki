@@ -1,5 +1,6 @@
 const Command = require('../../structures/Command');
-const path = require('path');
+const glob = require('glob');
+const e = require('../../utils/Emojis');
 
 module.exports = class Reload extends Command {
 	constructor (client) {
@@ -12,56 +13,30 @@ module.exports = class Reload extends Command {
 		this.aliases = ['rl'];
 	}
 
-	async execute ({ message, args }) {
+	async execute ({ message }) {
 		if(!this.client.developers.some(x => x === message.author.id)) {return;}
 
-		if (!args[0]) {
-			return message.reply(
-				'Você precisa inserir o comando que deseja reiniciar.'
-			);
-		}
+		this.client.commands.sweep(() => true);
 
-		const cmd =
-        this.client.commands.get(args[0].toLowerCase()) ||
-        this.client.commands.get(this.client.aliases.get(args[0].toLowerCase()));
+		glob(`${__dirname}/../**/*js`, async (err, filePaths) => {
+			if (err) return console.log(err);
 
-		const cmdFile = path.parse(
-			`../../commands/${cmd.category}/${cmd.name}.js`
-		);
+			filePaths.forEach((file) => {
 
-		if (!cmdFile.ext || cmdFile.ext !== '.js') {
-			return message.reply(
-				'Desculpe, não encontrei o comando inserido.'
-			);
-		}
+				delete require.cache[require.resolve(file)];
 
-		const reload = async (commandPath, commandName) => {
-			const props = new (require(`${commandPath}/${commandName}`))(
-				this.client
-			);
-			delete require.cache[require.resolve(`${commandPath}/${commandName}`)];
-
-			this.client.commands.set(props.name, props);
-		};
-
-		const response = reload(
-			cmdFile.dir,
-			`${cmdFile.name}${cmdFile.ext}`
-		).catch((error) => {
-			if (error) {
-				return message.reply(
-					`Ocorreu um erro: **${
-						error.name
-					}** ( \`${error.message}\` )`
-				);
-			}
+				const pull = require(file);
+				if (pull.name) {
+					client.commands.set(pull.name, pull);
+				}
+				if (pull.aliases && Array.isArray(pull.aliases)) {
+					pull.aliases.forEach((alias) => {
+						client.aliases.set(alias, pull.name);
+					});
+				}
+			});
 		});
-
-		if (response) {
-			return message.reply(
-				`O comando ${args[0]} foi reiniciado com sucesso!`
-			);
-		}
+		message.reply(`${e.Dev} | ${message.author}, comandos recarregados com sucesso.`);
 
 	}
 };

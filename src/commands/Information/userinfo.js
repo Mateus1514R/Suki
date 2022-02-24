@@ -19,12 +19,6 @@ module.exports = class UserInfo extends Command {
 
 		const userI = message.guild.members.cache.get(USER.id);
 
-		const status = userI.presence.status
-			.replace('dnd', 'Ocupado')
-			.replace('idle', 'Ausente')
-			.replace('online', 'Disponível')
-			.replace('invisible', 'Invisível');
-
 		var nickname;
 		if (userI.nickname == null) {
 			nickname = 'Sem nickname.';
@@ -54,12 +48,12 @@ module.exports = class UserInfo extends Command {
 			.addFields(
 				{
 					name: 'Informações Pessoais',
-					value: `${e.User} | Nome de Usuário: **${USER.username}**\n${e.ID} | ID: **${USER.id}**\n${e.Time} | Conta criada: **${created}**\n${e.On} | Status: **${status}**`,
+					value: `${e.User} | Nome de Usuário: **${USER.username}**\n${e.ID} | ID: **${USER.id}**\n${e.Time} | Conta criada: **${created}**`,
 					inline: true,
 				},
 				{
 					name: 'Informações no Servidor',
-					value: `${e.Info} | Apelido: **${nickname}**\n${e.World} | Entrou em: **${joined}**\n${e.Archive} | Maior Cargo: **${userI.roles.highest}**\n${e.Crystal} | Booster: **${boosted}**`,
+					value: `${e.Info} | Apelido: **${nickname}**\n${e.World} | Entrou em: **${joined}**\n${e.Crystal} | Booster: **${boosted}**\n${e.Archive} | Maior Cargo: **${userI.roles.highest}**`,
 					inline: true,
 				}
 			)

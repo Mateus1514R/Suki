@@ -20,7 +20,7 @@ module.exports = class messageCreate {
 		}
 
 		if (message.content.match(GetMention(this.client.user.id))) {
-			message.reply(`Olá ${message.author}, meu prefixo é **${prefix}**`);
+			message.reply(`Olá ${message.author}, Eu sou a **Suki**. Meu prefixo aqui é **${prefix}**. Caso precise de ajuda, utilize o comando **${prefix}help**!`);
 		}
 
 		if (message.content.indexOf(prefix) !== 0) return;
@@ -33,16 +33,15 @@ module.exports = class messageCreate {
 		if(!cmd) return;
 
 		if(command) {
-			this.client.sendLogs(`\`---\`\nData: **${moment(Date.now()).format('L LT')}**\nComando **${cmd.name}** executado no servidor **${message.guild.name}** (\`${message.guild.id}\`)\nUsuário: **${message.author.tag}** (\`${message.author.id}\`)\n\`---\``);
+			this.client.sendLogs(`\`---\`\nData: **${moment(Date.now()).format('L LT')}**\nComando **${cmd.name}** executado no servidor **${message.guild.name}** (\`${message.guild.id}\`)\nArgs: \`${args.join(' ')}\`\nUsuário: **${message.author.tag}** (\`${message.author.id}\`)\n\`---\``);
 
 			try {
 				cmd.execute({ message, args });
-
 			}
 			catch (err) {
 				const erro = new this.client.embed(message.author)
 					.setTitle('❌ Ocorreu um Erro!')
-					.setDescription('Desculpe, um erro foi encontrado e o comando não foi executado corretamente. Peço que reporte o Bug aos meus desenvolvedores e aguarde o mesmo ser resolvido.]nObrigado.');
+					.setDescription('Desculpe, um erro foi encontrado e o comando não foi executado corretamente. Peço que reporte o Bug aos meus desenvolvedores e aguarde o mesmo ser resolvido. Obrigado.');
 				await message.reply({ embeds: [erro] });
 				console.log(err);
 			}

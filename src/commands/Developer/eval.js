@@ -37,7 +37,7 @@ module.exports = class Eval extends Command {
 
 		}
 		catch (error) {
-
+			message.reply(`Error \`\`\`js\n${error}\n\`\`\``);
 		}
 	}
 };

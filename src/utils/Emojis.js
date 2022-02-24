@@ -27,5 +27,6 @@ module.exports = {
 	Crystal: '<a:Crystal:945777633545830421>',
 	Info: '<:Info:945820037468520529>',
 	Contributor: '<:Contributor:946117867005415454>',
-	Music: '<a:Music:946176382814261358>'
+	Music: '<a:Music:946176382814261358>',
+	Lava: '<:Lava:946344668415791147>'
 };

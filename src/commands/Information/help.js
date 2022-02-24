@@ -123,6 +123,15 @@ module.exports = class Help extends Command {
 					});
 					break;
 				}
+				case 'Miscellaneous': {
+					menu.addOptions({
+						label: option.label ? option.label : option.value,
+						description: 'Comandos sem categoria especifica.',
+						value: option.value,
+						emoji: e.World,
+					});
+					break;
+				}
 			}
 		});
 
@@ -159,7 +168,7 @@ module.exports = class Help extends Command {
 		collector.on('collect', async (r) => {
 			if (r.user.id !== message.author.id) {
 				return r.reply({
-					content: `${e.Error} | ${message.author}, você precisa executar o comando para isso.`,
+					content: `${e.Error} | ${r.user}, você precisa executar o comando para isso.`,
 					ephemeral: true,
 				});
 			}
