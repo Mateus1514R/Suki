@@ -21,7 +21,7 @@ module.exports = class Ping extends Command {
 
 		const startLL = process.hrtime();
 		await fetch('http://lavalinkeua.herokuapp.com/version', {
-			headers: { Authorization: '1234' }
+			headers: { Authorization: `${process.env.LAVALINKPASSWORD}` }
 		});
 		const stopLL = process.hrtime(startLL);
 

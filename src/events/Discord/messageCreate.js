@@ -33,7 +33,7 @@ module.exports = class messageCreate {
 		if(!cmd) return;
 
 		if(command) {
-			this.client.sendLogs(`\`---\`\nData: **${moment(Date.now()).format('L LT')}**\nComando **${cmd.name}** executado no servidor **${message.guild.name}** (\`${message.guild.id}\`)\nArgs: **${args.join(' ')}**\nUsuário: **${message.author.tag}** (\`${message.author.id}\`)\n\`---\``);
+			this.client.sendLogs(`\`---\`\nData: **${moment(Date.now()).format('L LT')}**\nComando **${cmd.name}** executado no servidor **${message.guild.name}** (\`${message.guild.id}\`)\nArgs: \`${args.join(' ')}\`\nUsuário: **${message.author.tag}** (\`${message.author.id}\`)\n\`---\``);
 
 			try {
 				cmd.execute({ message, args });
@@ -41,7 +41,7 @@ module.exports = class messageCreate {
 			catch (err) {
 				const erro = new this.client.embed(message.author)
 					.setTitle('❌ Ocorreu um Erro!')
-					.setDescription('Desculpe, um erro foi encontrado e o comando não foi executado corretamente. Peço que reporte o Bug aos meus desenvolvedores e aguarde o mesmo ser resolvido.]nObrigado.');
+					.setDescription('Desculpe, um erro foi encontrado e o comando não foi executado corretamente. Peço que reporte o Bug aos meus desenvolvedores e aguarde o mesmo ser resolvido. Obrigado.');
 				await message.reply({ embeds: [erro] });
 				console.log(err);
 			}
