@@ -53,7 +53,7 @@ module.exports = class UserInfo extends Command {
 				},
 				{
 					name: 'Informações no Servidor',
-					value: `${e.Info} | Apelido: **${nickname}**\n${e.World} | Entrou em: **${joined}**\n${e.Crystal} | Booster: **${boosted}**${e.Archive} | Maior Cargo: **${userI.roles.highest}**`,
+					value: `${e.Info} | Apelido: **${nickname}**\n${e.World} | Entrou em: **${joined}**\n${e.Crystal} | Booster: **${boosted}**\n${e.Archive} | Maior Cargo: **${userI.roles.highest}**`,
 					inline: true,
 				}
 			)
