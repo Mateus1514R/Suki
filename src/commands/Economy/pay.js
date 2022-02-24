@@ -31,15 +31,17 @@ module.exports = class Daily extends Command {
 		if(alvoDB) {
 			alvoDB.coins = alvoDB.coins + money;
 			await alvoDB.save();
+			user.coins = user.coins - money;
+			await user.save();
 		}
 		else {
 			await this.client.userDB.create({
 				_id: USER.id,
 				coins: money,
 			});
+			user.coins = user.coins - money;
+			await user.save();
 		}
-
-		await this.client.userDB.findOneAndUpdate({ _id: message.author.id }, { $set: { coins: user.coins - money } });
 
 		return message.reply(`${e.Correct} | ${message.author}, pagamento de **${money.toLocaleString()} coins** feito com sucesso para \`${USER.username}\`.`);
 
