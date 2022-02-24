@@ -31,6 +31,7 @@ module.exports = class Daily extends Command {
 		if(alvoDB) {
 			alvoDB.coins = alvoDB.coins + money;
 			await alvoDB.save();
+			await this.client.userDB.findOneAndUpdate({ _id: message.author.id }, { $set: { coins: user.coins - money } });
 		}
 		else {
 			await this.client.userDB.create({
