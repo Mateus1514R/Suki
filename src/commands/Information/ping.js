@@ -28,6 +28,6 @@ module.exports = class Ping extends Command {
 		const lavalinkPing = Math.round((stopLL[0] * 1e9 + stopLL[1]) / 1e6);
 		const pingDB = Math.round((stopDB[0] * 1e9 + stopDB[1]) / 1e6);
 
-		message.reply(`🏓 | ${message.author}, abaixo estão meus Ping's:\n${e.World} | API Ping: **${this.client.ws.ping}ms**\n${e.Database} | Database Ping: **${pingDB}ms**\n${e.Lava} | Lavalink Ping: **${lavalinkPing}**`);
+		message.reply(`🏓 | ${message.author}, abaixo estão meus Ping's:\n${e.World} | API Ping: **${this.client.ws.ping}ms**\n${e.Database} | Database Ping: **${pingDB}ms**\n${e.Lava} | Lavalink Ping: **${lavalinkPing}ms**`);
 	}
 };
