@@ -37,7 +37,6 @@ module.exports = class messageCreate {
 
 			try {
 				cmd.execute({ message, args });
-
 			}
 			catch (err) {
 				const erro = new this.client.embed(message.author)

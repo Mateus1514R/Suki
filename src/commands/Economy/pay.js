@@ -14,35 +14,42 @@ module.exports = class Daily extends Command {
 
 	async execute ({ message, args }) {
 
-		const user = await this.client.userDB.findOne({ _id: message.author.id });
+		try {
 
-		const USER = this.client.getUser(args[0], message);
-		if(!USER) return message.reply(`${e.Error} | ${message.author}, você precisa inserir o usuário que deseja fazer o pagamento.`);
-		if(USER.id == message.author.id) return message.reply(`${e.Error} | ${message.author}, você não pode enviar dinheiro para si mesmo.`);
+			const user = await this.client.userDB.findOne({ _id: message.author.id });
 
-		const alvoDB = await this.client.userDB.findOne({ _id: USER.id });
+			const USER = this.client.getUser(args[0], message);
+			if(!args[0]) return message.reply(`${e.Error} | ${message.author}, você precisa inserir o usuário que deseja fazer o pagamento.`);
+			if(USER.id == message.author.id) return message.reply(`${e.Error} | ${message.author}, você não pode enviar dinheiro para si mesmo.`);
 
-		const money = parseInt(args[1]);
-		if(!money) return message.reply(`${e.Error} | ${message.author}, você precisa inserir a quantia de dinheiro que deseja enviar ao usuário.`);
-		if(isNaN(money)) return message.reply(`${e.Error} | ${message.author}, você precisa inserir uma quantia válida.`);
-		if(money <= 0) return message.reply(`${e.Error} | ${message.author}, a quantia deve ser maior que 0.`);
-		if(money > user.coins) return message.reply(`${e.Error} | ${message.author}, você não possui dinheiro suficiente para realizar o pagamento.`);
+			const alvoDB = await this.client.userDB.findOne({ _id: USER.id });
 
-		if(alvoDB) {
-			alvoDB.coins = alvoDB.coins + money;
-			await alvoDB.save();
+			const money = parseInt(args[1]);
+			if(!money) return message.reply(`${e.Error} | ${message.author}, você precisa inserir a quantia de dinheiro que deseja enviar ao usuário.`);
+			if(isNaN(money)) return message.reply(`${e.Error} | ${message.author}, você precisa inserir uma quantia válida.`);
+			if(money <= 0) return message.reply(`${e.Error} | ${message.author}, a quantia deve ser maior que 0.`);
+			if(money > user.coins) return message.reply(`${e.Error} | ${message.author}, você não possui dinheiro suficiente para realizar o pagamento.`);
+
+			if(alvoDB) {
+				alvoDB.coins = alvoDB.coins + money;
+				await alvoDB.save();
+			}
+			else {
+				await this.client.userDB.create({
+					_id: USER.id,
+					coins: money,
+				});
+			}
+
+			await this.client.userDB.findOneAndUpdate({ _id: message.author.id }, { $set: { coins: user.coins - money } });
+
+			return message.reply(`${e.Correct} | ${message.author}, pagamento de **${money.toLocaleString()} coins** feito com sucesso para \`${USER.username}\`.`);
+
 		}
-		else {
-			await this.client.userDB.create({
-				_id: USER.id,
-				coins: money,
-			});
+		catch (err) {
+			const canal = this.client.channels.cache.get('946207120817258497');
+			canal.send(err);
 		}
-
-		user.coins = user.coins - money;
-		await user.save();
-
-		return message.reply(`${e.Correct} | ${message.author}, pagamento de **${money.toLocaleString()} coins** feito com sucesso para \`${USER.username}\`.`);
 
 	}
 };
