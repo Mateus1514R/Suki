@@ -17,7 +17,7 @@ module.exports = class Suggest extends Command {
 		const suggest = args.slice(0).join(' ');
 		if(!suggest) return message.reply(`${e.Error} | ${message.author}, você precisa inserir a sugestão que deseja enviar.`);
 
-		const channel = this.client.channels.cache.get('946386176871383120');
+		const channel = this.client.channels.cache.get(`${process.env.SUGGEST_ID}`);
 		const embed = new this.client.embed(message.author)
 			.setAuthor({ name: message.author.tag, iconURL: message.author.displayAvatarURL() })
 			.addFields([
@@ -31,8 +31,8 @@ module.exports = class Suggest extends Command {
 				}
 			]);
 		const msg = await channel.send({ embeds: [embed] });
-		await msg.react(e.Confirm);
-		await msg.react(e.Error);
+		await msg.react(`${e.Confirm}`);
+		await msg.react(`${e.Error}`);
 		await message.reply(`${e.Confirm} | ${message.author}, sugestão enviada com sucesso, agradecemos a colaboração!`);
 
 	}
