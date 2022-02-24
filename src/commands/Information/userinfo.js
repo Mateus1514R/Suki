@@ -19,11 +19,6 @@ module.exports = class UserInfo extends Command {
 
 		const userI = message.guild.members.cache.get(USER.id);
 
-		const status = !userI.presence.status ? 'Invisível' : userI.presence.status
-			.replace('dnd', 'Ocupado')
-			.replace('idle', 'Ausente')
-			.replace('online', 'Disponível');
-
 		var nickname;
 		if (userI.nickname == null) {
 			nickname = 'Sem nickname.';
@@ -53,7 +48,7 @@ module.exports = class UserInfo extends Command {
 			.addFields(
 				{
 					name: 'Informações Pessoais',
-					value: `${e.User} | Nome de Usuário: **${USER.username}**\n${e.ID} | ID: **${USER.id}**\n${e.Time} | Conta criada: **${created}**\n${e.On} | Status: **${status}**`,
+					value: `${e.User} | Nome de Usuário: **${USER.username}**\n${e.ID} | ID: **${USER.id}**\n${e.Time} | Conta criada: **${created}**`,
 					inline: true,
 				},
 				{
