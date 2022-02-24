@@ -1,10 +1,10 @@
 module.exports = class Command {
-	constructor (client) {
-		this.client = client;
+  constructor(client) {
+    this.client = client;
 
-		this.name = 'Nome';
-		this.category = 'Categoria';
-		this.description = 'Descrição';
-		this.aliases = [];
-	}
+    this.name = 'Nome';
+    this.category = 'Categoria';
+    this.description = 'Descrição';
+    this.aliases = [];
+  }
 };

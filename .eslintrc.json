@@ -12,7 +12,8 @@
     "globals": {
       "client": true
     },
-    "extends": "eslint:recommended",
+    "extends": ["eslint:recommended", "prettier"],
+    "plugins": ["prettier"],
     "rules": {
       "no-unused-vars": "error",
       "no-undef": "warn",

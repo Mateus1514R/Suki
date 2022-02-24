@@ -34,8 +34,8 @@ module.exports = class guildCreate {
 				}
 			);
 
-		this.client.channels.cache
-			.get(process.env.SERVER_LOGS)
-			.send({ embeds: [embed] });
+		const channel = this.client.channels.cache.get(`${process.env.SERVER_LOGS}`);
+
+		channel.send({ embeds: [embed] });
 	}
 };

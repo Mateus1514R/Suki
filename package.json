@@ -1,7 +1,8 @@
 {
-  "name": "suki",
-  "version": "1.2",
+  "name": "@sukicorp/suki",
   "description": "An open source bot made with discord.js using javascript.",
+  "version": "1.2",
+  "private": true,
   "main": "src/index.js",
   "contributors": [
     "Niskii https://github.com/Niskii3",
@@ -16,11 +17,16 @@
   "bugs": {
     "url": "https://github.com/Niskii3/Suki/issues"
   },
+  "engines": {
+    "node": ">=16.9.0",
+    "yarn": ">=1.22.17"
+  },
   "license": "Apache-2.0",
   "scripts": {
     "dev": "nodemon",
     "start": "node --max_old_space_size=512 --optimize_for_size --expose-gc --gc-interval=1 .",
-    "lint": "eslint --fix --ext .js --ignore-path .gitignore ."
+    "lint": "eslint --ext .js --fix",
+    "format": "prettier --write --config ./prettierrc.js src/**/*.js"
   },
   "dependencies": {
     "child_process": "^1.0.2",
@@ -32,7 +38,7 @@
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
     "mongoose": "^6.2.3",
-    "node-fetch": "^3.2.0",
+    "node-fetch": "2.6.6",
     "util": "^0.12.4",
     "vulkava": "^1.1.2"
   },
@@ -42,6 +48,7 @@
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1"
   }
 }
