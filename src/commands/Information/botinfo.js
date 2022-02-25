@@ -71,7 +71,7 @@ module.exports = class BotInfo extends Command {
 			new MessageButton()
 				.setLabel('Repositório')
 				.setStyle('LINK')
-				.setURL('https://github.com/Niskii3/Suki')
+				.setURL('https://github.com/sukicorp/Suki')
 				.setEmoji(e.Bot)
 		);
 
