@@ -17,8 +17,11 @@ mongodb_connect: YOUR MONGOOSE CONNECTION
 logs_token: WEBHOOK LOGS TOKEN
 servers_log: SERVER LOGS ID
 suggest_id: CHANNEL SUGGEST ID
-lavalinkhost: LAVALINK HOST
+usalavalinkhost: USA LAVALINK HOST
+eulavalinkhost: EU LAVALINK HOST
 lavalinkpassword: LAVALINK PASSWORD
+spotifyclientid: SPOTIFY API CLIENT ID
+spotifyclientsecret: SPOTIFY API CLIENT SECRET
 ```
 
 ### ⬆️ Starting:
