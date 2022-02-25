@@ -1,4 +1,3 @@
-const { MessageEmbed } = require('discord.js');
 const Command = require('../../structures/Command')
 
 module.exports = class NowPlaying extends Command {
@@ -18,7 +17,7 @@ module.exports = class NowPlaying extends Command {
 
 		if(!player) return message.reply('Não tem nada tocando neste servidor!')
 
-		const embed = new MessageEmbed()
+	const embed = new this.client.embed(message.author)
     .setAuthor({ name: 'Tocando agora', iconURL: message.guild.iconURL({}) })
     .setDescription('Informações da música que estou tocando agora')
     .addFields(
@@ -42,9 +41,6 @@ module.exports = class NowPlaying extends Command {
         value: `\`${this.ms(player.position)}\` **${this.progressbar(player.position / 1000 / 50, player.current.duration / 1000 / 50, 15)}** \`${this.ms(player.current.duration)}\``
       }
     )
-    .setTimestamp()
-    .setColor('#7A0BC0')
-    .setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
 
     message.reply({ embeds: [embed] })
 
