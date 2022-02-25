@@ -14,12 +14,12 @@ module.exports = class Play extends Command {
 
 	async execute ({ message, args }) {
 		if(this.client.music.players.get(message.guild.id)) {
-		if (message.member.voice.channel?.id !== message.guild.me.voice.channel?.id) {
-			return message.reply(
-				`${e.Error} | ${message.author}, você precisa estar no mesmo canal de voz que eu para modificar a fila.`
-			);
+			if (message.member.voice.channel?.id !== message.guild.me.voice.channel?.id) {
+				return message.reply(
+					`${e.Error} | ${message.author}, você precisa estar no mesmo canal de voz que eu para modificar a fila.`
+				);
+			}
 		}
-	}
 
 		const music = args.join(' ');
 

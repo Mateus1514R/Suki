@@ -14,35 +14,37 @@ module.exports = class Daily extends Command {
 
 	async execute ({ message, args }) {
 
-		const user = await this.client.userDB.findOne({ _id: message.author.id });
+		const user = await this.client.getUser(args[0], message);
 
-		const USER = this.client.getUser(args[0], message)
-		if(!USER) return message.reply(`${e.Error} | ${message.author}, você precisa inserir o usuário que deseja fazer o pagamento.`);
-		if(USER.id == message.author.id) return message.reply(`${e.Error} | ${message.author}, você não pode enviar dinheiro para si mesmo.`);
+		const authorDB = await this.client.userDB.findOne({ _id: message.author.id });
 
-		const alvoDB = await this.client.userDB.findOne({ _id: USER.id });
+		const targetDB = await this.client.userDB.findOne({ _id: user.id });
 
-		const money = parseInt(args[1]);
-		if(!money) return message.reply(`${e.Error} | ${message.author}, você precisa inserir a quantia de dinheiro que deseja enviar ao usuário.`);
-		if(isNaN(money)) return message.reply(`${e.Error} | ${message.author}, você precisa inserir uma quantia válida.`);
-		if(money <= 0) return message.reply(`${e.Error} | ${message.author}, a quantia deve ser maior que 0.`);
-		if(money > user.coins) return message.reply(`${e.Error} | ${message.author}, você não possui dinheiro suficiente para realizar o pagamento.`);
+		if(!user) return message.reply(`${e.Error} | ${message.author}, você precisa inserir o usuário que deseja fazer o pagamento.`);
 
-		if(alvoDB) {
-			alvoDB.coins = alvoDB.coins + money;
-			await alvoDB.save();
-		}
-		else {
-			await this.client.userDB.create({
-				_id: USER.id,
-				coins: money,
+		if (user.id == message.author.id) return message.reply(`${e.Error} | ${message.author}, você não pode enviar dinheiro para si mesmo.`);
+
+		const value = parseInt(args[1]);
+
+		if (!args[1] || value < 0 || isNaN(value)) return message.reply(`${e.Error} | ${message.author}, você precisa inserir a quantia de dinheiro que deseja enviar ao usuário.`);
+
+		if(!targetDB) return message.reply(`${e.Error} | ${message.author}, este usuário não está registrado em meu banco de dados, peça a ele para usar um comando primeiro.`);
+
+		if (authorDB.value < value) return message.reply(`${e.Error} | ${message.author}, você não possui dinheiro suficiente para realizar o pagamento.`);
+
+	 message.reply(`${e.Correct} | ${message.author}, pagamento de **${value.toLocaleString()} coins** feito com sucesso para \`${user.username}\`.`);
+
+		await this.client.userDB.findOneAndUpdate({ _id: message.author.id },
+			{
+			  $set: {
+					coins: authorDB.coins - value
+			  }
 			});
-		}
-
-		user.coins = user.coins - money;
-		await user.save();
-
-		return message.reply(`${e.Correct} | ${message.author}, pagamento de **${money.toLocaleString()} coins** feito com sucesso para \`${USER.username}\`.`);
-
+		  await this.client.userDB.findOneAndUpdate({ _id: user.id },
+			{
+			  $set: {
+					coins: targetDB.coins + value
+			  }
+			});
 	}
 };

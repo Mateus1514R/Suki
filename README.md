@@ -42,4 +42,4 @@ Ah! So you would like to contribute to my repository, right? Great! We love new 
 - Once they're done, make a pull request to the master branch if you are contributing to the new version or the main branch if you are contributing to the stable and running version
 
 ### ⛔ Issues:
-If you have any problems, pleas open a [Issue](https://github.com/sukicorp/Suki/issues) or [contact us](https://discord.gg/xBe7hABxMD)
+If you have any problems, please open a [Issue](https://github.com/sukicorp/Suki/issues) or [contact us](https://discord.gg/xBe7hABxMD)

@@ -29,7 +29,7 @@ module.exports = class BotInfo extends Command {
 		const system = process.platform
 			.replace('win32', 'Windows')
 			.replace('linux', 'Linux');
-		const uptime = moment.duration(this.client.uptime).format("d[d] h[h] m[m] s[s]");
+		const uptime = moment.duration(this.client.uptime).format('d[d] h[h] m[m] s[s]');
 		const version = process.version;
 		const server = await this.client.guildDB.findOne({
 			guildID: message.guild.id,
@@ -71,7 +71,7 @@ module.exports = class BotInfo extends Command {
 			new MessageButton()
 				.setLabel('Repositório')
 				.setStyle('LINK')
-				.setURL('https://github.com/Niskii3/Suki')
+				.setURL('https://github.com/sukicorp/Suki')
 				.setEmoji(e.Bot)
 		);
 

@@ -101,4 +101,3 @@ module.exports = class SukiClient extends Client {
       content: String(content),
     });
   }
-};

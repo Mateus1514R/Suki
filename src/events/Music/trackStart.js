@@ -7,7 +7,7 @@ module.exports = class {
 		if (player.reconnect) {
 			delete player.reconnect;
 			return;
-		  
+
 		}
 		  if (!player.textChannelId) return;
 
