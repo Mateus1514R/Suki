@@ -1,10 +1,11 @@
-const { config } = require('dotenv');
 const Client = require('./structures/Client');
 const { connect } = require('mongoose');
 const c = require('colors');
 const { Vulkava } = require('vulkava');
+const yaml = require('js-yaml');
+const { readFileSync } = require('fs');
 
-config();
+const env = yaml.load(readFileSync('./envirovments.yml', 'utf8'));
 
 const client = new Client({
 	intents: [
@@ -14,16 +15,16 @@ const client = new Client({
 		'GUILD_MESSAGES',
 		'GUILD_VOICE_STATES',
 	],
-	allowedMentions: { parse: ['users'], repliedUser: true },
+	allowedMentions: { parse: ['users'], repliedUser: false },
 });
 
 client.music = new Vulkava({
 	nodes: [
 		{
 			id: 'Suki 1',
-			hostname: process.env.LAVALINKHOST,
+			hostname: env.lavalinkhost,
 			port: 80,
-			password: process.env.LAVALINKPASSWORD,
+			password: String(env.lavalinkpassword),
 			resumeKey: 'Suki',
 			resumeTimeout: 5 * 60000,
 		},
@@ -33,7 +34,7 @@ client.music = new Vulkava({
 	},
 });
 
-connect(process.env.MONGODB_CONNECT, {})
+connect(env.mongodb_connect, {})
 	.then(() => {
 		console.log(c.green('✅ [DataBase] - Iniciada com sucesso.'));
 	})
@@ -51,4 +52,4 @@ process.on('unhandledRejection', (err) => {
 
 client.onLoad(client);
 
-client.login(process.env.TOKEN);
+client.login(env.token);

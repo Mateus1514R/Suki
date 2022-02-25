@@ -1,6 +1,11 @@
 const Command = require('../../structures/Command');
 const e = require('../../utils/Emojis');
 
+const yaml = require('js-yaml');
+const { readFileSync } = require('fs');
+
+const env = yaml.load(readFileSync('./envirovments.yml', 'utf8'));
+
 module.exports = class Suggest extends Command {
 	constructor (client) {
 		super(client);
@@ -17,7 +22,7 @@ module.exports = class Suggest extends Command {
 		const suggest = args.slice(0).join(' ');
 		if(!suggest) return message.reply(`${e.Error} | ${message.author}, você precisa inserir a sugestão que deseja enviar.`);
 
-		const channel = this.client.channels.cache.get(`${process.env.SUGGEST_ID}`);
+		const channel = this.client.channels.cache.get(`${env.suggest_id}`);
 		const embed = new this.client.embed(message.author)
 			.setAuthor({ name: message.author.tag, iconURL: message.author.displayAvatarURL() })
 			.addFields([

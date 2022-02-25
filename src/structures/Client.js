@@ -3,6 +3,11 @@ const { promisify } = require('util');
 const klaw = require('klaw');
 const path = require('path');
 
+const yaml = require('js-yaml');
+const { readFileSync } = require('fs');
+
+const env = yaml.load(readFileSync('./envirovments.yml', 'utf8'));
+
 const guildDB = require('../models/guildDB');
 const userDB = require('../models/userDB');
 const botDB = require('../models/botDB');
@@ -85,8 +90,8 @@ module.exports = class SukiClient extends Client {
 
   async commandLogs(content) {
     const webhookClient = new WebhookClient({
-      token: process.env.LOGS_TOKEN,
-      id: process.env.LOGS_ID,
+      token: String(env.logs_token),
+      id: '946563655003144212',
     });
     webhookClient.send({
       content: String(content),

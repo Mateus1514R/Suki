@@ -3,6 +3,11 @@ const Command = require('../../structures/Command');
 const fetch = require('node-fetch');
 const e = require('../../utils/Emojis');
 
+const yaml = require('js-yaml');
+const { readFileSync } = require('fs');
+
+const env = yaml.load(readFileSync('./envirovments.yml', 'utf8'));
+
 module.exports = class Ping extends Command {
 	constructor (client) {
 		super(client);
@@ -21,7 +26,7 @@ module.exports = class Ping extends Command {
 
 		const startLL = process.hrtime();
 		await fetch('http://lavalinkeua.herokuapp.com/version', {
-			headers: { Authorization: `${process.env.LAVALINKPASSWORD}` }
+			headers: { Authorization: `${env.lavalinkpassword}` }
 		});
 		const stopLL = process.hrtime(startLL);
 

@@ -1,6 +1,11 @@
 const Command = require('../../structures/Command');
 const { inspect } = require('util');
 
+const yaml = require('js-yaml');
+const { readFileSync } = require('fs');
+
+const env = yaml.load(readFileSync('./envirovments.yml', 'utf8'));
+
 module.exports = class Eval extends Command {
 	constructor (client) {
 		super(client);
@@ -22,7 +27,7 @@ module.exports = class Eval extends Command {
 				text = text
 					.replace(/`/g, `\`${String.fromCharCode(8203)}`)
 					.replace(/@/g, `@${String.fromCharCode(8203)}`)
-					.replace(new RegExp(process.env.TOKEN, 'gi'), '****');
+					.replace((String(env.token), 'gi'), '****');
 			}
 			return text;
 		};

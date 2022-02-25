@@ -7,19 +7,18 @@ Made by Niskii#6694 & vxk 🖤#1834
 
 ### 💻 Setup
 - Install nodejs 16 or higher [here](https://nodejs.org)
-- Rename env.example file to .env
+- Create a file called envirovments.yml
 
-> ⚙️ .env
+> ⚙️ envirovments.yml
 
-```js
-TOKEN=YOUR BOT TOKEN
-MONGODB_CONNECT=YOUR MONGOOSE CONNECTION
-LOGS_TOKEN=WEBHOOK LOGS TOKEN
-LOGS_ID=WEBHOOK LOGS ID
-SERVERS_LOG=SERVER LOGS ID
-LAVALINKHOST=LAVALINK HOST
-LAVALINKPASSWORD=LAVALINK PASSWORD
-SUGGEST_ID=CHANNEL SUGGEST ID
+```yml
+token: YOUR BOT TOKEN
+mongodb_connect: YOUR MONGOOSE CONNECTION
+logs_token: WEBHOOK LOGS TOKEN
+servers_log: SERVER LOGS ID
+suggest_id: CHANNEL SUGGEST ID
+lavalinkhost: LAVALINK HOST
+lavalinkpassword: LAVALINK PASSWORD
 ```
 
 ### ⬆️ Starting:

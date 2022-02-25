@@ -1,6 +1,11 @@
 const { MessageEmbed, Guild } = require('discord.js');
 const e = require('../../utils/Emojis');
 
+const yaml = require('js-yaml');
+const { readFileSync } = require('fs');
+
+const env = yaml.load(readFileSync('./envirovments.yml', 'utf8'));
+
 module.exports = class guildDelete {
 	constructor (client) {
 		this.client = client;
@@ -31,7 +36,7 @@ module.exports = class guildDelete {
 				}
 			);
 
-		const channel = this.client.channels.cache.get(`${process.env.SERVER_LOGS}`);
+		const channel = this.client.channels.cache.get(`${env.servers_log}`);
 
 		channel.send({ embeds: [embed] });
 	}
