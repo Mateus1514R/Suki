@@ -1,0 +1,9 @@
+version: '3.7'
+services:
+  bot:
+    container_name: suki
+    restart: always
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    network_mode: bridge
