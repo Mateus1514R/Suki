@@ -22,7 +22,7 @@ client.music = new Vulkava({
 	nodes: [
 		{
 			id: 'Suki 1',
-			hostname: env.lavalinkhost,
+			hostname: String(env.lavalinkhost),
 			port: 80,
 			password: String(env.lavalinkpassword),
 			resumeKey: 'Suki',
