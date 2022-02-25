@@ -6,14 +6,14 @@ module.exports = class {
 	}
 
 	async execute (node, error) {
-        console.log(c.red(`❌ [Lavalink] - Ocorreu um erro no Node ${node.identifier}.\nErro: ${error.message}`));
-        if (error.message.startsWith('Unable to connect after')) this.reconnect(node);
+		console.log(c.red(`❌ [Lavalink] - Ocorreu um erro no Node ${node.identifier}.\nErro: ${error.message}`));
+		if (error.message.startsWith('Unable to connect after')) this.reconnect(node);
 	}
-    
-    async reconnect(node) {
+
+	async reconnect (node) {
 		node.disconnect();
 		this.nodes.splice(this.nodes.indexOf(node), 1);
-	
+
 		const newNode = new Node(this, {
 		  id: String(node.identifier),
 		  hostname: node.options.hostname,
@@ -23,10 +23,10 @@ module.exports = class {
 		  retryAttemptsInterval: 3000,
 		  secure: false,
 		  region: node.options.region
-		})
-	
+		});
+
 		this.nodes.push(newNode);
-	
+
 		newNode.connect();
 	  }
 };

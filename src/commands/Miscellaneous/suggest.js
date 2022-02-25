@@ -1,11 +1,6 @@
 const Command = require('../../structures/Command');
 const e = require('../../utils/Emojis');
 
-const yaml = require('js-yaml');
-const { readFileSync } = require('fs');
-
-const env = yaml.load(readFileSync('./envirovments.yml', 'utf8'));
-
 module.exports = class Suggest extends Command {
 	constructor (client) {
 		super(client);

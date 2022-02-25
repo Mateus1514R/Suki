@@ -176,7 +176,7 @@ module.exports = class Welcome extends Command {
 				}
 				else {
 					await this.client.guildDB.create({
-						guildID: message.guild.id,
+						'guildID': message.guild.id,
 						'welcome.channel': channel,
 					});
 				}
@@ -212,7 +212,7 @@ module.exports = class Welcome extends Command {
 				}
 				else {
 					await this.client.guildDB.create({
-						guildID: message.guild.id,
+						'guildID': message.guild.id,
 						'welcome.message': msg,
 					});
 				}
