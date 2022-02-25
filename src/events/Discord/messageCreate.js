@@ -19,6 +19,16 @@ module.exports = class messageCreate {
 			prefix = server.prefix;
 		}
 
+          let lang;
+          switch(server ? server.lang : 0) {
+            case 0:
+              lang = this.client.langs.pt 
+              break;
+            case 1: 
+              lang = this.client.langs.en 
+              break;
+          }
+
 		if (message.content.match(GetMention(this.client.user.id))) {
 			message.reply(`Olá ${message.author}, Eu sou a **Suki**. Meu prefixo aqui é **${prefix}**. Caso precise de ajuda, utilize o comando **${prefix}help**!`);
 		}
@@ -36,7 +46,7 @@ module.exports = class messageCreate {
 			this.client.sendLogs(`\`---\`\nData: **${moment(Date.now()).format('L LT')}**\nComando **${cmd.name}** executado no servidor **${message.guild.name}** (\`${message.guild.id}\`)\nArgs: \`${args.join(' ')}\`\nUsuário: **${message.author.tag}** (\`${message.author.id}\`)\n\`---\``);
 
 			try {
-				cmd.execute({ message, args });
+				cmd.execute({ message, args, lang });
 			}
 			catch (err) {
 				const erro = new this.client.embed(message.author)
