@@ -14,9 +14,9 @@ module.exports = class Daily extends Command {
 
 	async execute ({ message, args }) {
 
-		const user = this.client.userDB.findOne({ _id: message.author.id });
+		const user = await this.client.userDB.findOne({ _id: message.author.id });
 
-		const USER = this.client.users.cache.get(args[0]) || message.mentions.users.first();
+		const USER = this.client.getUser(args[0], message)
 		if(!USER) return message.reply(`${e.Error} | ${message.author}, você precisa inserir o usuário que deseja fazer o pagamento.`);
 		if(USER.id == message.author.id) return message.reply(`${e.Error} | ${message.author}, você não pode enviar dinheiro para si mesmo.`);
 
@@ -38,6 +38,9 @@ module.exports = class Daily extends Command {
 				coins: money,
 			});
 		}
+
+		user.coins = user.coins - money;
+		await user.save();
 
 		return message.reply(`${e.Correct} | ${message.author}, pagamento de **${money.toLocaleString()} coins** feito com sucesso para \`${USER.username}\`.`);
 
