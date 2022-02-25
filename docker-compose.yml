@@ -1,8 +1,8 @@
-version: '3.7'
+version: '3.9'
 services:
   bot:
     container_name: suki
-    restart: always
+    restart: unless-stopped
     build: 
       context: .
       dockerfile: Dockerfile
