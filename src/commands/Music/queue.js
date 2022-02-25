@@ -1,12 +1,12 @@
-const { MessageButton, MessageActionRow, MessageEmbed } = require('discord.js');
+const { MessageButton, MessageActionRow } = require('discord.js');
 const Command = require('../../structures/Command')
 
 module.exports = class Queue extends Command {
 	constructor (client) {
 		super(client)
 		this.client = client;
-
-    this.collection = []
+		
+		this.collection = []
 
 		this.name = 'queue'
 		this.category = 'Music'
@@ -49,11 +49,8 @@ module.exports = class Queue extends Command {
 
     const paginate = this.collection.slice((page - 1) * 10, page * 10)
 
-    const embed = new MessageEmbed()
+    const embed = new this.client.embed(message.author)
     .setAuthor({ name: 'Queue', iconURL: message.guild.iconURL({}) })
-    .setTimestamp()
-    .setColor('#7A0BC0')
-    .setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
     .setDescription(`**${player.queue.length <= 0 ? 'Nenhuma música na minha fila' : this.collection.slice((page - 1) * 10, page * 10).join('\n')}\n\nMúsica tocando atualmente: [${player.current.title}](${player.current.uri})**`)
 
     await message.rewply({ embeds: [embed], components: [row] }).then((msg) => {
