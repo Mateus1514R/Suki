@@ -11,7 +11,7 @@ module.exports = class Remove extends Command {
 		this.aliases = ['']
 	}
 
-	async execute ({ message }) {
+	async execute ({ message, args }) {
 
     const player = this.client.music.players.get(message.guild.id)
 
