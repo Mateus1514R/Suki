@@ -27,7 +27,7 @@ module.exports = class Volume extends Command {
 
     if(!args[0] || args[0] < 1 || args[0] > 500) return message.reply('Foreneça um volume entre 0 a 500')
 
-    player.filters.setVolume(args[0])
+    player.filters.setVolume(Number(args[0]));
 
     message.reply('O volume da música foi setado com sucesso')
 

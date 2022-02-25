@@ -22,16 +22,30 @@ client.music = new Vulkava({
 	nodes: [
 		{
 			id: 'Suki 1',
-			hostname: String(env.lavalinkhost),
+			hostname: String(env.usalavalinkhost),
 			port: 80,
 			password: String(env.lavalinkpassword),
+			region: 'USA',
 			resumeKey: 'Suki',
 			resumeTimeout: 5 * 60000,
 		},
+		{
+			id: 'Suki 2',
+			hostname: String(env.eulavalinkhost),
+			port: 80,
+			password: String(env.lavalinkpassword),
+			region: 'EU',
+			resumeKey: 'Suki',
+			resumeTimeout: 5 * 60000,
+		}
 	],
 	sendWS: (guildId, payload) => {
 		client.guilds.cache.get(guildId)?.shard.send(payload);
 	},
+	spotify: {
+		clientId: String(env.spotifyclientid),
+		clientSecret: String(env.spotifyclientsecret)
+	}
 });
 
 connect(env.mongodb_connect, {})

@@ -6,7 +6,8 @@ module.exports = class {
 	}
 
 	async execute (node) {
-		console.log(c.green('✅ [Vulkava] - Node conectado.'));
+		console.log(c.green(`✅ [Lavalink] - ${node.identifier} conectado!`));
+
 		setInterval(() => {
 			node.send({
 				op: 'ping',

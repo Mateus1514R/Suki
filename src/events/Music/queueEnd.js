@@ -5,7 +5,7 @@ module.exports = class {
 		this.client = client;
 	}
 
-	async run (player) {
+	async execute (player) {
 		const channel = this.client.channels.cache.get(player.textChannelId);
 
 		player.destroy();
