@@ -29,7 +29,7 @@ module.exports = class BotInfo extends Command {
 		const system = process.platform
 			.replace('win32', 'Windows')
 			.replace('linux', 'Linux');
-		const uptime = moment(process.uptime()).format('LT');
+		const uptime = moment.duration(process.uptime()).format("d[d] h[h] m[m] s[s]");
 		const version = process.version;
 		const server = await this.client.guildDB.findOne({
 			guildID: message.guild.id,
