@@ -53,7 +53,7 @@ module.exports = class Queue extends Command {
     .setAuthor({ name: 'Queue', iconURL: message.guild.iconURL({}) })
     .setDescription(`**${player.queue.length <= 0 ? 'Nenhuma música na minha fila' : this.collection.slice((page - 1) * 10, page * 10).join('\n')}\n\nMúsica tocando atualmente: [${player.current.title}](${player.current.uri})**`)
 
-    await message.rewply({ embeds: [embed], components: [row] }).then((msg) => {
+    await message.reply({ embeds: [embed], components: [row] }).then((msg) => {
 
       if(pages <= 1) return;
 
