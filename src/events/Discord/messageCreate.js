@@ -19,15 +19,15 @@ module.exports = class messageCreate {
 			prefix = server.prefix;
 		}
 
-          let lang;
-          switch(server ? server.lang : 0) {
-            case 0:
-              lang = this.client.langs.pt 
-              break;
-            case 1: 
-              lang = this.client.langs.en 
-              break;
-          }
+		let lang;
+		switch(server ? server.lang : 0) {
+			case 0:
+				lang = this.client.langs.pt;
+				break;
+			case 1:
+				lang = this.client.langs.en;
+				break;
+		}
 
 		if (message.content.match(GetMention(this.client.user.id))) {
 			message.reply(`Olá ${message.author}, Eu sou a **Suki**. Meu prefixo aqui é **${prefix}**. Caso precise de ajuda, utilize o comando **${prefix}help**!`);
