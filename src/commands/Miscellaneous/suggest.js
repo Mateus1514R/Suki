@@ -19,7 +19,7 @@ module.exports = class Suggest extends Command {
 
 		const channel = this.client.channels.cache.get('946386176871383120');
 
-		message.reply(`${e.Confirm} | ${message.author}, ${lang.commands.suggest.send}`);
+		message.reply(`${e.Correct} | ${message.author}, ${lang.commands.suggest.send}`);
 		const embed = new this.client.embed(message.author)
 			.setAuthor({ name: message.author.tag, iconURL: message.author.displayAvatarURL() })
 			.addFields([
@@ -33,7 +33,7 @@ module.exports = class Suggest extends Command {
 				}
 			]);
 		const msg = await channel.send({ embeds: [embed] });
-		await msg.react(`${e.Confirm}`);
+		await msg.react(`${e.Correct}`);
 		await msg.react(`${e.Error}`);
 	}
 };

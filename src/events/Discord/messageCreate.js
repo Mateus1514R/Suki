@@ -50,9 +50,9 @@ module.exports = class messageCreate {
 			}
 			catch (err) {
 				const erro = new this.client.embed(message.author)
-					.setTitle('❌ Ocorreu um Erro!')
-					.setDescription('Desculpe, um erro foi encontrado e o comando não foi executado corretamente. Peço que reporte o Bug aos meus desenvolvedores e aguarde o mesmo ser resolvido. Obrigado.');
-				await message.reply({ embeds: [erro] });
+					.setTitle(`${lang.events.messageCreate.embed.title}`)
+					.setDescription(`${lang.events.messageCreate.embed.description}`);
+				message.reply({ embeds: [erro] });
 				console.log(err);
 			}
 			const user = await this.client.userDB.findOne({ _id: message.author.id });

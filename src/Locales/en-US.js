@@ -1,15 +1,64 @@
-/* eslint-disable no-useless-escape */
 module.exports = {
 	lang: 'en-US',
 	events: {
 		messageCreate: {
-			mention: "Hi $, I'm **Suki**. My prefix here is **{}**. If you need help, use the command **{}help**!"
+			mention: "Hi $, I'm **Suki**. My prefix here is **{}**. If you need help, use the command **{}help**!",
+			embed: {
+				title: '❌ An Error Occurred!',
+				description: 'Sorry, an error was encountered and the command did not execute correctly. I ask you to report the Bug to my developers and wait for it to be resolved. Thanks.'
+			}
 		},
 		musicEvents: {
 			queueEnd: 'The music queue ended, so I left the voice channel.'
 		}
 	},
 	commands: {
+		welcome: {
+			noPerm: 'you need \`Manage Server\` permission to run this command!',
+			embedHelp: {
+				title: '🚪 | Entry Log System',
+				fields: {
+					system: 'System:',
+					on: 'Activated',
+					off: 'Off',
+					noChannel: 'No defined channel.',
+					message: 'Message',
+					noMessage: 'No message defined.'
+				},
+				embed2: {
+					title: '🚪 | Entry Log System',
+					fields: {
+						user: 'Mention the user',
+						name: 'Show username',
+						guild: 'Show server name',
+						total: 'Shows the current amount of members',
+						set: 'Set the Input channel.',
+						msg: 'Set the welcome message.',
+						status: 'Enables or disables the system.'
+					}
+				},
+				subs: {
+					set: {
+						noChannel: 'you need to send the channel.',
+						hasChannel: 'the channel entered is the same as currently set.',
+						noArgsChannel: 'you need to enter a text channel.',
+						sucess: 'input channel successfully set to {}'
+					},
+					msg: {
+						noArgs: 'you need to enter the message.',
+						hasMessage: 'the message entered is the same as currently defined.',
+						length: 'the message must have a maximum of 200 characters.',
+						sucess: 'welcome message successfully set to \`\`\`{}\`\`\`'
+					},
+					status: {
+						noChannel: 'you need to set the input channel to turn on the system.',
+						noMessage: 'you need to set the welcome message to turn on the system.',
+						on: 'system started successfully!',
+						off: 'system has been shut down successfully!'
+					}
+				}
+			}
+		},
 		prefix: {
 			noPerm: 'you need \`Manage Server\` permission to run this command!',
 			noArgs: 'to change my prefix on your server, use **{}prefix <Prefix>**.',

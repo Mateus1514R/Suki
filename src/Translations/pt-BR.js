@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-escape */
 module.exports = {
 	lang: 'pt-BR',
 	events: {
