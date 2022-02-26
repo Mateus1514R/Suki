@@ -89,20 +89,20 @@ module.exports = class Welcome extends Command {
 					}
 					switch (r.customId) {
 						case 'right': {
-							const info = new this.client.embed(message.author)
+							const info = new this.client.embed(message.author, lang)
 								.setAuthor({
 									name: message.guild.name,
 									iconURL: message.guild.iconURL({ dynamic: true }),
 								})
-								.setDescription(`${lang.commands.welcome.embed2.title}`)
+								.setDescription(String(`${lang.commands.welcome.embedHelp.embed2.title}`))
 								.addFields([
 									{
 										name: 'Placeholders:',
-										value: `> **[user]** - ${lang.commands.welcome.embed2.fields.user}\n> **[name]** - ${lang.commands.welcome.embed2.fields.name}\n> **[guild]** - ${lang.commands.welcome.embed2.fields.guild}\n> **[total]** - ${lang.commands.welcome.embed2.fields.total}.`,
+										value: `> **[user]** - ${lang.commands.welcome.embedHelp.embed2.fields.user}\n> **[name]** - ${lang.commands.welcome.embedHelp.embed2.fields.name}\n> **[guild]** - ${lang.commands.welcome.embedHelp.embed2.fields.guild}\n> **[total]** - ${lang.commands.welcome.embedHelp.embed2.fields.total}.`,
 									},
 									{
 										name: 'Comandos:',
-										value: `> **welcome set <chat>** - ${lang.commands.help.embed2.fields.set}\n> **welcome msg <msg>** - ${lang.commands.help.embed2.fields.msg}\n> **welcome status** - ${lang.commands.help.embed2.fields.status}`,
+										value: `> **welcome set <chat>** - ${lang.commands.welcome.embedHelp.embed2.fields.set}\n> **welcome msg <msg>** - ${lang.commands.welcome.embedHelp.embed2.fields.msg}\n> **welcome status** - ${lang.commands.welcome.embedHelp.embed2.fields.status}`,
 									},
 								]);
 
@@ -154,17 +154,17 @@ module.exports = class Welcome extends Command {
 
 			if (!channel) {
 				return message.reply(
-					`${e.Error} | ${message.author}, ${lang.commands.welcome.subs.set.noChannel}`
+					`${e.Error} | ${message.author}, ${lang.commands.welcome.embedHelp.subs.set.noChannel}`
 				);
 			}
 			else if (channel.id == guildDBData.welcome.channel) {
 				return message.reply(
-					`${e.Error} | ${message.author}, ${lang.commands.welcome.subs.set.hasChannel}`
+					`${e.Error} | ${message.author}, ${lang.commands.welcome.embedHelp.subs.set.hasChannel}`
 				);
 			}
 			else if (!channel.type === 'text') {
 				return message.reply(
-					`${e.Error} | ${message.author}, ${lang.commands.welcome.subs.set.noArgsChannel}`
+					`${e.Error} | ${message.author}, ${lang.commands.welcome.embedHelp.subs.set.noArgsChannel}`
 				);
 			}
 			else {
@@ -179,7 +179,7 @@ module.exports = class Welcome extends Command {
 					});
 				}
 				await message.reply(
-					`${e.Correct} | ${message.author}, ${lang.commands.welcome.subs.set.success.replace('{}', channel)}.`
+					`${e.Correct} | ${message.author}, ${lang.commands.welcome.embedHelp.subs.set.success.replace('{}', channel)}.`
 				);
 			}
 			return;
@@ -190,17 +190,17 @@ module.exports = class Welcome extends Command {
 
 			if (!msg) {
 				return message.reply(
-					`${e.Error} | ${message.author}, ${lang.commands.welcome.subs.msg.noArgs}`
+					`${e.Error} | ${message.author}, ${lang.commands.welcome.embedHelp.subs.msg.noArgs}`
 				);
 			}
 			else if (msg == guildDBData.welcome.message) {
 				return message.reply(
-					`${e.Error} | ${message.author}, ${lang.commands.welcome.subs.msg.hasMessage}`
+					`${e.Error} | ${message.author}, ${lang.commands.welcome.embedHelp.subs.msg.hasMessage}`
 				);
 			}
 			else if (msg.length > 200) {
 				return message.reply(
-					`${e.Error} | ${message.author}, ${lang.commands.welcome.subs.msg.length}`
+					`${e.Error} | ${message.author}, ${lang.commands.welcome.embedHelp.subs.msg.length}`
 				);
 			}
 			else {
@@ -215,7 +215,7 @@ module.exports = class Welcome extends Command {
 					});
 				}
 				await message.reply(
-					`${e.Correct} | ${message.author}, ${lang.commands.welcome.subs.msg.success.replace('{}', msg)}`
+					`${e.Correct} | ${message.author}, ${lang.commands.welcome.embedHelp.subs.msg.success.replace('{}', msg)}`
 				);
 			}
 			return;
@@ -225,26 +225,26 @@ module.exports = class Welcome extends Command {
 			if (guildDBData.welcome.status == false) {
 				if (guildDBData.welcome.channel == 'null') {
 					return message.reply(
-						`${e.Error} | ${message.author}, ${lang.commands.welcome.status.noChannel}`
+						`${e.Error} | ${message.author}, ${lang.commands.welcome.embedHelp.subs.status.noChannel}`
 					);
 				}
 				else if (guildDBData.welcome.message == 'null') {
 					return message.reply(
-						`${e.Error} | ${message.author}, ${lang.commands.welcome.status.noMessage}`
+						`${e.Error} | ${message.author}, ${lang.commands.welcome.embedHelp.subs.status.noMessage}`
 					);
 				}
 				else {
 					guildDBData.welcome.status = true;
 					await guildDBData.save();
 
-					return message.reply(`${e.Correct} | ${message.author}, ${lang.commands.welcome.status.on}`);
+					return message.reply(`${e.Correct} | ${message.author}, ${lang.commands.welcome.embedHelp.subs.status.on}`);
 				}
 			}
 			if (guildDBData.welcome.status == true) {
 				guildDBData.welcome.status = false;
 				await guildDBData.save();
 
-				return message.reply(`${e.Correct} | ${message.author}, ${lang.commands.welcome.status.off}`);
+				return message.reply(`${e.Correct} | ${message.author}, ${lang.commands.welcome.embedHelp.subs.status.off}`);
 			}
 		}
 
