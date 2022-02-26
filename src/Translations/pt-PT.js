@@ -1,18 +1,18 @@
 module.exports = {
-	lang: 'pt-BR',
+	lang: 'en-US',
 	events: {
 		messageCreate: {
-			mention: 'Oi $, eu sou a **Suki**. Meu prefixo neste servidor é **{}**. Se você precisar de ajuda, use o comando **{}help**!',
+			mention: 'Hi $, I\'m **Suki**. My prefix here is **{}**. If you need help, use the command **{}help**!',
 			embed: {
 				title: '❌ An Error Occurred!',
 				description: 'Sorry, an error was encountered and the command did not execute correctly. I ask you to report the Bug to my developers and wait for it to be resolved. Thanks.'
 			}
 		},
-		musicEvents: { queueEnd: 'A fila de músicas acabou, então eu deixei o canal de voz.' }
+		musicEvents: { queueEnd: 'The music queue ended, so I left the voice channel.' }
 	},
 	commands: {
 		welcome: {
-			noPerm: 'você precisa da permissão `Gerenciar Servidor` para executar este comando!',
+			noPerm: 'you need `Manage Server` permission to run this command!',
 			embedHelp: {
 				title: '🚪 | Entry Log System',
 				fields: {
@@ -58,8 +58,8 @@ module.exports = {
 			}
 		},
 		prefix: {
-			noPerm: 'você precisa da permissão `Gerenciar Servidor` para executar este comando!',
-			noArgs: 'para mudar meu prefixo em seu servidor, utilize **{}prefix <Prefix>**.',
+			noPerm: 'you need `Manage Server` permission to run this command!',
+			noArgs: 'to change my prefix on your server, use **{}prefix <Prefix>**.',
 			threeLength: 'the prefix must have a maximum of **3** characters.',
 			seted: 'my prefix on the server has been changed to: **{}**'
 		},
