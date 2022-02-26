@@ -46,13 +46,13 @@ module.exports = class messageCreate {
 			this.client.sendLogs(`\`---\`\nData: **${moment(Date.now()).format('L LT')}**\nComando **${cmd.name}** executado no servidor **${message.guild.name}** (\`${message.guild.id}\`)\nArgs: \`${args.join(' ')}\`\nUsuário: **${message.author.tag}** (\`${message.author.id}\`)\n\`---\``);
 
 			try {
-				cmd.execute({ message, args, lang });
+				await cmd.execute({ message, args, lang });
 			}
 			catch (err) {
 				const erro = new this.client.embed(message.author)
 					.setTitle(`${lang.events.messageCreate.embed.title}`)
 					.setDescription(`${lang.events.messageCreate.embed.description}`);
-				message.reply({ embeds: [erro] });
+				await message.reply({ embeds: [erro] });
 				console.log(err);
 			}
 			const user = await this.client.userDB.findOne({ _id: message.author.id });

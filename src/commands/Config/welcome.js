@@ -179,8 +179,7 @@ module.exports = class Welcome extends Command {
 					});
 				}
 				await message.reply(
-					`${e.Correct} | ${message.author}, ${lang.commands.welcome.embedHelp.subs.set.success.replace('{}', channel)}.`
-				);
+					`${e.Correct} | ${message.author}, ${lang.commands.welcome.embedHelp.subs.set.success}.`.replace('{}', channel));
 			}
 			return;
 		}
