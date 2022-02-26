@@ -4,55 +4,55 @@ module.exports = {
 		messageCreate: {
 			mention: 'Oi $, eu sou a **Suki**. Meu prefixo neste servidor é **{}**. Se você precisar de ajuda, use o comando **{}help**!',
 			embed: {
-				title: '❌ An Error Occurred!',
-				description: 'Sorry, an error was encountered and the command did not execute correctly. I ask you to report the Bug to my developers and wait for it to be resolved. Thanks.'
+				title: '❌ Ocorreu um erro!',
+				description: 'Desculpe um erro ocorreu e o comando não foi executado corretamente. Eu peço para você reportar o erro para meus desenvolvedores e esperar que seja corrigido. Obrigado.'
 			}
 		},
-		musicEvents: { queueEnd: 'A fila de músicas acabou, então eu deixei o canal de voz.' }
+		musicEvents: { queueEnd: 'A fila de músicas acabou, então eu saí do canal de voz.' }
 	},
 	commands: {
 		welcome: {
 			noPerm: 'você precisa da permissão `Gerenciar Servidor` para executar este comando!',
 			embedHelp: {
-				title: '🚪 | Entry Log System',
+				title: '🚪 | Sistema de boas-vindas',
 				fields: {
-					system: 'System:',
-					on: 'Activated',
-					off: 'Off',
-					noChannel: 'No defined channel.',
-					message: 'Message',
-					noMessage: 'No message defined.'
+					system: 'Sistema:',
+					on: 'Ativado',
+					off: 'Desligado',
+					noChannel: 'Canal não definido.',
+					message: 'Mensagem',
+					noMessage: 'Mensagem não definida.'
 				},
 				embed2: {
-					title: '🚪 | Entry Log System',
+					title: '🚪 | Sistema de boas-vindas',
 					fields: {
-						user: 'Mention the user',
-						name: 'Show username',
-						guild: 'Show server name',
-						total: 'Shows the current amount of members',
-						set: 'Set the Input channel.',
-						msg: 'Set the welcome message.',
-						status: 'Enables or disables the system.'
+						user: 'Mencione o usuário',
+						name: 'Mostrar nome de usuário',
+						guild: 'Mostrar nome do servidor',
+						total: 'Mostrar a quantidade atual de membros',
+						set: 'Defina o canal de entrada.',
+						msg: 'Defina a mensagem de boas-vindas.',
+						status: 'Habilitar ou desabilitar o sistema.'
 					}
 				},
 				subs: {
 					set: {
-						noChannel: 'you need to send the channel.',
-						hasChannel: 'the channel entered is the same as currently set.',
-						noArgsChannel: 'you need to enter a text channel.',
-						sucess: 'input channel successfully set to {}'
+						noChannel: 'você precisa enviar o canal.',
+						hasChannel: 'O canal inserido é o mesmo que o setado atualmente.',
+						noArgsChannel: 'Você precisa colocar o canal de texto.',
+						sucess: 'Canal de saída setado com sucesso para {}'
 					},
 					msg: {
-						noArgs: 'you need to enter the message.',
-						hasMessage: 'the message entered is the same as currently defined.',
-						length: 'the message must have a maximum of 200 characters.',
-						sucess: 'welcome message successfully set to ```{}```'
+						noArgs: 'Você precisa colocar a mensagem.',
+						hasMessage: 'A mensagem inserida é a mesma que a definida atualmente.',
+						length: 'A mensagem deve ter no máximo 200 caracteres.',
+						sucess: 'Mensagem de boas-vindas setada com sucesso para ```{}```'
 					},
 					status: {
-						noChannel: 'you need to set the input channel to turn on the system.',
-						noMessage: 'you need to set the welcome message to turn on the system.',
-						on: 'system started successfully!',
-						off: 'system has been shut down successfully!'
+						noChannel: 'Você precisa estar o canal de saída para ativar o sistema.',
+						noMessage: 'Você precisa setar a mensagem de boas-vindas para ativar o sistema.',
+						on: 'Sistema ativado com sucesso!',
+						off: 'O sistema foi desativado com sucesso!'
 					}
 				}
 			}
@@ -60,21 +60,21 @@ module.exports = {
 		prefix: {
 			noPerm: 'você precisa da permissão `Gerenciar Servidor` para executar este comando!',
 			noArgs: 'para mudar meu prefixo em seu servidor, utilize **{}prefix <Prefix>**.',
-			threeLength: 'the prefix must have a maximum of **3** characters.',
-			seted: 'my prefix on the server has been changed to: **{}**'
+			threeLength: 'O prefixo deve ter no máximo **3** caracteres.',
+			seted: 'Meu prefixo nesse servidor foi alterado para: **{}**'
 		},
-		coins: { money: 'Currently {user} has **{value}** coins(s)' },
+		coins: { money: 'Atualmente o(a) {user} tem **{value}** coin(s)' },
 		daily: {
-			cooldown: 'Try again at',
-			won: 'won in your daily `{amount}` coins!'
+			cooldown: 'Tente de novo às',
+			won: 'Você ganhou `{amount}` coins no seu prêmio diário!'
 		},
 		pay: {
-			noMention: 'You have to mention someone to pay!',
-			payYourSelf: 'You can\'t pay yourself!',
-			validValue: 'Enter a valid amount for payment!',
-			noCoins: 'You don\'t have enough coins to make the payment!',
-			neverUsed: 'This user has never used me so you can\'t pay him!',
-			payed: 'successful payment of **${value} coins** to `${user}`.'
+			noMention: 'Você deve mencionar alguém para pagar!',
+			payYourSelf: 'Você não pode pagar você mesmo!',
+			validValue: 'Valor de pagamento inválido inserido!',
+			noCoins: 'Você não tem coins suficientes para fazer esse pagamento!',
+			neverUsed: 'Esse usuário nunca me usou então você não pode pagar ele!',
+			payed: 'Você pagou com sucesso **${value} coins** para `${user}`.'
 		},
 		avatar: { embed: 'Click the button below to download the image.' },
 		userinfo: {
