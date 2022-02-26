@@ -15,6 +15,12 @@ module.exports = class guildCreate {
 		this.client.guildDB.create({
 			guildID: guild.id,
 			prefix: 's!',
+			welcome: {
+				channel: '',
+				message: '',
+				status: false,
+			},
+			lang: 0
 		});
 
 		const embed = new MessageEmbed()
