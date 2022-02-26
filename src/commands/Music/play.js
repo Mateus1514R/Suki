@@ -14,7 +14,7 @@ module.exports = class Play extends Command {
 
 	async execute ({ message, args, lang }) {
 		if(this.client.music.players.get(message.guild.id)) {
-			if (message.member.voice.channel?.id !== message.guild.me.voice.channel?.id) {
+			if (message.member.voice.channel.id !== message.guild.me.voice.channel?.id) {
 				return message.reply(
 					`${e.Error} | ${message.author}, ${lang.commands.play.channelError}`
 				);
