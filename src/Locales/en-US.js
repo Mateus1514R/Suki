@@ -43,7 +43,7 @@ module.exports = {
 						name: 'Show username',
 						guild: 'Show server name',
 						total: 'Shows the current amount of members',
-						set: 'Set the Input channel.',
+						set: 'Set the welcome channel.',
 						msg: 'Set the welcome message.',
 						status: 'Enables or disables the system.'
 					}
@@ -53,7 +53,7 @@ module.exports = {
 						noChannel: 'you need to send the channel.',
 						hasChannel: 'the channel entered is the same as currently set.',
 						noArgsChannel: 'you need to enter a text channel.',
-						success: 'input channel successfully set to {}'
+						success: 'welcome channel successfully set to {}'
 					},
 					msg: {
 						noArgs: 'you need to enter the message.',
@@ -62,7 +62,7 @@ module.exports = {
 						success: 'welcome message successfully set to \`\`\`{}\`\`\`'
 					},
 					status: {
-						noChannel: 'you need to set the input channel to turn on the system.',
+						noChannel: 'you need to set the welcome channel to turn on the system.',
 						noMessage: 'you need to set the welcome message to turn on the system.',
 						on: 'system started successfully!',
 						off: 'system has been shut down successfully!'
