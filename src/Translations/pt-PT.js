@@ -1,18 +1,18 @@
 module.exports = {
-	lang: 'pt-BR',
+	lang: 'en-US',
 	events: {
 		messageCreate: {
-			mention: 'Oi $, eu sou a **Suki**. Meu prefixo neste servidor é **{}**. Se você precisar de ajuda, use o comando **{}help**!',
+			mention: 'Hi $, I\'m **Suki**. My prefix here is **{}**. If you need help, use the command **{}help**!',
 			embed: {
 				title: '❌ An Error Occurred!',
 				description: 'Sorry, an error was encountered and the command did not execute correctly. I ask you to report the Bug to my developers and wait for it to be resolved. Thanks.'
 			}
 		},
-		musicEvents: { queueEnd: 'A fila de músicas acabou, então eu deixei o canal de voz.' }
+		musicEvents: { queueEnd: 'The music queue ended, so I left the voice channel.' }
 	},
 	commands: {
 		welcome: {
-			noPerm: 'você precisa da permissão `Gerenciar Servidor` para executar este comando!',
+			noPerm: 'you need `Manage Server` permission to run this command!',
 			embedHelp: {
 				title: '🚪 | Entry Log System',
 				fields: {
@@ -58,8 +58,8 @@ module.exports = {
 			}
 		},
 		prefix: {
-			noPerm: 'você precisa da permissão `Gerenciar Servidor` para executar este comando!',
-			noArgs: 'para mudar meu prefixo em seu servidor, utilize **{}prefix <Prefix>**.',
+			noPerm: 'you need `Manage Server` permission to run this command!',
+			noArgs: 'to change my prefix on your server, use **{}prefix <Prefix>**.',
 			threeLength: 'the prefix must have a maximum of **3** characters.',
 			seted: 'my prefix on the server has been changed to: **{}**'
 		},
@@ -125,7 +125,7 @@ module.exports = {
 			channelError: 'You\'re not on a voice channel',
 			channelError2: 'You need to be on the same channel as I am to change the queue!',
 			alteradyPause: 'Music is currently paused!',
-			success: 'Music successfully paused!'
+			sucess: 'Music successfully paused!'
 		},
 		play: {
 			channelError: 'You\'re not on a voice channel or you\'re not on the same channel as me',
@@ -146,7 +146,7 @@ module.exports = {
 			channelError: 'You are not on a voice channel.',
 			channelError2: 'You are not on the same voice channel as me to unpause the music!',
 			alteradyPause: 'Music is currently not paused!',
-			success: 'Music resumed successfully!'
+			sucess: 'Music resumed successfully!'
 		},
 		seek: {
 			noPlayer: 'I\'m not playing music on this server.',
@@ -154,19 +154,19 @@ module.exports = {
 			channelError2: 'You are not on the same voice channel as me!',
 			invalidTime: 'Enter the time for me to jump and let it be valid.',
 			exceeds: 'This time exceeds the time of the song',
-			success: 'I skipped the song to the desired time successfully'
+			sucess: 'I skipped the song to the desired time successfully'
 		},
 		shuffle: {
 			noPlayer: 'I\'m not playing music on this server.',
 			channelError: 'You are not on a voice channel.',
 			channelError2: 'You are not on the same voice channel as me!',
-			success: 'I shuffled the queue successfully'
+			sucess: 'I shuffled the queue successfully'
 		},
 		skip: {
 			noPlayer: 'I\'m not playing music on this server.',
 			channelError: 'You are not on a voice channel.',
 			channelError2: 'You are not on the same voice channel as me!',
-			success: 'Successfully skipped song'
+			sucess: 'Successfully skipped song'
 		},
 		skipto: {
 			noPlayer: 'I\'m not playing music on this server.',
@@ -177,7 +177,7 @@ module.exports = {
 			numberOne: 'Enter a number that is greater than 1',
 			queue: 'You don\'t have that number of songs in the queue',
 			end: 'All the songs that were in the queue were skipped',
-			success: 'I successfully skipped the desired songs'
+			sucess: 'I successfully skipped the desired songs'
 		},
 		stop: {
 			noPlayer: 'I\'m not playing music on this server.',
@@ -191,9 +191,9 @@ module.exports = {
 			noArgs: 'Enter the volume you want to set',
 			number: 'I only accept numbers',
 			correctNumber: 'Provide a volume between 0 to 500',
-			success: 'The music volume has been successfully set'
+			sucess: 'The music volume has been successfully set'
 		},
-		reload: { success: 'all commands reloaded successfully.' },
+		reload: { sucess: 'all commands reloaded successfully.' },
 		shell: { error: 'No output!' },
 		help: {
 			cmdCategory: 'Category commands',
