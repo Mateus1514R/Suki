@@ -12,11 +12,11 @@ module.exports = class Play extends Command {
 		this.aliases = ['p'];
 	}
 
-	async execute ({ message, args }) {
+	async execute ({ message, args, lang }) {
 		if(this.client.music.players.get(message.guild.id)) {
 			if (message.member.voice.channel?.id !== message.guild.me.voice.channel?.id) {
 				return message.reply(
-					`${e.Error} | ${message.author}, você precisa estar no mesmo canal de voz que eu para modificar a fila.`
+					`${e.Error} | ${message.author}, ${lang.commands.play.channelError}`
 				);
 			}
 		}
@@ -25,21 +25,21 @@ module.exports = class Play extends Command {
 
 		if (!music) {
 			return message.reply(
-				`${e.Error} | ${message.author}, você precisa inserir a música que deseja que eu toque.`
+				`${e.Error} | ${message.author}, ${lang.commands.play.noArgs}`
 			);
 		}
 
 		const result = await message.client.music.search(music, message.author);
-		var msg = await message.reply(`${e.Music} | ${message.author}, pesquisando \`${music}\`...`);
+		var msg = await message.reply(`${e.Music} | ${message.author}, ${lang.commands.play.searching} \`${music}\`...`);
 
 		if (result.loadType === 'LOAD_FAILED') {
 			return message.reply(
-				`${e.Error} | ${message.author}, desculpe, mas o link/nome que você inseriu não é válido.`
+				`${e.Error} | ${message.author}, ${lang.commands.play.failed}`
 			);
 		}
 		if (result.loadType === 'NO_MATCHES') {
 			return message.reply(
-				`${e.Error} | ${message.author}, não encontrei a música que você deseja.`
+				`${e.Error} | ${message.author}, ${lang.commands.play.nomatches}`
 			);
 		}
 
@@ -63,7 +63,7 @@ module.exports = class Play extends Command {
 			const embed = new this.client.embed(message.author)
 				.setDescription(`[${result.playlistInfo.name}](${args[0]})`)
 				.addFields({
-					name: 'Duração:',
+					name: `${lang.commands.play.embed1.duration}:`,
 					value: `${formatTime(
 						convertMilliseconds(result.playlistInfo?.duration),
 						'hh:mm:ss'
@@ -82,21 +82,21 @@ module.exports = class Play extends Command {
 			if (message.client.music.players.get(message.guild.id)) {
 
 				  const startingMusic = new this.client.embed(message.author)
-					.setAuthor({ name: 'Começando a tocar', iconURL: message.guild.iconURL() })
+					.setAuthor({ name: `${lang.commands.play.embed2.author}`, iconURL: message.guild.iconURL() })
 					.addFields(
 				  {
-							name: `${e.Music} | Música:`,
+							name: `${e.Music} | ${lang.commands.play.embed2.music}:`,
 							value: `> [${tracks[0].title}](${tracks[0].uri})`,
 				  },
 				  {
-							name: `${e.Time} | Duração:`,
+							name: `${e.Time} | ${lang.commands.play.embed2.duration}:`,
 							value: `> ${formatTime(
 					  convertMilliseconds(tracks[0].duration),
 					  'mm:ss'
 							)}`,
 				  },
 				  {
-							name: `${e.User} | Pedido por:`,
+							name: `${e.User} | ${lang.commands.play.embed2.requester}:`,
 							value: `> ${message.author}`,
 				  }
 					);

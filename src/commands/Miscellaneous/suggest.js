@@ -12,14 +12,14 @@ module.exports = class Suggest extends Command {
 		this.aliases = ['sugerir', 'sugestão'];
 	}
 
-	async execute ({ message, args }) {
+	async execute ({ message, args, lang }) {
 
 		const suggest = args.slice(0).join(' ');
-		if(!suggest) return message.reply(`${e.Error} | ${message.author}, você precisa inserir a sugestão que deseja enviar.`);
+		if(!suggest) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.suggest.noArgs}`);
 
 		const channel = this.client.channels.cache.get('946386176871383120');
 
-		message.reply(`${e.Confirm} | ${message.author}, sugestão enviada com sucesso, agradecemos a colaboração!`);
+		message.reply(`${e.Confirm} | ${message.author}, ${lang.commands.suggest.send}`);
 		const embed = new this.client.embed(message.author)
 			.setAuthor({ name: message.author.tag, iconURL: message.author.displayAvatarURL() })
 			.addFields([

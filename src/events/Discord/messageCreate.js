@@ -19,18 +19,18 @@ module.exports = class messageCreate {
 			prefix = server.prefix;
 		}
 
-		let lang;
-		switch(server ? server.lang : 0) {
-			case 0:
+		let lang = server.lang;
+		switch(lang) {
+			case 1:
 				lang = this.client.langs.pt;
 				break;
-			case 1:
+			case 0:
 				lang = this.client.langs.en;
 				break;
-		}
+		  }
 
 		if (message.content.match(GetMention(this.client.user.id))) {
-			message.reply(`Olá ${message.author}, Eu sou a **Suki**. Meu prefixo aqui é **${prefix}**. Caso precise de ajuda, utilize o comando **${prefix}help**!`);
+			message.reply(String(lang.events.messageCreate.mention).replaceAll('{}', prefix).replace('$', message.author));
 		}
 
 		if (message.content.indexOf(prefix) !== 0) return;

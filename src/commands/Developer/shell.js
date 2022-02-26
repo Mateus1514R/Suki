@@ -14,14 +14,14 @@ module.exports = class Shell extends Command {
 		this.aliases = ['sh'];
 	}
 
-	async execute ({ message, args }) {
+	async execute ({ message, args, lang }) {
 		if(!this.client.developers.some(x => x === message.author.id)) {return;}
 
 		if(!args[0]) {return;}
 
 		exec(args.join(' '), async (_err, stdout, stderr) => {
 			if (!stdout && !stderr) {
-				message.reply('Sem output!');
+				message.reply(`${lang.commands.shell.error}`);
 				return;
 			}
 

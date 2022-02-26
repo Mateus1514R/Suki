@@ -12,29 +12,29 @@ module.exports = class Seek extends Command {
 		this.aliases = [''];
 	}
 
-	async execute ({ message, args }) {
+	async execute ({ message, args, lang }) {
 
 		const player = this.client.music.players.get(message.guild.id);
 
-		if(!player) return message.reply('Não tem nada tocando neste servidor!');
+		if(!player) return message.reply(`${lang.commands.seek.noPlayer}`);
 
-		if(!message.member.voice.channel) return message.reply('Você não está em um canal de voz');
+		if(!message.member.voice.channel) return message.reply(`${lang.commands.seek.channelError}`);
 
-		if(message.client.music.players.get(message.guild.id) != null && message.member.voice.channel.id != message.guild.me.voice.channel.id) return message.reply('Você precisa estar no mesmo canal que eu estou para modificar a fila!');
+		if(message.client.music.players.get(message.guild.id) != null && message.member.voice.channel.id != message.guild.me.voice.channel.id) return message.reply(`${lang.commands.seek.channelError2}`);
 
-		if(!player.current) return message.reply('Não tem nada tocando atualmente');
+		if(!player.current) return message.reply(`${lang.commands.seek.noPlayer}`);
 
-		if(!args[0]) return message.reply('Coloque o tempo, exemplo: \\`1M\\`');
+		if(!args[0]) return message.reply(`${lang.commands.seek.invalidTime}`);
 
 		const time = ms(args[0]);
 
-		if(!Number(time)) return message.reply('Decsulpe, aceito apenas numeros.');
+		if(!Number(time)) return message.reply(`${lang.commands.seek.invalidTime}`);
 
-		if(time > player.current.duration) return message.reply('Esse tempo que você colocou excede o da música');
+		if(time > player.current.duration) return message.reply(`${lang.commands.seek.exceeds}`);
 
 		player.seek(time);
 
-		message.reply('Pulei para o tempo desejado com sucesso');
+		message.reply(`${lang.commands.seek.sucess}`);
 
 	}
 };

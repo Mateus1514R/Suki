@@ -16,7 +16,7 @@ module.exports = class {
 			const row = new MessageActionRow().addComponents(
 				new MessageButton()
 					.setCustomId('configured')
-					.setLabel(`Mensagem configurada pela Equipe ${guild.name}`)
+					.setLabel(`Message configured by ${guild.name} team`)
 					.setStyle('SECONDARY')
 					.setEmoji(e.Lock)
 					.setDisabled(true)
