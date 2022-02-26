@@ -179,7 +179,7 @@ module.exports = class Welcome extends Command {
 					});
 				}
 				await message.reply(
-					`${e.Correct} | ${message.author}, ${lang.commands.welcome.subs.set.sucess.replace('{}', channel)}.`
+					`${e.Correct} | ${message.author}, ${lang.commands.welcome.subs.set.success.replace('{}', channel)}.`
 				);
 			}
 			return;
@@ -215,7 +215,7 @@ module.exports = class Welcome extends Command {
 					});
 				}
 				await message.reply(
-					`${e.Correct} | ${message.author}, ${lang.commands.welcome.subs.msg.sucess.replace('{}', msg)}`
+					`${e.Correct} | ${message.author}, ${lang.commands.welcome.subs.msg.success.replace('{}', msg)}`
 				);
 			}
 			return;

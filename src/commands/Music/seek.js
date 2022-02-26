@@ -34,7 +34,7 @@ module.exports = class Seek extends Command {
 
 		player.seek(time);
 
-		message.reply(`${lang.commands.seek.sucess}`);
+		message.reply(`${lang.commands.seek.success}`);
 
 	}
 };

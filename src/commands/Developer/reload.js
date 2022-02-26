@@ -36,7 +36,7 @@ module.exports = class Reload extends Command {
 				}
 			});
 		});
-		message.reply(`${e.Dev} | ${message.author}, ${lang.commands.reload.sucess}`);
+		message.reply(`${e.Dev} | ${message.author}, ${lang.commands.reload.success}`);
 
 	}
 };

@@ -23,7 +23,7 @@ module.exports = class Shuffle extends Command {
 
 		player.shuffleQueue();
 
-		message.reply(`${lang.commands.shuffle.sucess}`);
+		message.reply(`${lang.commands.shuffle.success}`);
 
 	}
 };

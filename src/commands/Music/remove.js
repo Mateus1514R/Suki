@@ -1,35 +1,35 @@
-const Command = require('../../structures/Command')
+const Command = require('../../structures/Command');
 
 module.exports = class Remove extends Command {
 	constructor (client) {
-		super(client)
+		super(client);
 		this.client = client;
 
-		this.name = 'remove'
-		this.category = 'Music'
-		this.description = ''
-		this.aliases = ['']
+		this.name = 'remove';
+		this.category = 'Music';
+		this.description = '';
+		this.aliases = [''];
 	}
 
-	async execute ({ message, args }) {
+	async execute ({ message, args, lang }) {
 
-    const player = this.client.music.players.get(message.guild.id)
+		const player = this.client.music.players.get(message.guild.id);
 
-		if(!player) return message.reply('Não tem nada tocando neste servidor!')
+		if(!player) return message.reply(`${lang.commands.remove.noPlayer}`);
 
-		if(!message.member.voice.channel) return message.reply('Você não está em um canal de voz')
-    
-		if(message.client.music.players.get(message.guild.id) != null && message.member.voice.channel.id != message.guild.me.voice.channel.id) return message.reply('Você precisa estar no mesmo canal que eu estou para modificar a fila!')
+		if(!message.member.voice.channel) return message.reply(`${lang.commands.remove.channelError}`);
 
-    if(!args[0]) return message.reply('Digite o numero da música que deseja tirar da fila, para ver o numero de uma música utilize o comando de \`Queue\`')
+		if(message.client.music.players.get(message.guild.id) != null && message.member.voice.channel.id != message.guild.me.voice.channel.id) return message.reply(`${lang.commands.remove.channelError2}`);
 
-    if(!Number(args[0])) return message.reply('Aceito só numeros')
+		if(!args[0]) return message.reply(`${lang.commands.remove.noArgs}`);
 
-    if(args[0] > player.queue.length) return message.reply('Não tem uma música com essa numeração')
+		if(!Number(args[0])) return message.reply(`${lang.commands.remove.number}`);
 
-    player.queue.splice(args[0] -1, 1)
+		if(args[0] > player.queue.length) return message.reply(`${lang.commands.remove.noMusic}`);
 
-    message.reply('Música removida da fila com sucesso')
+		player.queue.splice(args[0] - 1, 1);
 
-  }
-}
+		message.reply(`${lang.commands.remove.success}`);
+
+	}
+};

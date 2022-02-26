@@ -73,7 +73,7 @@ module.exports = {
 			channelError: 'You\'re not on a voice channel',
 			channelError2: 'You need to be on the same channel as I am to change the queue!',
 			alteradyPause: 'Music is currently paused!',
-			sucess: 'Music successfully paused!'
+			success: 'Music successfully paused!'
 		},
 		play: {
 			channelError: 'You\'re not on a voice channel or you\'re not on the same channel as me',
@@ -94,7 +94,7 @@ module.exports = {
 			channelError: 'You are not on a voice channel.',
 			channelError2: 'You are not on the same voice channel as me to unpause the music!',
 			alteradyPause: 'Music is currently not paused!',
-			sucess: 'Music resumed successfully!'
+			success: 'Music resumed successfully!'
 		},
 		seek: {
 			noPlayer: 'I\'m not playing music on this server.',
@@ -102,19 +102,19 @@ module.exports = {
 			channelError2: 'You are not on the same voice channel as me!',
 			invalidTime: 'Enter the time for me to jump and let it be valid.',
 			exceeds: 'This time exceeds the time of the song',
-			sucess: 'I skipped the song to the desired time successfully'
+			success: 'I skipped the song to the desired time successfully'
 		},
 		shuffle: {
 			noPlayer: 'I\'m not playing music on this server.',
 			channelError: 'You are not on a voice channel.',
 			channelError2: 'You are not on the same voice channel as me!',
-			sucess: 'I shuffled the queue successfully'
+			success: 'I shuffled the queue successfully'
 		},
 		skip: {
 			noPlayer: 'I\'m not playing music on this server.',
 			channelError: 'You are not on a voice channel.',
 			channelError2: 'You are not on the same voice channel as me!',
-			sucess: 'Successfully skipped song'
+			success: 'Successfully skipped song'
 		},
 		skipto: {
 			noPlayer: 'I\'m not playing music on this server.',
@@ -125,7 +125,7 @@ module.exports = {
 			numberOne: 'Enter a number that is greater than 1',
 			queue: 'You don\'t have that number of songs in the queue',
 			end: 'All the songs that were in the queue were skipped',
-			sucess: 'I successfully skipped the desired songs'
+			success: 'I successfully skipped the desired songs'
 		},
 		stop: {
 			noPlayer: 'I\'m not playing music on this server.',
@@ -139,9 +139,9 @@ module.exports = {
 			noArgs: 'Enter the volume you want to set',
 			number: 'I only accept numbers',
 			correctNumber: 'Provide a volume between 0 to 500',
-			sucess: 'The music volume has been successfully set'
+			success: 'The music volume has been successfully set'
 		},
-		reload: { sucess: 'all commands reloaded successfully.' },
+		reload: { success: 'all commands reloaded successfully.' },
 		shell: { error: 'No output!' },
 		help: {
 			cmdCategory: 'Category commands',
