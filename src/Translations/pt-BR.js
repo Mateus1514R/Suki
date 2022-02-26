@@ -37,19 +37,19 @@ module.exports = {
 				},
 				subs: {
 					set: {
-						noChannel: 'você precisa enviar o canal.',
+						noChannel: 'você precisa mencionar o canal.',
 						hasChannel: 'O canal inserido é o mesmo que o setado atualmente.',
-						noArgsChannel: 'Você precisa colocar o canal de texto.',
+						noArgsChannel: 'Você precisa mencionar o canal de texto.',
 						sucess: 'Canal de saída setado com sucesso para {}'
 					},
 					msg: {
-						noArgs: 'Você precisa colocar a mensagem.',
-						hasMessage: 'A mensagem inserida é a mesma que a definida atualmente.',
+						noArgs: 'Você precisa inserir a mensagem.',
+						hasMessage: 'A mensagem inserida é a mesma que a setada atualmente.',
 						length: 'A mensagem deve ter no máximo 200 caracteres.',
 						sucess: 'Mensagem de boas-vindas setada com sucesso para ```{}```'
 					},
 					status: {
-						noChannel: 'Você precisa estar o canal de saída para ativar o sistema.',
+						noChannel: 'Você precisa setar o canal de saída para ativar o sistema.',
 						noMessage: 'Você precisa setar a mensagem de boas-vindas para ativar o sistema.',
 						on: 'Sistema ativado com sucesso!',
 						off: 'O sistema foi desativado com sucesso!'
@@ -97,9 +97,9 @@ module.exports = {
 		loop: {
 			noPlayer: 'Eu não estou tocando música neste servidor!',
 			channelError: 'Você precisa estar em um canal de voz para utilizar esse comando!',
-			noArgs: 'Você precisa inserir qual repetição deseja ativar.\n{} | Opções disponíveis:\n> Faixa | lista | desativar',
-			trackloop: 'Você ativou com sucesso `Repetição de Faixa`!',
-			queueloop: 'Você ativou com sucesso a `Repetição de Lista`!',
+			noArgs: 'Você precisa inserir qual repetição deseja ativar.\n{} | Opções disponíveis:\n> track | queue | disable',
+			trackloop: 'Loop da música ativada com sucesso!',
+			queueloop: 'Loop da queue ativado com sucesso!',
 			disable: 'Você desativou com sucesso a `Repetição`!'
 		},
 		botinfo: {
@@ -129,7 +129,7 @@ module.exports = {
 		},
 		play: {
 			channelError: 'Você não está em um canal de voz ou não está no mesmo canal que eu',
-			noArgs: 'Você precisa colocar uma música ou url para eu tocar!',
+			noArgs: 'Você precisa inserir o nome/url da música para eu começar a tocar',
 			searching: `Procurando`,
 			failed: `Desculpe mas o link/nome que você inseriu não é válido.`,
 			nomatches: `Eu não achei a música que você quer.`,
