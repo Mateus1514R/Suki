@@ -13,6 +13,17 @@ module.exports = {
 		}
 	},
 	commands: {
+		lang: {
+			noPerm: 'you need \`Manage Server\` permission to run this command!',
+			embed: {
+				desc: '🇺🇸 English **[Complete]**\n🇧🇷 Português **[Incomplete]**',
+				select: 'Which language do you want? Click on the buttons below.'
+			},
+			authorOnly: "Only the command author can choose the new language.",
+			sucess: "I will speak English on this server.",
+			closed: 'I closed the language selection menu.',
+			cancel: 'Cancel'
+		},
 		welcome: {
 			noPerm: 'you need \`Manage Server\` permission to run this command!',
 			embedHelp: {

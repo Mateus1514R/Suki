@@ -1,7 +1,7 @@
 const Command = require('../../structures/Command');
 const e = require('../../utils/Emojis');
 
-module.exports = class Daily extends Command {
+module.exports = class Pay extends Command {
 	constructor (client) {
 		super(client);
 		this.client = client;

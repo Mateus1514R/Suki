@@ -11,6 +11,16 @@ module.exports = {
 		musicEvents: { queueEnd: 'A fila de músicas acabou, então eu deixei o canal de voz.' }
 	},
 	commands: {
+		lang: {
+			noPerm: 'você precisa da permissão \`Gerenciar Servidor\` para executar este comando!',
+			embed: {
+				desc: '🇺🇸 Inglês **[Completo]**\n🇧🇷 Português **[Incompleto]**',
+				select: 'Qual idioma você quer? Clique nos botões abaixo.'
+			},
+			authorOnly: "Apenas o autor do comando pode escolher o novo idioma.",
+			closed: 'Fechei o menu de seleção de idiomas.',
+			cancel: 'Cancelar'
+		},
 		welcome: {
 			noPerm: 'você precisa da permissão `Gerenciar Servidor` para executar este comando!',
 			embedHelp: {
