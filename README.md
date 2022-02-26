@@ -41,5 +41,9 @@ Ah! So you would like to contribute to my repository, right? Great! We love new 
 - Read [CONTRIBUTING.md](https://github.com/sukicorp/Suki/blob/main/.github/CONTRIBUTING.md) to make the pull request correctly
 - Once they're done, make a pull request to the master branch if you are contributing to the new version or the main branch if you are contributing to the stable and running version
 
+### 🌎 Translating:
+- If you want to contribute and help translating Suki, go to [our Crowdin page](https://crowdin.com/project/suki)!
+- For more information, visit [Suki's Locales repository](https://github.com/sukicorp/SukiLocales)
+
 ### ⛔ Issues:
 If you have any problems, please open a [Issue](https://github.com/sukicorp/Suki/issues) or [contact us](https://discord.gg/xBe7hABxMD)
