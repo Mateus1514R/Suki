@@ -76,101 +76,101 @@ module.exports = {
 			neverUsed: 'Esse usuário nunca me usou então você não pode pagar ele!',
 			payed: 'Você pagou com sucesso **${value} coins** para `${user}`.'
 		},
-		avatar: { embed: 'Click the button below to download the image.' },
+		avatar: { embed: 'Clique no botão abaixo para baixar a imagem.' },
 		userinfo: {
-			noNickname: 'No nickname',
+			noNickname: 'Sem apelido',
 			noBooster: 'It\'s not boost.',
 			embed: {
-				name1: 'Personal information',
-				username: 'User name',
-				created: 'Account created',
-				infoserver: 'Information on the Server',
-				nickname: 'Nickname',
-				joined: 'Entered into',
-				role: 'Highest Position'
+				name1: 'Informação pessoal',
+				username: 'Nome de usuário',
+				created: 'Conta criada',
+				infoserver: 'Informações do servidor',
+				nickname: 'Apelido',
+				joined: 'Inserido em',
+				role: 'Cargo mais alto'
 			}
 		},
 		suggest: {
-			noArgs: 'you need to enter the suggestion you want to send.',
-			send: 'suggestion sent successfully, thank you for your cooperation!'
+			noArgs: 'Você precisa colocar a sugestão que deseja enviar.',
+			send: 'Sugestão enviada com sucesso, obrigado pela sua cooperação!'
 		},
 		loop: {
-			noPlayer: 'i\'m not playing music on this server!',
-			channelError: 'you need to be on a voice channel!',
-			noArgs: 'you need to enter the loop you want to activate.\n{} | Available Options:\n> Track | Queue | disable',
-			trackloop: 'you have successfully activated `Track Loop`!',
-			queueloop: 'you have successfully activated the `Queue Loop`!',
-			disable: 'you have successfully disabled `Loop`!'
+			noPlayer: 'Eu não estou tocando música neste servidor!',
+			channelError: 'Você precisa estar em um canal de voz para utilizar esse comando!',
+			noArgs: 'Você precisa inserir qual repetição deseja ativar.\n{} | Opções disponíveis:\n> Faixa | lista | desativar',
+			trackloop: 'Você ativou com sucesso `Repetição de Faixa`!',
+			queueloop: 'Você ativou com sucesso a `Repetição de Lista`!',
+			disable: 'Você desativou com sucesso a `Repetição`!'
 		},
 		botinfo: {
 			embed: {
-				name1: `Personal information:`,
-				owners: `Creators`,
-				created: `Created in`,
-				prefix: `Prefix`,
-				users: `Users`,
-				servers: `Servers`,
-				name2: `Technical information`,
-				commands: `Commands`,
-				platform: `Platform`
+				name1: `Informação pessoal:`,
+				owners: `Criadores`,
+				created: `Criado em`,
+				prefix: `Prefixo`,
+				users: `Usuários`,
+				servers: `Servidores`,
+				name2: `Informações técnicas`,
+				commands: `Comandos`,
+				platform: `Plataforma`
 			},
 			buttons: {
-				add: `Add me`,
-				sup: `Support`,
-				repo: `Repository`
+				add: `Me adicione`,
+				sup: `Suporte`,
+				repo: `Repositório`
 			}
 		},
 		pause: {
-			noPlayer: 'I\'m not playing music on this server.',
-			channelError: 'You\'re not on a voice channel',
-			channelError2: 'You need to be on the same channel as I am to change the queue!',
-			alteradyPause: 'Music is currently paused!',
-			sucess: 'Music successfully paused!'
+			noPlayer: 'Eu não estou tocando música neste servidor.',
+			channelError: 'Você não está em um canal de voz',
+			channelError2: 'Você precisa estar no mesmo canal que eu para mudar a lista!',
+			alteradyPause: 'Música pausada!',
+			sucess: 'Música pausada com sucesso!'
 		},
 		play: {
-			channelError: 'You\'re not on a voice channel or you\'re not on the same channel as me',
-			noArgs: 'You need to put a song or url for me to play!',
-			searching: `searching`,
-			failed: `sorry but the link/name you entered is not valid.`,
-			nomatches: `i didn't find the song you want.`,
-			embed1: { duration: 'Duration' },
+			channelError: 'Você não está em um canal de voz ou não está no mesmo canal que eu',
+			noArgs: 'Você precisa colocar uma música ou url para eu tocar!',
+			searching: `Procurando`,
+			failed: `Desculpe mas o link/nome que você inseriu não é válido.`,
+			nomatches: `Eu não achei a música que você quer.`,
+			embed1: { duration: 'Duração' },
 			embed2: {
-				author: 'Starting to play',
-				music: `Music`,
-				duration: 'Duration',
-				requester: 'Requested by'
+				author: 'Começando a tocar',
+				music: `Música`,
+				duration: 'Duração',
+				requester: 'Solicitado por'
 			}
 		},
 		resume: {
-			noPlayer: 'I\'m not playing music on this server.',
-			channelError: 'You are not on a voice channel.',
+			noPlayer: 'Eu não estou tocando música neste servidor.',
+			channelError: 'Você não está em um canal de voz.',
 			channelError2: 'You are not on the same voice channel as me to unpause the music!',
 			alteradyPause: 'Music is currently not paused!',
 			sucess: 'Music resumed successfully!'
 		},
 		seek: {
-			noPlayer: 'I\'m not playing music on this server.',
-			channelError: 'You are not on a voice channel.',
+			noPlayer: 'Eu não estou tocando música neste servidor.',
+			channelError: 'Você não está em um canal de voz.',
 			channelError2: 'You are not on the same voice channel as me!',
 			invalidTime: 'Enter the time for me to jump and let it be valid.',
 			exceeds: 'This time exceeds the time of the song',
 			sucess: 'I skipped the song to the desired time successfully'
 		},
 		shuffle: {
-			noPlayer: 'I\'m not playing music on this server.',
-			channelError: 'You are not on a voice channel.',
+			noPlayer: 'Eu não estou tocando música neste servidor.',
+			channelError: 'Você não está em um canal de voz.',
 			channelError2: 'You are not on the same voice channel as me!',
 			sucess: 'I shuffled the queue successfully'
 		},
 		skip: {
-			noPlayer: 'I\'m not playing music on this server.',
-			channelError: 'You are not on a voice channel.',
+			noPlayer: 'Eu não estou tocando música neste servidor.',
+			channelError: 'Você não está em um canal de voz.',
 			channelError2: 'You are not on the same voice channel as me!',
 			sucess: 'Successfully skipped song'
 		},
 		skipto: {
-			noPlayer: 'I\'m not playing music on this server.',
-			channelError: 'You are not on a voice channel.',
+			noPlayer: 'Eu não estou tocando música neste servidor.',
+			channelError: 'Você não está em um canal de voz.',
 			channelError2: 'You are not on the same voice channel as me!',
 			noArgs: 'Enter the number of songs you want to skip',
 			number: 'I only accept numbers',
@@ -180,13 +180,13 @@ module.exports = {
 			sucess: 'I successfully skipped the desired songs'
 		},
 		stop: {
-			noPlayer: 'I\'m not playing music on this server.',
-			channelError: 'You are not on a voice channel.',
+			noPlayer: 'Eu não estou tocando música neste servidor.',
+			channelError: 'Você não está em um canal de voz.',
 			channelError2: 'You are not on the same voice channel as me!'
 		},
 		volume: {
-			noPlayer: 'I\'m not playing music on this server.',
-			channelError: 'You are not on a voice channel.',
+			noPlayer: 'Eu não estou tocando música neste servidor.',
+			channelError: 'Você não está em um canal de voz.',
 			channelError2: 'You are not on the same voice channel as me!',
 			noArgs: 'Enter the volume you want to set',
 			number: 'I only accept numbers',
@@ -220,7 +220,7 @@ module.exports = {
 			},
 			noPerm: 'you need to run the command for that.',
 			commands: 'You are **seeing** the **commands** of the category',
-			field: 'Commands'
+			field: 'Comandos'
 		}
 	}
 };
