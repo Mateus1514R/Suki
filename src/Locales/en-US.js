@@ -78,7 +78,7 @@ module.exports = {
 			validValue: 'Enter a valid amount for payment!',
 			noCoins: "You don't have enough coins to make the payment!",
 			neverUsed: "This user has never used me so you can't pay him!",
-			payed: 'successful payment of **${value} coins** to \`${user}\`.',
+			payed: 'successful payment of **{} coins** to \`{user}\`.',
 		},
 		avatar: {
 			embed: 'Click the button below to download the image.'

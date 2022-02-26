@@ -18,9 +18,9 @@ module.exports = class Daily extends Command {
 
 		const authorDB = await this.client.userDB.findOne({ _id: message.author.id });
 
-		const targetDB = await this.client.userDB.findOne({ _id: user.id });
-
 		if(!user) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.noMention}`);
+
+		const targetDB = await this.client.userDB.findOne({ _id: user.id });
 
 		if (user.id == message.author.id) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.payYourSelf}!`);
 
@@ -32,7 +32,7 @@ module.exports = class Daily extends Command {
 
 		if (authorDB.value < value) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.noDiamonds}!`);
 
-	 message.reply(`${e.Correct} | ${message.author}, ${lang.commands.pay.payed.replace('{user}', String(user).replace('{value}', value.toLocaleString()))}`);
+	 message.reply(`${e.Correct} | ${message.author}, ${lang.commands.pay.payed.replace('{user}', String(user.username)).replace('{}', value.toLocaleString())}`);
 
 		await this.client.userDB.findOneAndUpdate({ _id: message.author.id },
 			{
