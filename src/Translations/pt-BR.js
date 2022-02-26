@@ -1,8 +1,8 @@
 /* eslint-disable no-useless-escape */
 module.exports = {
-	lang: 'en-US',
+	lang: 'pt-BR',
 	events: {
-		messageCreate: { mention: 'Hi $, I\'m **Suki**. My prefix here is **{}**. If you need help, use the command **{}help**!' },
+		messageCreate: { mention: 'Oi $, eu sou a **Suki**. Meu prefixo neste servidor é **{}**. Se você precisar de ajuda, use o comando **{}help**!' },
 		musicEvents: { queueEnd: 'The music queue ended, so I left the voice channel.' }
 	},
 	commands: {
