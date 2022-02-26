@@ -12,7 +12,7 @@ module.exports = class Daily extends Command {
 		this.aliases = ['doar', 'pagar', 'enviar'];
 	}
 
-	async execute ({ message, args }) {
+	async execute ({ message, args, lang }) {
 
 		const user = await this.client.getUser(args[0], message);
 
@@ -20,19 +20,19 @@ module.exports = class Daily extends Command {
 
 		const targetDB = await this.client.userDB.findOne({ _id: user.id });
 
-		if(!user) return message.reply(`${e.Error} | ${message.author}, você precisa inserir o usuário que deseja fazer o pagamento.`);
+		if(!user) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.noMention}`);
 
-		if (user.id == message.author.id) return message.reply(`${e.Error} | ${message.author}, você não pode enviar dinheiro para si mesmo.`);
+		if (user.id == message.author.id) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.payYourSelf}!`);
 
 		const value = parseInt(args[1]);
 
-		if (!args[1] || value < 0 || isNaN(value)) return message.reply(`${e.Error} | ${message.author}, você precisa inserir a quantia de dinheiro que deseja enviar ao usuário.`);
+		if (!args[1] || value < 0 || isNaN(value)) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.validValue}`);
 
-		if(!targetDB) return message.reply(`${e.Error} | ${message.author}, este usuário não está registrado em meu banco de dados, peça a ele para usar um comando primeiro.`);
+		if(!targetDB) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.neverUsed}!`);
 
-		if (authorDB.value < value) return message.reply(`${e.Error} | ${message.author}, você não possui dinheiro suficiente para realizar o pagamento.`);
+		if (authorDB.value < value) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.noDiamonds}!`);
 
-	 message.reply(`${e.Correct} | ${message.author}, pagamento de **${value.toLocaleString()} coins** feito com sucesso para \`${user.username}\`.`);
+	 message.reply(`${e.Correct} | ${message.author}, ${lang.commands.pay.payed.replace('{user}', String(user).replace('{value}', value.toLocaleString()))}`);
 
 		await this.client.userDB.findOneAndUpdate({ _id: message.author.id },
 			{

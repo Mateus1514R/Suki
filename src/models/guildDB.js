@@ -8,6 +8,7 @@ let guildDB = new Schema({
 		message: { type: String, default: 'null' },
 		status: { type: Boolean, default: false },
 	},
+	lang: { type: Number, default: 0 },
 });
 
 let Guild = model('Guild', guildDB);

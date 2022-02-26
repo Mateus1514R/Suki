@@ -7,3 +7,5 @@ LICENSE
 package.json
 README.md
 renovate.json
+src/Locales
+src/Translations

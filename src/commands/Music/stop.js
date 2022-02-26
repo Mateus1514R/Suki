@@ -12,7 +12,7 @@ module.exports = class Stop extends Command {
 		this.aliases = ['reset', 'disconnect'];
 	}
 
-	async execute ({ message }) {
+	async execute ({ message, lang }) {
 		if (message.guild.me.voice.channel != null) {
 			if (
 				message.member.voice.channel.id !=
@@ -20,7 +20,7 @@ module.exports = class Stop extends Command {
               true
 			) {
 				return message.reply(
-					`${e.Error} | ${message.author}, você precisa estar no mesmo canal de voz que eu para modificar a fila.`
+					`${e.Error} | ${message.author}, ${lang.commands.stop.channelError2}`
 				);
 			}
 		}
@@ -30,7 +30,7 @@ module.exports = class Stop extends Command {
 
 		if (!channel) {
 			return message.reply(
-				`${e.Error} | ${message.author}, você precisa estar em um \`Canal de Voz\` para isso.`
+				`${e.Error} | ${message.author}, ${lang.commands.stop.channelError}`
 			);
 		}
 

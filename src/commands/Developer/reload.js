@@ -13,7 +13,7 @@ module.exports = class Reload extends Command {
 		this.aliases = ['rl'];
 	}
 
-	async execute ({ message }) {
+	async execute ({ message, lang }) {
 		if(!this.client.developers.some(x => x === message.author.id)) {return;}
 
 		this.client.commands.sweep(() => true);
@@ -36,7 +36,7 @@ module.exports = class Reload extends Command {
 				}
 			});
 		});
-		message.reply(`${e.Dev} | ${message.author}, comandos recarregados com sucesso.`);
+		message.reply(`${e.Dev} | ${message.author}, ${lang.commands.reload.sucess}`);
 
 	}
 };

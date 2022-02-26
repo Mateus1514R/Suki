@@ -12,12 +12,12 @@ module.exports = class Loop extends Command {
 		this.aliases = ['lp'];
 	}
 
-	async execute ({ message, args }) {
+	async execute ({ message, args, lang }) {
 
 		const player = this.client.music.players.get(message.guild.id);
-		if(!message.member.voice.channel) return message.reply(`${e.Error} | ${message.author}, você precisa estar em um \`Canal de Voz\` para isso.`);
-		if(!player) return message.reply(`${e.Error} | ${message.author}, não há nada tocando neste servidor.`);
-		if(!args[0]) return message.reply(`${e.Error} | ${message.author}, você precisa inserir o loop que deseja ativar.\n${e.Right} | Opções Disponíveis:\n> Track | Queue | Disable`);
+		if(!message.member.voice.channel) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.loop.channelError}`);
+		if(!player) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.loop.noPlayer}`);
+		if(!args[0]) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.loop.noArgs.replace('{}', e.Right)}`);
 
 		if(message.client.music.players.get(message.guild.id) != null && message.member.voice.channel.id != message.guild.me.voice.channel.id) return message.reply(`${e.Error} | ${message.author}, você precisa estar no mesmo canal de voz que eu para modificar a fila.`);
 
@@ -26,7 +26,7 @@ module.exports = class Loop extends Command {
 			player.setTrackLoop(true);
 			player.setQueueLoop(false);
 
-			return message.reply(`${e.Confirm} | ${message.author}, você ativou o \`Track Loop\` com sucesso!`);
+			return message.reply(`${e.Confirm} | ${message.author}, ${lang.commands.loop.trackloop}`);
 
 		}
 
@@ -35,7 +35,7 @@ module.exports = class Loop extends Command {
 			player.setQueueLoop(true);
 			player.setTrackLoop(false);
 
-			return message.reply(`${e.Confirm} | ${message.author}, você ativou o \`Queue Loop\` com sucesso!`);
+			return message.reply(`${e.Confirm} | ${message.author}, ${lang.commands.loop.queueloop}`);
 
 		}
 
@@ -44,7 +44,7 @@ module.exports = class Loop extends Command {
 			player.setQueueLoop(false);
 			player.setTrackLoop(false);
 
-			return message.reply(`${e.Confirm} | ${message.author}, você desativou o \`Loop\` com sucesso!`);
+			return message.reply(`${e.Confirm} | ${message.author}, ${lang.commands.loop.disable}`);
 
 		}
 	}

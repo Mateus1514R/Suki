@@ -12,7 +12,7 @@ module.exports = class Avatar extends Command {
 		this.aliases = ['foto'];
 	}
 
-	async execute ({ message, args }) {
+	async execute ({ message, args, lang }) {
 
 		let user = await this.client.getUser(args[0], message);
 		if(!user) user = message.author;
@@ -21,7 +21,7 @@ module.exports = class Avatar extends Command {
 
 		const embed = new this.client.embed(message.author)
 			.setAuthor({ name: user.username, iconURL: user.avatarURL({ dynamic: true }) })
-			.setDescription('Clique no botão abaixo para baixar a imagem.')
+			.setDescription(`${lang.commands.avatar.embed}`)
 			.setImage(avatar);
 
 		const row = new MessageActionRow()

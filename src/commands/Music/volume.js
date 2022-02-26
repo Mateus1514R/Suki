@@ -11,25 +11,25 @@ module.exports = class Volume extends Command {
 		this.aliases = [''];
 	}
 
-	async execute ({ message, args }) {
+	async execute ({ message, args, lang }) {
 
 		const player = this.client.music.players.get(message.guild.id);
 
-		if(!player) return message.reply('Não tem nada tocando neste servidor!');
+		if(!player) return message.reply(`${lang.commands.volume.noPlayer}`);
 
-		if(!message.member.voice.channel) return message.reply('Você não está em um canal de voz');
+		if(!message.member.voice.channel) return message.reply(`${lang.commands.volume.channelError}`);
 
-		if(message.client.music.players.get(message.guild.id) != null && message.member.voice.channel.id != message.guild.me.voice.channel.id) return message.reply('Você precisa estar no mesmo canal que eu estou para modificar a fila!');
+		if(message.client.music.players.get(message.guild.id) != null && message.member.voice.channel.id != message.guild.me.voice.channel.id) return message.reply(`${lang.commands.volume.channelError2}`);
 
-		if(!args[0]) return message.reply('Insira o volume que deseja setar');
+		if(!args[0]) return message.reply(`${lang.commands.volume.noArgs}`);
 
-		if(!Number(args[0])) return message.reply('Só aceito numeros');
+		if(!Number(args[0])) return message.reply(`${lang.commands.volume.number}`);
 
-		if(!args[0] || args[0] < 1 || args[0] > 500) return message.reply('Foreneça um volume entre 0 a 500');
+		if(!args[0] || args[0] < 1 || args[0] > 500) return message.reply(`${lang.commands.volume.correctNumber}`);
 
 		player.filters.setVolume(Number(args[0]));
 
-		message.reply('O volume da música foi setado com sucesso');
+		message.reply(`${lang.commands.volume.sucess}`);
 
 	}
 };

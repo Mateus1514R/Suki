@@ -11,19 +11,19 @@ module.exports = class Shuffle extends Command {
 		this.aliases = [''];
 	}
 
-	async execute ({ message }) {
+	async execute ({ message, lang }) {
 
 		const player = this.client.music.players.get(message.guild.id);
 
-		if(!player) return message.reply('Não tem nada tocando neste servidor!');
+		if(!player) return message.reply(`${lang.commands.shuffle.noPlayer}`);
 
-		if(!message.member.voice.channel) return message.reply('Você não está em um canal de voz');
+		if(!message.member.voice.channel) return message.reply(`${lang.commands.shuffle.channelError}`);
 
-		if(message.client.music.players.get(message.guild.id) != null && message.member.voice.channel.id != message.guild.me.voice.channel.id) return message.reply('Você precisa estar no mesmo canal que eu estou para modificar a fila!');
+		if(message.client.music.players.get(message.guild.id) != null && message.member.voice.channel.id != message.guild.me.voice.channel.id) return message.reply(`${lang.commands.shuffle.channelError2}`);
 
 		player.shuffleQueue();
 
-		message.reply('Embaralhei a fila com sucesso');
+		message.reply(`${lang.commands.shuffle.sucess}`);
 
 	}
 };

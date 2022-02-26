@@ -23,6 +23,10 @@ module.exports = class SukiClient extends Client {
 		this.guildDB = guildDB;
 		this.userDB = userDB;
 		this.botDB = botDB;
+		this.langs = {
+			pt: require('../Translations/pt-BR.js'),
+			en: require('../Locales/en-US.js'),
+		};
 
 		this.embed = Embed;
 		this.getUser = this.findUser;

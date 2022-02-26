@@ -11,29 +11,29 @@ module.exports = class Skipto extends Command {
 		this.aliases = [''];
 	}
 
-	async execute ({ message, args }) {
+	async execute ({ message, args, lang }) {
 
 		const player = this.client.music.players.get(message.guild.id);
 
-		if(!player) return message.reply('Não tem nada tocando neste servidor!');
+		if(!player) return message.reply(`${lang.commads.skipto.noPlayer}`);
 
-		if(!message.member.voice.channel) return message.reply('Você não está em um canal de voz');
+		if(!message.member.voice.channel) return message.reply(`${lang.commads.skipto.channelError}`);
 
-		if(message.client.music.players.get(message.guild.id) != null && message.member.voice.channel.id != message.guild.me.voice.channel.id) return message.reply('Você precisa estar no mesmo canal que eu estou para modificar a fila!');
+		if(message.client.music.players.get(message.guild.id) != null && message.member.voice.channel.id != message.guild.me.voice.channel.id) return message.reply(`${lang.commads.skipto.channelError2}`);
 
-		if(!args[0]) return message.reply('Coloque o numero de músicas que deseja pular');
+		if(!args[0]) return message.reply(`${lang.commands.skipto.noArgs}`);
 
-		if(!Number(args[0])) return message.reply('Só aceito numeros');
+		if(!Number(args[0])) return message.reply(`${lang.commands.skipto.number}`);
 
-		if(args[0] < 1) return message.reply('Coloque um numero que seja acima de 1');
+		if(args[0] < 1) return message.reply(`${lang.commands.skipto.numberOne}`);
 
-		if(args[0] > player.queue.length) return message.reply('Não tem esse numero de músicas na fila');
+		if(args[0] > player.queue.length) return message.reply(`${lang.commands.skipto.queue}`);
 
 		player.skip(args[0]);
 
-		if(!player.queue) return message.reply('Todas as músicas que estavam na queue foi pulada');
+		if(!player.queue) return message.reply(`${lang.commands.skipto.end}`);
 
-		message.reply('Pulei as músicas desejadas com sucesso');
+		message.reply(`${lang.commands.skipto.sucess}`);
 
 	}
 };

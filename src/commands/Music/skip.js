@@ -11,21 +11,21 @@ module.exports = class Skip extends Command {
 		this.aliases = [''];
 	}
 
-	async execute ({ message }) {
+	async execute ({ message, lang }) {
 
 		const player = this.client.music.players.get(message.guild.id);
 
-		if(!player) return message.reply('Não tem nada tocando neste servidor!');
+		if(!player) return message.reply(`${lang.commands.skip.noPlayer}`);
 
-		if(!message.member.voice.channel) return message.reply('Você não está em um canal de voz');
+		if(!message.member.voice.channel) return message.reply(`${lang.commands.skip.chnanelError}`);
 
-		if(message.client.music.players.get(message.guild.id) != null && message.member.voice.channel.id != message.guild.me.voice.channel.id) return message.reply('Você precisa estar no mesmo canal que eu estou para modificar a fila!');
+		if(message.client.music.players.get(message.guild.id) != null && message.member.voice.channel.id != message.guild.me.voice.channel.id) return message.reply(`${lang.commands.skip.chnanelError2}`);
 
-		if(!player.current) return message.reply('Não há nada tocando atualmente');
+		if(!player.current) return message.reply(`${lang.commands.skip.noPlayer}`);
 
 		player.skip();
 
-		message.reply('Música pulada com sucesso');
+		message.reply(`${lang.commands.skip.sucess}`);
 
 	}
 };

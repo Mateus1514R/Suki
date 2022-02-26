@@ -19,8 +19,18 @@ module.exports = class messageCreate {
 			prefix = server.prefix;
 		}
 
+		let lang = server.lang;
+		switch(lang) {
+			case 1:
+				lang = this.client.langs.pt;
+				break;
+			case 0:
+				lang = this.client.langs.en;
+				break;
+		  }
+
 		if (message.content.match(GetMention(this.client.user.id))) {
-			message.reply(`Olá ${message.author}, Eu sou a **Suki**. Meu prefixo aqui é **${prefix}**. Caso precise de ajuda, utilize o comando **${prefix}help**!`);
+			message.reply(String(lang.events.messageCreate.mention).replaceAll('{}', prefix).replace('$', message.author));
 		}
 
 		if (message.content.indexOf(prefix) !== 0) return;
@@ -36,13 +46,13 @@ module.exports = class messageCreate {
 			this.client.sendLogs(`\`---\`\nData: **${moment(Date.now()).format('L LT')}**\nComando **${cmd.name}** executado no servidor **${message.guild.name}** (\`${message.guild.id}\`)\nArgs: \`${args.join(' ')}\`\nUsuário: **${message.author.tag}** (\`${message.author.id}\`)\n\`---\``);
 
 			try {
-				cmd.execute({ message, args });
+				cmd.execute({ message, args, lang });
 			}
 			catch (err) {
 				const erro = new this.client.embed(message.author)
-					.setTitle('❌ Ocorreu um Erro!')
-					.setDescription('Desculpe, um erro foi encontrado e o comando não foi executado corretamente. Peço que reporte o Bug aos meus desenvolvedores e aguarde o mesmo ser resolvido. Obrigado.');
-				await message.reply({ embeds: [erro] });
+					.setTitle(`${lang.events.messageCreate.embed.title}`)
+					.setDescription(`${lang.events.messageCreate.embed.description}`);
+				message.reply({ embeds: [erro] });
 				console.log(err);
 			}
 			const user = await this.client.userDB.findOne({ _id: message.author.id });

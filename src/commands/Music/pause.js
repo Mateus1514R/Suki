@@ -11,21 +11,21 @@ module.exports = class Pause extends Command {
 		this.aliases = [''];
 	}
 
-	async execute ({ message }) {
+	async execute ({ message, lang }) {
 
 		const player = this.client.music.players.get(message.guild.id);
 
-		if(!player) return message.reply('Não tem nada tocando neste servidor!');
+		if(!player) return message.reply(`${lang.commands.pause.noPlayer}`);
 
-		if(!message.member.voice.channel) return message.reply('Você não está em um canal de voz');
+		if(!message.member.voice.channel) return message.reply(`${lang.commands.pause.channelError}`);
 
-		if(message.client.music.players.get(message.guild.id) != null && message.member.voice.channel.id != message.guild.me.voice.channel.id) return message.reply('Você precisa estar no mesmo canal que eu estou para modificar a fila!');
+		if(message.client.music.players.get(message.guild.id) != null && message.member.voice.channel.id != message.guild.me.voice.channel.id) return message.reply(`${lang.commands.pause.channelError2}`);
 
-		if(player.paused) return message.reply('A música já se encontra pausada.');
+		if(player.paused) return message.reply(`${lang.commands.pause.alteradyPause}`);
 
 		player.pause(true);
 
-		message.reply('Música pausada com sucesso');
+		message.reply(`${lang.commands.pause.sucess}`);
 
 	}
 };

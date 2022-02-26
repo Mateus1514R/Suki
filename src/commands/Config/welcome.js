@@ -13,10 +13,10 @@ module.exports = class Welcome extends Command {
 		this.aliases = ['setentrada'];
 	}
 
-	async execute ({ message, args }) {
+	async execute ({ message, args, lang }) {
 		if (!message.member.permissions.has('MANAGE_GUILD') && !this.client.developers.some(x => x === message.author.id)) {
 			return message.reply(
-				`${e.Error} | ${message.author}, você precisa da permissão \`Gerenciar Servidor\` para usar este comando.`
+				`${e.Error} | ${message.author}, ${lang.commands.welcome.noPerm}`
 			);
 		}
 
@@ -30,19 +30,19 @@ module.exports = class Welcome extends Command {
 					name: message.guild.name,
 					iconURL: message.guild.iconURL({ dynamic: true }),
 				})
-				.setDescription('🚪 | Sistema de Logs de Entrada:')
+				.setDescription(`${lang.commands.welcome.embedHelp.title}`)
 				.addFields([
 					{
-						name: 'Sistema:',
+						name: `${lang.commands.welcome.embedHelp.fields.system}`,
 						value: `> ${e.On} | Status: **${
-							guildDBData.welcome.status == false ? 'Desligado' : 'Ligado'
+							guildDBData.welcome.status == false ? `${lang.commands.welcome.embedHelp.fields.off}` : `${lang.commands.welcome.embedHelp.fields.on}`
 						}**\n> ${e.World} | Chat: **${
 							guildDBData.welcome.channel == 'null'
-								? 'Sem canal definido.'
+								? `${lang.commands.welcome.embedHelp.fields.noChannel}`
 								: `<#${guildDBData.welcome.channel}>`
-						}**\n> ${e.Chat} | Mensagem: \`\`\` ${
+						}**\n> ${e.Chat} | ${lang.commands.welcome.embedHelp.fields.message}: \`\`\` ${
 							guildDBData.welcome.message == 'null'
-								? '# Nenhuma mensagem definida.'
+								? `${lang.commands.welcome.embedHelp.fields.noMessage}`
 								: guildDBData.welcome.message
 						}\`\`\``,
 					},
@@ -94,15 +94,15 @@ module.exports = class Welcome extends Command {
 									name: message.guild.name,
 									iconURL: message.guild.iconURL({ dynamic: true }),
 								})
-								.setDescription('🚪 | Sistema de Logs de Entrada:')
+								.setDescription(`${lang.commands.welcome.embed2.title}`)
 								.addFields([
 									{
 										name: 'Placeholders:',
-										value: '> **[user]** - Menciona o usuário\n> **[name]** - Mostra o nome do usuário\n> **[guild]** - Mostra o nome do servidor\n> **[total]** - Mostra a quantia atual de membros.',
+										value: `> **[user]** - ${lang.commands.welcome.embed2.fields.user}\n> **[name]** - ${lang.commands.welcome.embed2.fields.name}\n> **[guild]** - ${lang.commands.welcome.embed2.fields.guild}\n> **[total]** - ${lang.commands.welcome.embed2.fields.total}.`,
 									},
 									{
 										name: 'Comandos:',
-										value: '> **welcome set <chat>** - Defina o canal de Entrada.\n> **welcome msg <msg>** - Defina a mensagem de boas-vindas.\n> **welcome status** - Ativa ou desativa o sistema.',
+										value: `> **welcome set <chat>** - ${lang.commands.help.embed2.fields.set}\n> **welcome msg <msg>** - ${lang.commands.help.embed2.fields.msg}\n> **welcome status** - ${lang.commands.help.embed2.fields.status}`,
 									},
 								]);
 
@@ -121,18 +121,16 @@ module.exports = class Welcome extends Command {
 								.setDescription('🚪 | Sistema de Logs de Entrada:')
 								.addFields([
 									{
-										name: 'Sistema:',
+										name: `${lang.commands.welcome.embedHelp.fields.system}`,
 										value: `> ${e.On} | Status: **${
-											guildDBData.welcome.status == false
-												? 'Desligado'
-												: 'Ligado'
+											guildDBData.welcome.status == false ? `${lang.commands.welcome.embedHelp.fields.off}` : `${lang.commands.welcome.embedHelp.fields.on}`
 										}**\n> ${e.World} | Chat: **${
 											guildDBData.welcome.channel == 'null'
-												? 'Sem canal definido.'
+												? `${lang.commands.welcome.embedHelp.fields.noChannel}`
 												: `<#${guildDBData.welcome.channel}>`
-										}**\n> ${e.Chat} | Mensagem: \`\`\` ${
+										}**\n> ${e.Chat} | ${lang.commands.welcome.embedHelp.fields.message}: \`\`\` ${
 											guildDBData.welcome.message == 'null'
-												? '# Nenhuma mensagem definida.'
+												? `${lang.commands.welcome.embedHelp.fields.noMessage}`
 												: guildDBData.welcome.message
 										}\`\`\``,
 									},
@@ -156,17 +154,17 @@ module.exports = class Welcome extends Command {
 
 			if (!channel) {
 				return message.reply(
-					`${e.Error} | ${message.author}, você precisa inserir o canal.`
+					`${e.Error} | ${message.author}, ${lang.commands.welcome.subs.set.noChannel}`
 				);
 			}
 			else if (channel.id == guildDBData.welcome.channel) {
 				return message.reply(
-					`${e.Error} | ${message.author}, o canal inserido é o mesmo definido atualmente.`
+					`${e.Error} | ${message.author}, ${lang.commands.welcome.subs.set.hasChannel}`
 				);
 			}
 			else if (!channel.type === 'text') {
 				return message.reply(
-					`${e.Error} | ${message.author}, você precisa inserir um canal de texto.`
+					`${e.Error} | ${message.author}, ${lang.commands.welcome.subs.set.noArgsChannel}`
 				);
 			}
 			else {
@@ -181,7 +179,7 @@ module.exports = class Welcome extends Command {
 					});
 				}
 				await message.reply(
-					`${e.Correct} | ${message.author}, canal de entrada definido com sucesso para ${channel}.`
+					`${e.Correct} | ${message.author}, ${lang.commands.welcome.subs.set.sucess.replace('{}', channel)}.`
 				);
 			}
 			return;
@@ -192,17 +190,17 @@ module.exports = class Welcome extends Command {
 
 			if (!msg) {
 				return message.reply(
-					`${e.Error} | ${message.author}, você precisa inserir a mensagem.`
+					`${e.Error} | ${message.author}, ${lang.commands.welcome.subs.msg.noArgs}`
 				);
 			}
 			else if (msg == guildDBData.welcome.message) {
 				return message.reply(
-					`${e.Error} | ${message.author}, a mensagem inserida é o mesma definida atualmente.`
+					`${e.Error} | ${message.author}, ${lang.commands.welcome.subs.msg.hasMessage}`
 				);
 			}
 			else if (msg.length > 200) {
 				return message.reply(
-					`${e.Error} | ${message.author}, a mensagem deve ter no máximo 200 caracteres.`
+					`${e.Error} | ${message.author}, ${lang.commands.welcome.subs.msg.length}`
 				);
 			}
 			else {
@@ -217,7 +215,7 @@ module.exports = class Welcome extends Command {
 					});
 				}
 				await message.reply(
-					`${e.Correct} | ${message.author}, mensagem de boas-vindas definida com sucesso para \`\`\`${msg}\`\`\``
+					`${e.Correct} | ${message.author}, ${lang.commands.welcome.subs.msg.sucess.replace('{}', msg)}`
 				);
 			}
 			return;
@@ -227,26 +225,26 @@ module.exports = class Welcome extends Command {
 			if (guildDBData.welcome.status == false) {
 				if (guildDBData.welcome.channel == 'null') {
 					return message.reply(
-						`${e.Error} | ${message.author}, você precisa definir o canal de entrada para ligar o sistema.`
+						`${e.Error} | ${message.author}, ${lang.commands.welcome.status.noChannel}`
 					);
 				}
 				else if (guildDBData.welcome.message == 'null') {
 					return message.reply(
-						`${e.Error} | ${message.author}, você precisa definir a mensagem de boas-vindas para ligar o sistema.`
+						`${e.Error} | ${message.author}, ${lang.commands.welcome.status.noMessage}`
 					);
 				}
 				else {
 					guildDBData.welcome.status = true;
 					await guildDBData.save();
 
-					return message.reply(`${e.Correct} | ${message.author}, sistema ligado com sucesso!`);
+					return message.reply(`${e.Correct} | ${message.author}, ${lang.commands.welcome.status.on}`);
 				}
 			}
 			if (guildDBData.welcome.status == true) {
 				guildDBData.welcome.status = false;
 				await guildDBData.save();
 
-				return message.reply(`${e.Correct} | ${message.author}, sistema desligado com sucesso!`);
+				return message.reply(`${e.Correct} | ${message.author}, ${lang.commands.welcome.status.off}`);
 			}
 		}
 
