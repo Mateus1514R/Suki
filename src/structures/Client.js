@@ -25,7 +25,7 @@ module.exports = class SukiClient extends Client {
 		this.botDB = botDB;
 		this.langs = {
 			pt: require('../Translations/pt-BR.js'),
-			en: require('../Locales/en-US.js')
+			en: require('../Locales/en-US.js'),
 		};
 
 		this.embed = Embed;
