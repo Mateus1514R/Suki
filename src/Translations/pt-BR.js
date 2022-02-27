@@ -12,14 +12,15 @@ module.exports = {
 	},
 	commands: {
 		lang: {
-			noPerm: 'você precisa da permissão \`Gerenciar Servidor\` para executar este comando!',
+			noPerm: 'você precisa da permissão `Gerenciar Servidor` para executar este comando!',
 			embed: {
-				desc: '🇺🇸 Inglês **[Completo]**\n🇧🇷 Português **[Incompleto]**',
-				select: 'Qual idioma você quer? Clique nos botões abaixo.'
+				desc: '🇺🇸 English **[Complete]**\n🇧🇷 Português **[Incomplete]**',
+				select: 'Which language do you want? Click on the buttons below.'
 			},
-			authorOnly: "Apenas o autor do comando pode escolher o novo idioma.",
-			closed: 'Fechei o menu de seleção de idiomas.',
-			cancel: 'Cancelar'
+			authorOnly: 'Only the command author can choose the new language.',
+			sucess: 'I will speak English on this server.',
+			closed: 'I closed the language selection menu.',
+			cancel: 'Cancel'
 		},
 		welcome: {
 			noPerm: 'você precisa da permissão `Gerenciar Servidor` para executar este comando!',
@@ -36,13 +37,13 @@ module.exports = {
 				embed2: {
 					title: '🚪 | Sistema de boas-vindas',
 					fields: {
-						user: 'Mention the user',
-						name: 'Show username',
-						guild: 'Show server name',
-						total: 'Shows the current amount of members',
+						user: 'Mencione o usuário',
+						name: 'Mostrar nome de usuário',
+						guild: 'Mostrar nome do servidor',
+						total: 'Mostrar a quantidade atual de membros',
 						set: 'Set the welcome channel.',
-						msg: 'Set the welcome message.',
-						status: 'Enables or disables the system.'
+						msg: 'Defina a mensagem de boas-vindas.',
+						status: 'Habilitar ou desabilitar o sistema.'
 					}
 				},
 				subs: {
