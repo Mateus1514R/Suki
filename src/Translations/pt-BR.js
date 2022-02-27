@@ -14,13 +14,13 @@ module.exports = {
 		lang: {
 			noPerm: 'você precisa da permissão `Gerenciar Servidor` para executar este comando!',
 			embed: {
-				desc: '🇺🇸 English **[Complete]**\n🇧🇷 Português **[Incomplete]**',
-				select: 'Which language do you want? Click on the buttons below.'
+				desc: '🇺🇸 Inglês **[Complete]**\n🇧🇷 Português **[Incomplete]**',
+				select: 'Escolha qual linguagem você quer? Clique nós botões abaixo.'
 			},
-			authorOnly: 'Only the command author can choose the new language.',
-			sucess: 'I will speak English on this server.',
-			closed: 'I closed the language selection menu.',
-			cancel: 'Cancel'
+			authorOnly: 'Apenas o autor do comando pode escolher a nova linguagem.',
+			sucess: 'Eu vou falar inglês nesse servidor.',
+			closed: 'Eu fechei o menu de seleção de linguagem.',
+			cancel: 'Cancelar'
 		},
 		welcome: {
 			noPerm: 'você precisa da permissão `Gerenciar Servidor` para executar este comando!',
@@ -41,7 +41,7 @@ module.exports = {
 						name: 'Mostrar nome de usuário',
 						guild: 'Mostrar nome do servidor',
 						total: 'Mostrar a quantidade atual de membros',
-						set: 'Set the welcome channel.',
+						set: 'Defina o canal de boas-vindas.',
 						msg: 'Defina a mensagem de boas-vindas.',
 						status: 'Habilitar ou desabilitar o sistema.'
 					}
@@ -51,16 +51,16 @@ module.exports = {
 						noChannel: 'você precisa mencionar o canal.',
 						hasChannel: 'O canal inserido é o mesmo que o setado atualmente.',
 						noArgsChannel: 'Você precisa mencionar o canal de texto.',
-						success: 'welcome channel successfully set to {}'
+						success: 'Canal de boas-vindas setado com sucesso para {}'
 					},
 					msg: {
 						noArgs: 'Você precisa inserir a mensagem.',
 						hasMessage: 'A mensagem inserida é a mesma que a setada atualmente.',
 						length: 'A mensagem deve ter no máximo 200 caracteres.',
-						success: 'welcome message successfully set to ```{}```'
+						success: 'Mensagem de boas-vindas setada com sucesso para ```{}```'
 					},
 					status: {
-						noChannel: 'you need to set the welcome channel to turn on the system.',
+						noChannel: 'Você precisa setar o canal de boas-vindas para poder ativar o sistema.',
 						noMessage: 'Você precisa setar a mensagem de boas-vindas para ativar o sistema.',
 						on: 'Sistema ativado com sucesso!',
 						off: 'O sistema foi desativado com sucesso!'
@@ -85,14 +85,14 @@ module.exports = {
 			validValue: 'Valor de pagamento inválido inserido!',
 			noCoins: 'Você não tem coins suficientes para fazer esse pagamento!',
 			neverUsed: 'Esse usuário nunca me usou então você não pode pagar ele!',
-			payed: 'successful payment of **{} coins** to `{user}`.'
+			payed: 'Pagou com sucesso**{} coins** para `{user}`.'
 		},
 		avatar: { embed: 'Clique no botão abaixo para baixar a imagem.' },
 		userinfo: {
 			noNickname: 'Sem apelido',
-			noBooster: 'It\'s not boost.',
+			noBooster: 'Não é impulsionador.',
 			embed: {
-				name1: 'Informação pessoal',
+				name1: 'Informações pessoais',
 				username: 'Nome de usuário',
 				created: 'Conta criada',
 				infoserver: 'Informações do servidor',
@@ -155,78 +155,78 @@ module.exports = {
 		resume: {
 			noPlayer: 'Eu não estou tocando música neste servidor.',
 			channelError: 'Você não está em um canal de voz.',
-			channelError2: 'You are not on the same voice channel as me to unpause the music!',
-			alteradyPause: 'Music is currently not paused!',
-			success: 'Music resumed successfully!'
+			channelError2: 'Você não está no mesmo canal de voz que eu para retomar a música!',
+			alteradyPause: 'A música atual não está pausada!',
+			success: 'Música retomada com sucesso!'
 		},
 		seek: {
 			noPlayer: 'Eu não estou tocando música neste servidor.',
 			channelError: 'Você não está em um canal de voz.',
-			channelError2: 'You are not on the same voice channel as me!',
-			invalidTime: 'Enter the time for me to jump and let it be valid.',
-			exceeds: 'This time exceeds the time of the song',
-			success: 'I skipped the song to the desired time successfully'
+			channelError2: 'Você não está no mesmo canal de voz que eu!',
+			invalidTime: 'Insira o tempo para eu pule e quem seja válido.',
+			exceeds: 'Esse tempo excede o tempo da música',
+			success: 'Eu pulei a música para o tempo desejando com sucesso'
 		},
 		shuffle: {
 			noPlayer: 'Eu não estou tocando música neste servidor.',
 			channelError: 'Você não está em um canal de voz.',
-			channelError2: 'You are not on the same voice channel as me!',
-			success: 'I shuffled the queue successfully'
+			channelError2: 'Você não está no mesmo canal de voz que eu!',
+			success: 'Eu embaralhei a fila com sucesso'
 		},
 		skip: {
 			noPlayer: 'Eu não estou tocando música neste servidor.',
 			channelError: 'Você não está em um canal de voz.',
-			channelError2: 'You are not on the same voice channel as me!',
-			success: 'Successfully skipped song'
+			channelError2: 'Você não está no mesmo canal de voz que eu!',
+			success: 'Música pulada com sucesso'
 		},
 		skipto: {
 			noPlayer: 'Eu não estou tocando música neste servidor.',
 			channelError: 'Você não está em um canal de voz.',
-			channelError2: 'You are not on the same voice channel as me!',
-			noArgs: 'Enter the number of songs you want to skip',
-			number: 'I only accept numbers',
-			numberOne: 'Enter a number that is greater than 1',
-			queue: 'You don\'t have that number of songs in the queue',
-			end: 'All the songs that were in the queue were skipped',
-			success: 'I successfully skipped the desired songs'
+			channelError2: 'Você não está no mesmo canal de voz que eu!',
+			noArgs: 'Insira o número de música que você deseja pular',
+			number: 'Eu apenas aceito números',
+			numberOne: 'Coloque um número maior que 1',
+			queue: 'Você não tem esse número de músicas na fila',
+			end: 'Todas as músicas da fila foram puladas',
+			success: 'Eu pulei com sucesso as músicas desejadas'
 		},
 		stop: {
 			noPlayer: 'Eu não estou tocando música neste servidor.',
 			channelError: 'Você não está em um canal de voz.',
-			channelError2: 'You are not on the same voice channel as me!'
+			channelError2: 'Você não está no mesmo canal de voz que eu!'
 		},
 		volume: {
 			noPlayer: 'Eu não estou tocando música neste servidor.',
 			channelError: 'Você não está em um canal de voz.',
-			channelError2: 'You are not on the same voice channel as me!',
-			noArgs: 'Enter the volume you want to set',
-			number: 'I only accept numbers',
-			correctNumber: 'Provide a volume between 0 to 500',
-			success: 'The music volume has been successfully set'
+			channelError2: 'Você não está no mesmo canal de voz que eu!',
+			noArgs: 'Coloque o volume que você quer definir',
+			number: 'Eu apenas aceito números',
+			correctNumber: 'Coloque um volume entre 0 a 500',
+			success: 'O volume da música foi alterado com sucesso'
 		},
-		reload: { success: 'all commands reloaded successfully.' },
-		shell: { error: 'No output!' },
+		reload: { success: 'Todos os comandos foram recarregados com sucesso.' },
+		shell: { error: 'Nenhuma saída!' },
 		help: {
-			cmdCategory: 'Category commands',
-			noCommand: 'I didn\'t find the requested command.',
+			cmdCategory: 'Categoria de comandos',
+			noCommand: 'Eu não encontrei o comando requisitado.',
 			helper: {
-				info: 'Command Information',
-				name: 'Command Name',
-				noAliases: 'This command has no aliases.',
-				desc: 'Description',
-				noDesc: 'This command has no description.'
+				info: 'Informações do comando',
+				name: 'Nome do comando',
+				noAliases: 'Esse comando não tem aliases.',
+				desc: 'Descrição',
+				noDesc: 'Esse comando não tem descrição.'
 			},
-			embed1: { author: 'Help Center' },
-			row: { selectMenu: 'Select the category.' },
+			embed1: { author: 'Centro de ajuda' },
+			row: { selectMenu: 'Selecione a categoria.' },
 			categorys: {
-				config: 'Commands related to bot configuration in the guild.',
-				economy: 'Commands to use the Bot economy.',
-				info: 'Commands for some useful miscellaneous information.',
-				music: 'Commands for listening to music using the Bot.',
-				misc: 'Commands without specific category.'
+				config: 'Comandos relacionados a configuração do bot no servidor.',
+				economy: 'Comandos para usar a economia do bot.',
+				info: 'Comandos de úteis de informações diversas.',
+				music: 'Comandos para escutar música usando o bot.',
+				misc: 'Comandos sem categoria específica.'
 			},
 			embed2: {
-				author: 'Help Center',
+				author: 'Centro de ajuda',
 				description: 'Hello {author}, welcome to my help center, here you will have access to all my features available for your use!\n\nTo receive more information about any command, use **{prefix}help <command>**.\nSelect the category you want to view from the menu below.'
 			},
 			noPerm: 'you need to run the command for that.',
@@ -253,9 +253,9 @@ module.exports = {
 		remove: {
 			noPlayer: 'Eu não estou tocando música neste servidor.',
 			channelError: 'Você não está em um canal de voz.',
-			channelError2: 'You are not on the same voice channel as me!',
+			channelError2: 'Você não está no mesmo canal de voz que eu!',
 			noArgs: 'Enter the number of the song you want to remove from the queue, to see the number of a song use the `Queue` command',
-			number: 'I only accept numbers',
+			number: 'Eu apenas aceito números',
 			noMusic: 'There isn\'t a song with that number in the queue',
 			success: 'Song successfully removed from queue'
 		}
