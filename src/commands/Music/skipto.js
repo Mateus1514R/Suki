@@ -33,7 +33,7 @@ module.exports = class Skipto extends Command {
 
 		if(!player.queue) return message.reply(`${lang.commands.skipto.end}`);
 
-		message.reply(`${lang.commands.skipto.sucess}`);
+		message.reply(`${lang.commands.skipto.success}`);
 
 	}
 };

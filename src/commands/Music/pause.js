@@ -25,7 +25,7 @@ module.exports = class Pause extends Command {
 
 		player.pause(true);
 
-		message.reply(`${lang.commands.pause.sucess}`);
+		message.reply(`${lang.commands.pause.success}`);
 
 	}
 };

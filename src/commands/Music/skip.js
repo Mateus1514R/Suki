@@ -25,7 +25,7 @@ module.exports = class Skip extends Command {
 
 		player.skip();
 
-		message.reply(`${lang.commands.skip.sucess}`);
+		message.reply(`${lang.commands.skip.success}`);
 
 	}
 };

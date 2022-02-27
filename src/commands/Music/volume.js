@@ -29,7 +29,7 @@ module.exports = class Volume extends Command {
 
 		player.filters.setVolume(Number(args[0]));
 
-		message.reply(`${lang.commands.volume.sucess}`);
+		message.reply(`${lang.commands.volume.success}`);
 
 	}
 };

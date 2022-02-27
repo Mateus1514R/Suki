@@ -25,7 +25,7 @@ module.exports = class Resume extends Command {
 
 		player.pause(false);
 
-		message.reply(`${lang.commands.resume.sucess}`);
+		message.reply(`${lang.commands.resume.success}`);
 
 	}
 };
