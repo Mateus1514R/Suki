@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 const Command = require('../../structures/Command');
 const e = require('../../utils/Emojis');
 
@@ -30,9 +31,9 @@ module.exports = class Pay extends Command {
 
 		if(!targetDB) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.neverUsed}!`);
 
-		if (authorDB.coins < value) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.noDiamonds}`);
+		if (authorDB.coins < value) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.noCoins}`);
 
-	 message.reply(`${e.Correct} | ${message.author}, ${lang.commands.pay.payed.replace('{user}', String(user.username)).replace('{}', value.toLocaleString())}`);
+	 	message.reply(`${e.Correct} | ${message.author}, ${lang.commands.pay.payed}`.replace('{}', value.toLocaleString()).replace('{user}', String(user.username)));
 
 		await this.client.userDB.findOneAndUpdate({ _id: message.author.id },
 			{

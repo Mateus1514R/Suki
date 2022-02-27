@@ -74,7 +74,7 @@ module.exports = {
 			threeLength: 'O prefixo deve ter no máximo **3** caracteres.',
 			seted: 'Meu prefixo nesse servidor foi alterado para: **{}**'
 		},
-		coins: { money: 'Atualmente o(a) {user} tem **{value}** coin(s)' },
+		coins: { money: 'Atualmente o(a) \`{user}\` tem **{value}** coin(s)' },
 		daily: {
 			cooldown: 'Tente de novo às',
 			won: 'Você ganhou `{amount}` coins no seu prêmio diário!'

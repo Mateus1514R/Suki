@@ -77,7 +77,7 @@ module.exports = {
 			seted: 'my prefix on the server has been changed to: **{}**'
 		},
 		coins: {
-			money: 'Currently {user} has **{value}** coins(s)'
+			money: 'Currently \`{user}\` has **{value}** coins(s)'
 		},
 		daily: {
 			cooldown: 'Try again at',

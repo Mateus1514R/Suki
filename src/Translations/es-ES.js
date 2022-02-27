@@ -74,7 +74,7 @@ module.exports = {
 			threeLength: 'the prefix must have a maximum of **3** characters.',
 			seted: 'my prefix on the server has been changed to: **{}**'
 		},
-		coins: { money: 'Currently {user} has **{value}** coins(s)' },
+		coins: { money: 'Currently \`{user}\` has **{value}** coins(s)' },
 		daily: {
 			cooldown: 'Try again at',
 			won: 'won in your daily `{amount}` coins!'

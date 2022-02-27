@@ -6,8 +6,7 @@ module.exports = class messageCreate {
 	}
 
 	async execute (message) {
-
-          if(!message.guild || message.author.bot) return;
+		if(!message.guild || message.author.bot) return;
 
 		const GetMention = (id) => new RegExp(`^<@!?${id}>( |)$`);
 
