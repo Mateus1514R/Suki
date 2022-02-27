@@ -31,7 +31,7 @@ module.exports = class Daily extends Command {
 			message.reply(
 				`${e.Correct} | ${
 					message.author
-				}, ${lang.commands.daily.won.replace('{amount}', coins.toLocaleString())}!*`
+				}, ${lang.commands.daily.won.replace('{amount}', coins.toLocaleString())}!`
 			);
 
 			if (userDBData) {
