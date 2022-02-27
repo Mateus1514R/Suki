@@ -14,7 +14,7 @@ module.exports = {
 		lang: {
 			noPerm: 'você precisa da permissão `Gerenciar Servidor` para executar este comando!',
 			embed: {
-				desc: '🇺🇸 Inglês **[Complete]**\n🇧🇷 Português **[Incomplete]**',
+				desc: '🇺🇸 Inglês **[Completo]**\n🇧🇷 Português **[Incompleto]**',
 				select: 'Escolha qual linguagem você quer? Clique nós botões abaixo.'
 			},
 			authorOnly: 'Apenas o autor do comando pode escolher a nova linguagem.',
@@ -29,7 +29,7 @@ module.exports = {
 				fields: {
 					system: 'Sistema:',
 					on: 'Ativado',
-					off: 'Desligado',
+					off: 'Desativado',
 					noChannel: 'Canal não definido.',
 					message: 'Mensagem',
 					noMessage: 'Mensagem não definida.'
@@ -85,7 +85,7 @@ module.exports = {
 			validValue: 'Valor de pagamento inválido inserido!',
 			noCoins: 'Você não tem coins suficientes para fazer esse pagamento!',
 			neverUsed: 'Esse usuário nunca me usou então você não pode pagar ele!',
-			payed: 'Pagou com sucesso**{} coins** para `{user}`.'
+			payed: 'pagamento de **{} coins** enviado com sucesso para `{user}`.'
 		},
 		avatar: { embed: 'Clique no botão abaixo para baixar a imagem.' },
 		userinfo: {
@@ -227,21 +227,21 @@ module.exports = {
 			},
 			embed2: {
 				author: 'Centro de ajuda',
-				description: 'Hello {author}, welcome to my help center, here you will have access to all my features available for your use!\n\nTo receive more information about any command, use **{prefix}help <command>**.\nSelect the category you want to view from the menu below.'
+				description: 'Olá {author}, bem-vindo a minha central de ajuda, aqui você terá acesso a todos os meus comandos disponível para uso!\n\nPara receber mais informações sobre qualquer comando, use **{prefix}help <command>**.\nSelecione a categoria que você deseja ver no menu abaixo.'
 			},
-			noPerm: 'you need to run the command for that.',
-			commands: 'You are **seeing** the **commands** of the category',
+			noPerm: 'apenas o autor do comando pode usar esta interação',
+			commands: 'Você está **vendo** os **comandos** da categoria',
 			field: 'Comandos'
 		},
 		nowplaying: {
 			noPlayer: 'Eu não estou tocando música neste servidor.',
 			embed: {
-				author: 'Now playing',
-				description: 'Information of the song I\'m playing right now',
-				name: 'Name:',
-				requester: 'Requested by:',
-				channel: 'Channel:',
-				duration: 'Duration:'
+				author: 'Tocando agora',
+				description: 'Informações da música que estou tocando agora',
+				name: 'Nome:',
+				requester: 'Solicitada por:',
+				channel: 'Canal:',
+				duration: 'Duração:'
 			}
 		},
 		queue: {
