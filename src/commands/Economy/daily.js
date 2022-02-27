@@ -24,9 +24,9 @@ module.exports = class Daily extends Command {
 		let daily = userDBData.daily;
 		let time = cooldown - (Date.now() - daily);
 
-		if (daily !== null && cooldown - (Date.now() - daily) > 0) {
+		if (daily !== null && 86400000 - (Date.now() - daily) > 0) {
 			return message.reply(
-				`${e.Error} | ${message.author}, ${lang.commands.daily.cooldown} \`${this.formatTime(this.convertMilliseconds(Date.now() - time))}\``);
+				`${e.Error} | ${message.author}, ${lang.commands.daily.cooldown} \`${this.formatTime(this.convertMilliseconds(time))}\``);
 		}
 		else {
 			message.reply(
