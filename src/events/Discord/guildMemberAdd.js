@@ -1,5 +1,4 @@
-const { MessageActionRow, MessageButton } = require('discord.js');
-const e = require('../../utils/Emojis');
+const { ButtonComponent, ActionRow, ButtonStyle } = require('discord.js');
 
 module.exports = class {
 	constructor (client) {
@@ -9,16 +8,20 @@ module.exports = class {
 	async execute (member) {
 		let guild = member.guild;
 
-		const server = await this.client.guildDB.findOne({ guildID: guild.id });
+		const server = await this.client.guildDB.findOne({ guildID: member.guild.id });
 		if (server.welcome.status == true) {
 			const channel = this.client.channels.cache.get(server.welcome.channel);
 
-			const row = new MessageActionRow().addComponents(
-				new MessageButton()
+			const row = new ActionRow().addComponents(
+				new ButtonComponent()
 					.setCustomId('configured')
 					.setLabel(`Message configured by ${guild.name} team`)
-					.setStyle('SECONDARY')
-					.setEmoji(e.Lock)
+					.setStyle(ButtonStyle.Secondary)
+					.setEmoji({
+						name: 'Lock',
+						id: '945774705904857128',
+						animated: false
+					})
 					.setDisabled(true)
 			);
 

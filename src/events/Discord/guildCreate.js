@@ -1,4 +1,4 @@
-const { MessageEmbed, Guild } = require('discord.js');
+const { Embed, Guild } = require('discord.js');
 const e = require('../../utils/Emojis');
 
 const yaml = require('js-yaml');
@@ -23,7 +23,7 @@ module.exports = class guildCreate {
 			lang: 0
 		});
 
-		const embed = new MessageEmbed()
+		const embed = new Embed()
 			.setAuthor({
 				name: `${this.client.user.username} - Adicionado`,
 				iconURL: this.client.user.avatarURL(),

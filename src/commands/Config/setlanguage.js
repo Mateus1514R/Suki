@@ -1,7 +1,7 @@
 /* eslint-disable no-return-await */
 const Command = require('../../structures/Command');
-const { MessageActionRow, MessageButton } = require('discord.js');
 const e = require('../../utils/Emojis');
+const { ActionRow, ButtonStyle, Embed, Util, ButtonComponent } = require('discord.js');
 
 module.exports = class Language extends Command {
 	constructor (client) {
@@ -14,33 +14,38 @@ module.exports = class Language extends Command {
 	}
 
 	async execute ({ message, lang }) {
-		if (!message.member.permissions.has('MANAGE_GUILD') && !this.client.developers.some(x => x === message.author.id)) {
-			return message.reply(`${e.Error} | ${message.author}, ${lang.commands.lang.noPerm}`);
+		if (!message.member.permissions.has('ManageGuild') && !this.client.developers.some(x => x === message.author.id)) {
+			return message.reply(
+				`${e.Error} | ${message.author}, ${lang.commands.lang.noPerm}`
+			);
 		}
 
-		let brazil = new MessageButton();
+		let brazil = new ButtonComponent();
 		brazil.setCustomId('brazil');
 		brazil.setLabel('Português');
-		brazil.setStyle('PRIMARY');
-		brazil.setEmoji('🇧🇷');
+		brazil.setStyle(ButtonStyle.Primary);
+		brazil.setEmoji({ name: '🇧🇷' });
 
-		let us = new MessageButton();
+		let us = new ButtonComponent();
 		us.setCustomId('us');
 		us.setLabel('English');
-		us.setStyle('PRIMARY');
-		us.setEmoji('🇺🇸');
+		us.setStyle(ButtonStyle.Primary);
+		us.setEmoji({ name: '🇺🇸' });
 
-		let x = new MessageButton();
+		let x = new ButtonComponent();
 		x.setCustomId('x');
 		x.setLabel(String(`${lang.commands.lang.cancel}`));
-		x.setStyle('PRIMARY');
-		x.setEmoji('❌');
+		x.setStyle(ButtonStyle.Primary);
+		x.setEmoji({ name: '❌' });
 
 		const filter = i => ['x', 'us', 'brazil'].includes(i.customId);
 
-		let embed = new this.client.embed(message.author);
-		embed.setDescription(`${lang.commands.lang.embed.desc}`);
+		let embed = new Embed();
+		embed.setDescription(String(`${lang.commands.lang.embed.desc}`));
 		embed.setAuthor({ name: `${lang.commands.lang.embed.select}`, iconURL: message.author.displayAvatarURL({ dynamic: true, size: 4096 }) });
+		embed.setTimestamp();
+		embed.setColor(Util.resolveColor('Purple'));
+		embed.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) });
 
 		const collector = message.channel.createMessageComponentCollector({ filter, time: 120000, idle: 120000 });
 
@@ -51,21 +56,19 @@ module.exports = class Language extends Command {
 		switch (guildDBData.lang) {
 			case 0:
 				us.setDisabled(true);
-				us.setStyle('DANGER');
+				us.setStyle(ButtonStyle.Danger);
 				break;
 
 			case 1:
 				brazil.setDisabled(true);
-				brazil.setStyle('DANGER');
+				brazil.setStyle(ButtonStyle.Danger);
 				break;
 		}
 
-		let row = new MessageActionRow();
-		row.addComponents([brazil, us, x]);
+		let row = new ActionRow().setComponents(brazil, us, x);
 
 
-		let disabledRow = new MessageActionRow();
-		disabledRow.addComponents([brazil, us, x]);
+		let disabledRow = new ActionRow().setComponents(brazil, us, x);
 
 		let msg = await message.reply({ embeds: [embed], components: [row] });
 
@@ -88,8 +91,7 @@ module.exports = class Language extends Command {
 					await msg.edit({
 						embeds: [{
 							description: '🇧🇷 Agora eu falarei em Português neste servidor.',
-							color: '#7A0BC0',
-							timestamp: Date.now()
+							color: Util.resolveColor('Purple')
 						}],
 						components: [disabledRow]
 					});
@@ -108,8 +110,7 @@ module.exports = class Language extends Command {
 					await msg.edit({
 						embeds: [{
 							description: `🇺🇸 Now I will speak English on this server.`,
-							color: '#7A0BC0',
-							timestamp: Date.now()
+							color: Util.resolveColor('Purple')
 						}],
 						components: [disabledRow]
 					});
@@ -122,8 +123,7 @@ module.exports = class Language extends Command {
 					await msg.edit({
 						embeds: [{
 							description: `${lang.commands.lang.closed}`,
-							color: '#7A0BC0',
-							timestamp: Date.now()
+							color: Util.resolveColor('Purple')
 						}],
 						components: [disabledRow]
 					});
