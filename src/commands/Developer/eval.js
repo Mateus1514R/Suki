@@ -1,11 +1,6 @@
 const Command = require('../../structures/Command');
 const { inspect } = require('util');
 
-const yaml = require('js-yaml');
-const { readFileSync } = require('fs');
-
-const env = yaml.load(readFileSync('./envirovments.yml', 'utf8'));
-
 module.exports = class Eval extends Command {
 	constructor (client) {
 		super(client);
@@ -24,10 +19,9 @@ module.exports = class Eval extends Command {
 
 		const clean = (text) => {
 			if (text === 'string') {
-				text = text
+				text = text.slice(0, 1970)
 					.replace(/`/g, `\`${String.fromCharCode(8203)}`)
-					.replace(/@/g, `@${String.fromCharCode(8203)}`)
-					.replace((String(env.token), 'gi'), '****');
+					.replace(/@/g, `@${String.fromCharCode(8203)}`);
 			}
 			return text;
 		};
@@ -38,11 +32,11 @@ module.exports = class Eval extends Command {
 
 			if (evaled instanceof Promise) {evaled = await evaled;}
 
-			message.reply(`Output \`\`\`js\n${clean(inspect(evaled, { depth: 0 }))}\n\`\`\``);
+			message.reply(`**Output:** \`\`\`js\n${clean(inspect(evaled, { depth: 0 }).replace(new RegExp(this.client.token, 'gi'), '******************').slice(0, 1970))}\n\`\`\``);
 
 		}
 		catch (error) {
-			message.reply(`Error \`\`\`js\n${error}\n\`\`\``);
+			message.reply(`**Error:** \`\`\`js\n${String(error.stack.slice(0, 1970))}\n\`\`\``);
 		}
 	}
 };

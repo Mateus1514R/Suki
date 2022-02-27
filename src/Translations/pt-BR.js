@@ -14,8 +14,10 @@ module.exports = {
 		lang: {
 			noPerm: 'você precisa da permissão `Gerenciar Servidor` para executar este comando!',
 			embed: {
-				desc: '🇺🇸 Inglês **[Completo]**\n🇧🇷 Português **[Completo]**',
-				select: 'Escolha qual linguagem você quer? Clique nós botões abaixo.'
+				title: '🌎 Escolha a linguagem desejada!',
+				desc: 'Para alterar a linguagem que eu interajo nesse servidor, clique no botão com a nova linguagem desejada.',
+				translated: '**Traduzido por:**',
+				help: '🌎 Quer ajudar a me traduzir?'
 			},
 			authorOnly: 'Apenas o autor do comando pode escolher a nova linguagem.',
 			sucess: 'Eu vou falar inglês nesse servidor.',

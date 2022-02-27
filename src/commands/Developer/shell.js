@@ -28,10 +28,10 @@ module.exports = class Shell extends Command {
 			const res = (stdout || stderr).replace(ANSI_REGEX, '');
 
 			if (stderr) {
-				await message.reply({ content: `Stderr: \`\`\`sh\n${res}\n\`\`\`` });
+				await message.reply({ content: `**Stderr:** \`\`\`sh\n${res.slice(0, 2000)}\n\`\`\`` });
 			}
 			else {
-				await message.reply({ content: `**Stdout:**\`\`\`sh\n${res}\n\`\`\`` });
+				await message.reply({ content: `**Stdout:**\`\`\`sh\n${res.slice(0, 2000)}\n\`\`\`` });
 			}
 		});
 	}

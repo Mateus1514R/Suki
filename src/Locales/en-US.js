@@ -16,8 +16,10 @@ module.exports = {
 		lang: {
 			noPerm: 'you need \`Manage Server\` permission to run this command!',
 			embed: {
-				desc: '🇺🇸 English **[Complete]**\n🇧🇷 Português **[Complete]**',
-				select: 'Which language do you want? Click on the buttons below.'
+				title: '🌎 Choose your desired language!',
+				desc: 'To change the language I interact with on this server, click on the button with the new desired language.',
+				translated: '**Translated by:**',
+				help: '🌎 Do you want to help translate me?'
 			},
 			authorOnly: "Only the command author can choose the new language.",
 			sucess: "I will speak English on this server.",
