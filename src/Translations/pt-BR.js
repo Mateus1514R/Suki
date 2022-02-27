@@ -246,18 +246,18 @@ module.exports = {
 		},
 		queue: {
 			noPlayer: 'Eu não estou tocando música neste servidor.',
-			noMusics: 'No music in my queue',
-			music: 'Music currently playing',
-			time: 'The time is over'
+			noMusics: 'Sem músicas na minha fila',
+			music: 'Música tocando atualmente',
+			time: 'O tempo acabou'
 		},
 		remove: {
 			noPlayer: 'Eu não estou tocando música neste servidor.',
 			channelError: 'Você não está em um canal de voz.',
 			channelError2: 'Você não está no mesmo canal de voz que eu!',
-			noArgs: 'Enter the number of the song you want to remove from the queue, to see the number of a song use the `Queue` command',
+			noArgs: 'Coloque o número de músicas que você deseja remover da lista, para ver o número de uma música use o comando `queue`',
 			number: 'Eu apenas aceito números',
-			noMusic: 'There isn\'t a song with that number in the queue',
-			success: 'Song successfully removed from queue'
+			noMusic: 'Não há uma música com esse número na lista',
+			success: 'Música removida da lista com sucesso'
 		}
 	}
 };
