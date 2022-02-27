@@ -1,12 +1,14 @@
 const moment = require('moment');
 
-
 module.exports = class messageCreate {
 	constructor (client) {
 		this.client = client;
 	}
 
 	async execute (message) {
+
+          if(!message.guild || message.author.bot) return;
+
 		const GetMention = (id) => new RegExp(`^<@!?${id}>( |)$`);
 
 		const server = await this.client.guildDB.findOne({ guildID: message.guild.id });
