@@ -32,7 +32,7 @@ module.exports = class Daily extends Command {
 			message.reply(
 				`${e.Correct} | ${
 					message.author
-				}, ${lang.commands.daily.won.replace('{amount}', coins.toLocaleString())}!*`
+				}, ${lang.commands.daily.won.replace('{amount}', coins.toLocaleString())}!`
 			);
 
 			if (userDBData) {
@@ -59,10 +59,8 @@ module.exports = class Daily extends Command {
 		const seconds = ~~(ms / 1000);
 		const minutes = ~~(seconds / 60);
 		const hours = ~~(minutes / 60);
-		const days = ~~(hours / 24);
 
 		return {
-		  days,
 		  hours: hours % 24,
 		  minutes: minutes % 60,
 		  seconds: seconds % 60,
