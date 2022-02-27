@@ -1,3 +1,4 @@
+const { Embed, Util } = require('discord.js');
 const Command = require('../../structures/Command');
 
 module.exports = class NowPlaying extends Command {
@@ -17,9 +18,12 @@ module.exports = class NowPlaying extends Command {
 
 		if(!player) return message.reply(`${lang.commands.nowplaying.noPlayer}`);
 
-		const embed = new this.client.embed(message.author)
+		const embed = new Embed()
 			.setAuthor({ name: `${lang.commands.nowplaying.embed.author}`, iconURL: message.guild.iconURL({}) })
 			.setDescription(`${lang.commands.nowplaying.embed.description}`)
+			.setTimestamp()
+			.setColor(Util.resolveColor('Purple'))
+			.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
 			.addFields(
 				{
 					name: `${lang.commands.nowplaying.embed.name}`,

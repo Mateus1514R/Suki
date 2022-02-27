@@ -1,4 +1,4 @@
-const { MessageSelectMenu, MessageActionRow } = require('discord.js');
+const { SelectMenuComponent, ActionRow, Embed, Util } = require('discord.js');
 const e = require('../../utils/Emojis');
 
 const Command = require('../../structures/Command');
@@ -40,12 +40,14 @@ module.exports = class Help extends Command {
 			});
 		}
 
-		const AJUDA = new this.client.embed(message.author)
+		const AJUDA = new Embed()
 			.setAuthor({
 				name: `${this.client.user.username} - ${lang.commands.help.embed1.author}`,
 				iconURL: this.client.user.displayAvatarURL({ size: 2048 })
 			})
-			.setColor('#7A0BC0');
+			.setTimestamp()
+			.setColor(Util.resolveColor('Purple'))
+			.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) });
 
 		if (!args[0]) return this.menu({ menuOptions, message, lang });
 
@@ -77,9 +79,9 @@ module.exports = class Help extends Command {
 	}
 
 	async menu ({ menuOptions, message, lang = String }) {
-		const row = new MessageActionRow();
+		const row = new ActionRow();
 
-		const menu = new MessageSelectMenu()
+		const menu = new SelectMenuComponent()
 			.setCustomId('MenuSelection')
 			.setMaxValues(1)
 			.setMinValues(1)
@@ -93,7 +95,11 @@ module.exports = class Help extends Command {
 						description:
                 `${lang.commands.help.categorys.config}`,
 						value: option.value,
-						emoji: e.Bot,
+						emoji: {
+							name: 'Bot',
+							id: '945748531594014752',
+							animated: false
+						},
 					});
 					break;
 				}
@@ -102,7 +108,11 @@ module.exports = class Help extends Command {
 						label: option.label ? option.label : option.value,
 						description: `${lang.commands.help.categorys.economy}`,
 						value: option.value,
-						emoji: e.Crystal,
+						emoji: {
+							name: 'Crystal',
+							id: '945777633545830421',
+							animated: false
+						},
 					});
 					break;
 				}
@@ -111,7 +121,11 @@ module.exports = class Help extends Command {
 						label: option.label ? option.label : option.value,
 						description: `${lang.commands.help.categorys.info}`,
 						value: option.value,
-						emoji: e.Archive,
+						emoji: {
+							name: 'Archive',
+							id: '945671657987649536',
+							animated: false
+						},
 					});
 					break;
 				}
@@ -120,7 +134,11 @@ module.exports = class Help extends Command {
 						label: option.label ? option.label : option.value,
 						description: `${lang.commands.help.categorys.music}`,
 						value: option.value,
-						emoji: e.Music,
+						emoji: {
+							name: 'Music',
+							id: '946176382814261358',
+							animated: false
+						},
 					});
 					break;
 				}
@@ -129,7 +147,11 @@ module.exports = class Help extends Command {
 						label: option.label ? option.label : option.value,
 						description: `${lang.commands.help.categorys.misc}`,
 						value: option.value,
-						emoji: e.World,
+						emoji: {
+							name: 'World',
+							id: '945481188326400011',
+							animated: false
+						},
 					});
 					break;
 				}
@@ -138,16 +160,17 @@ module.exports = class Help extends Command {
 
 		const server = await this.client.guildDB.findOne({ guildID: message.guild.id });
 
-		const EMBED = new this.client.embed(message.author)
+		const EMBED = new Embed()
 			.setAuthor({
 				name: `${this.client.user.username} - ${lang.commands.help.embed2.author}`,
 				iconURL: this.client.user.displayAvatarURL({ size: 2048 })
 			})
-			.setColor('#7A0BC0')
-			.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true, size: 2048 }) })
+			.setTimestamp()
+			.setColor(Util.resolveColor('Purple'))
+			.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
 			.setDescription(String(`${lang.commands.help.embed2.description}`).replace('{author}', message.author).replace('{prefix}', !server. prefix ? 's!' : server.prefix));
 
-		row.addComponents(menu);
+		row.setComponents(menu);
 
 		const msg = await message.reply({
 			embeds: [EMBED],
@@ -176,11 +199,11 @@ module.exports = class Help extends Command {
 			EMBED.setDescription(
 				`${lang.commands.help.commands} **\`${menuOptionData.value}\`**`
 			);
-			EMBED.fields = [];
-			EMBED.addField(
-				String(`${lang.commands.help.field}`),
-				menuOptionData.commandList
-			);
+			EMBED._fields = [];
+			EMBED.addField({
+				name: String(`${lang.commands.help.field}`),
+				value: menuOptionData.commandList
+			});
 
 			await msg.edit({ embeds: [EMBED] }, true);
 			await r.deferUpdate();

@@ -4,17 +4,22 @@ const c = require('colors');
 const { Vulkava } = require('vulkava');
 const yaml = require('js-yaml');
 const { readFileSync } = require('fs');
+const { GatewayIntentBits } = require('discord.js');
 
 const env = yaml.load(readFileSync('./envirovments.yml', 'utf8'));
 
 const client = new Client({
-	intents: [
-		'GUILDS',
-		'GUILD_MEMBERS',
-		'GUILD_MESSAGES',
-		'GUILD_VOICE_STATES',
-	],
-	allowedMentions: { parse: ['users'], repliedUser: false },
+	intents: [GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.GuildMembers],
+	failIfNotExists: false,
+	rest: {
+		retries: 3,
+	},
+	allowedMentions: {
+		repliedUser: true,
+		parse: ['users'],
+	},
 });
 
 client.music = new Vulkava({

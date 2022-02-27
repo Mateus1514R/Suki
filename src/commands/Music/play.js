@@ -1,3 +1,4 @@
+const { Embed, Util } = require('discord.js');
 const Command = require('../../structures/Command');
 const e = require('../../utils/Emojis');
 
@@ -60,8 +61,11 @@ module.exports = class Play extends Command {
 
 			if (!player.playing) player.play();
 
-			const embed = new this.client.embed(message.author)
+			const embed = new Embed()
 				.setDescription(`[${result.playlistInfo.name}](${args[0]})`)
+				.setTimestamp()
+				.setColor(Util.resolveColor('Purple'))
+				.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
 				.addFields({
 					name: `${lang.commands.play.embed1.duration}:`,
 					value: `${formatTime(
@@ -81,8 +85,11 @@ module.exports = class Play extends Command {
 
 			if (message.client.music.players.get(message.guild.id)) {
 
-				  const startingMusic = new this.client.embed(message.author)
+				  const startingMusic = new Embed()
 					.setAuthor({ name: `${lang.commands.play.embed2.author}`, iconURL: message.guild.iconURL() })
+					.setTimestamp()
+					.setColor(Util.resolveColor('Purple'))
+					.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
 					.addFields(
 				  {
 							name: `${e.Music} | ${lang.commands.play.embed2.music}:`,

@@ -1,6 +1,6 @@
 const Command = require('../../structures/Command');
 const e = require('../../utils/Emojis');
-const { MessageActionRow, MessageButton } = require('discord.js');
+const { ActionRow, ButtonStyle, ButtonComponent, Util, Embed } = require('discord.js');
 
 module.exports = class Welcome extends Command {
 	constructor (client) {
@@ -14,7 +14,7 @@ module.exports = class Welcome extends Command {
 	}
 
 	async execute ({ message, args, lang }) {
-		if (!message.member.permissions.has('MANAGE_GUILD') && !this.client.developers.some(x => x === message.author.id)) {
+		if (!message.member.permissions.has('ManageGuild') && !this.client.developers.some(x => x === message.author.id)) {
 			return message.reply(
 				`${e.Error} | ${message.author}, ${lang.commands.welcome.noPerm}`
 			);
@@ -25,13 +25,16 @@ module.exports = class Welcome extends Command {
 		});
 
 		if (!args[0]) {
-			const embed = new this.client.embed(message.author)
+			const embed = new Embed()
 				.setAuthor({
 					name: message.guild.name,
 					iconURL: message.guild.iconURL({ dynamic: true }),
 				})
 				.setDescription(`${lang.commands.welcome.embedHelp.title}`)
-				.addFields([
+				.setTimestamp()
+				.setColor(Util.resolveColor('Purple'))
+				.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
+				.addFields(
 					{
 						name: `${lang.commands.welcome.embedHelp.fields.system}`,
 						value: `> ${e.On} | Status: **${
@@ -45,25 +48,30 @@ module.exports = class Welcome extends Command {
 								? `${lang.commands.welcome.embedHelp.fields.noMessage}`
 								: guildDBData.welcome.message
 						}\`\`\``,
-					},
-				]);
+					});
 
-			let row = new MessageActionRow();
+			let row = new ActionRow();
 
-			const left = new MessageButton()
+			const left = new ButtonComponent()
 				.setCustomId('left')
-				.setLabel('')
-				.setEmoji(e.Left)
-				.setStyle('SECONDARY')
+				.setEmoji({
+					name: 'Left',
+					id: '945755302014373958',
+					animated: false
+				})
+				.setStyle(ButtonStyle.Secondary)
 				.setDisabled(true);
 
-			const right = new MessageButton()
+			const right = new ButtonComponent()
 				.setCustomId('right')
-				.setLabel('')
-				.setEmoji(e.Right)
-				.setStyle('SECONDARY');
+				.setEmoji({
+					name: 'Right',
+					id: '945479660827992155',
+					animated: false
+				})
+				.setStyle(ButtonStyle.Secondary);
 
-			row.addComponents([left, right]);
+			row.setComponents(left, right);
 
 			let msg = await message.reply({ embeds: [embed], components: [row] });
 
@@ -89,13 +97,13 @@ module.exports = class Welcome extends Command {
 					}
 					switch (r.customId) {
 						case 'right': {
-							const info = new this.client.embed(message.author, lang)
+							const info = new Embed()
 								.setAuthor({
 									name: message.guild.name,
 									iconURL: message.guild.iconURL({ dynamic: true }),
 								})
 								.setDescription(String(`${lang.commands.welcome.embedHelp.embed2.title}`))
-								.addFields([
+								.addFields(
 									{
 										name: 'Placeholders:',
 										value: `> **[user]** - ${lang.commands.welcome.embedHelp.embed2.fields.user}\n> **[name]** - ${lang.commands.welcome.embedHelp.embed2.fields.name}\n> **[guild]** - ${lang.commands.welcome.embedHelp.embed2.fields.guild}\n> **[total]** - ${lang.commands.welcome.embedHelp.embed2.fields.total}.`,
@@ -103,8 +111,7 @@ module.exports = class Welcome extends Command {
 									{
 										name: 'Comandos:',
 										value: `> **welcome set <chat>** - ${lang.commands.welcome.embedHelp.embed2.fields.set}\n> **welcome msg <msg>** - ${lang.commands.welcome.embedHelp.embed2.fields.msg}\n> **welcome status** - ${lang.commands.welcome.embedHelp.embed2.fields.status}`,
-									},
-								]);
+									});
 
 							right.setDisabled(true);
 							left.setDisabled(false);
@@ -113,13 +120,16 @@ module.exports = class Welcome extends Command {
 							break;
 						}
 						case 'left': {
-							const embed = new this.client.embed(message.author)
+							const embed = new Embed()
 								.setAuthor({
 									name: message.guild.name,
 									iconURL: message.guild.iconURL({ dynamic: true }),
 								})
 								.setDescription('🚪 | Sistema de Logs de Entrada:')
-								.addFields([
+								.setTimestamp()
+								.setColor(Util.resolveColor('Purple'))
+								.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
+								.addFields(
 									{
 										name: `${lang.commands.welcome.embedHelp.fields.system}`,
 										value: `> ${e.On} | Status: **${
@@ -133,8 +143,7 @@ module.exports = class Welcome extends Command {
 												? `${lang.commands.welcome.embedHelp.fields.noMessage}`
 												: guildDBData.welcome.message
 										}\`\`\``,
-									},
-								]);
+									});
 
 							right.setDisabled(false);
 							left.setDisabled(true);

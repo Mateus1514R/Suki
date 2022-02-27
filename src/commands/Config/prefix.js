@@ -13,7 +13,7 @@ module.exports = class Prefix extends Command {
 	}
 
 	async execute ({ message, args, lang }) {
-		if (!message.member.permissions.has('MANAGE_GUILD') && !this.client.developers.some(x => x === message.author.id)) {
+		if (!message.member.permissions.has('ManageGuild') && !this.client.developers.some(x => x === message.author.id)) {
 			return message.reply(`${e.Error} | ${message.author}, ${lang.commands.prefix.noPerm}`);
 		}
 

@@ -1,6 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 const Command = require('../../structures/Command');
 const e = require('../../utils/Emojis');
+const { Embed, Util } = require('discord.js');
 
 module.exports = class UserInfo extends Command {
 	constructor (client) {
@@ -40,11 +41,14 @@ module.exports = class UserInfo extends Command {
 			this.client.users.cache.get(userI.id).createdAt / 1e3
 		)}:d>`;
 
-		const UserInfo = new this.client.embed(message.author)
+		const UserInfo = new Embed()
 			.setAuthor({
 				name: USER.tag,
 				iconURL: USER.displayAvatarURL({ dynamic: true }),
 			})
+			.setTimestamp()
+			.setColor(Util.resolveColor('Purple'))
+			.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
 			.addFields(
 				{
 					name: `${lang.commands.userinfo.embed.name1}`,
