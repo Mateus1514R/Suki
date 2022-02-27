@@ -44,7 +44,24 @@ module.exports = class messageCreate {
 		if(!cmd) return;
 
 		if(command) {
-			this.client.sendLogs(`\`---\`\nData: **${moment(Date.now()).format('L LT')}**\nComando **${cmd.name}** executado no servidor **${message.guild.name}** (\`${message.guild.id}\`)\nArgs: \`${args.join(' ')}\`\nUsuário: **${message.author.tag}** (\`${message.author.id}\`)\n\`---\``);
+			const embedError = new this.client.embed(message.author)
+			    .setAuthor({ name: `${this.client.user.username} | Logs`, iconURL: this.client.user.displayAvatarURL({ dynamic: true }) })
+				.setDescription(`Comando **${cmd.name}** executado no servidor **${message.guild.name}** (\`${message.guild.id}\`)`)
+				.addFields(
+					{
+						name: 'Args',
+						value: `\`${args.join(' ')}\``
+					},
+					{
+						name: 'Usuário',
+						value: `**${message.author.tag}** (\`${message.author.id}\`)`
+					},
+					{
+						name: 'Data',
+						value: `**${moment(Date.now()).format('L LT')}**`
+					},
+				);
+			this.client.sendLogs(embedError);
 
 			try {
 				await cmd.execute({ message, args, lang });

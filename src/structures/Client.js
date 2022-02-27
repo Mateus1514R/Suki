@@ -101,7 +101,7 @@ module.exports = class SukiClient extends Client {
 			id: '946563655003144212',
 		});
 		webhookClient.send({
-			content: String(content),
+			embeds: [content],
 		});
 	}
 };
