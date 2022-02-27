@@ -26,11 +26,11 @@ module.exports = class Pay extends Command {
 
 		const value = parseInt(args[1]);
 
-		if (!args[1] || value < 0 || isNaN(value)) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.validValue}`);
+		if (!args[1] || value < 0 || isNaN(value) || ) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.validValue}`);
 
 		if(!targetDB) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.neverUsed}!`);
 
-		if (authorDB.value < value) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.noDiamonds}!`);
+		if (authorDB.coins < value) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.noDiamonds}!`);
 
 	 message.reply(`${e.Correct} | ${message.author}, ${lang.commands.pay.payed.replace('{user}', String(user.username)).replace('{}', value.toLocaleString())}`);
 
