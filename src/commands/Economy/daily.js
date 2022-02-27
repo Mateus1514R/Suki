@@ -19,12 +19,11 @@ module.exports = class Daily extends Command {
 			_id: message.author.id,
 		});
 
-		let cooldown = 8.64e7;
 		let coins = Math.floor(Math.random() * 3000);
 		let daily = userDBData.daily;
-		let time = cooldown - (Date.now() - daily);
+		let time = 8.64e7 - (Date.now() - daily);
 
-		if (daily !== null && 86400000 - (Date.now() - daily) > 0) {
+		if (daily !== null && 8.64e7 - (Date.now() - daily) > 0) {
 			return message.reply(
 				`${e.Error} | ${message.author}, ${lang.commands.daily.cooldown} \`${this.formatTime(this.convertMilliseconds(time))}\``);
 		}
