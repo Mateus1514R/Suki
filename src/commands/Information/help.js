@@ -199,7 +199,7 @@ module.exports = class Help extends Command {
 			EMBED.setDescription(
 				`${lang.commands.help.commands} **\`${menuOptionData.value}\`**`
 			);
-			EMBED._fields = [];
+			EMBED.data.fields = [];
 			EMBED.addField({
 				name: String(`${lang.commands.help.field}`),
 				value: menuOptionData.commandList

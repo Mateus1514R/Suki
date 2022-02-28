@@ -32,11 +32,11 @@ module.exports = class Eval extends Command {
 
 			if (evaled instanceof Promise) {evaled = await evaled;}
 
-			message.reply(`**Output:** \`\`\`js\n${clean(inspect(evaled, { depth: 0 }).replace(new RegExp(this.client.token, 'gi'), '******************').slice(0, 1970))}\n\`\`\``);
+			message.reply(`**Output**: \`\`\`js\n${clean(inspect(evaled, { depth: 0 }).replace(new RegExp(this.client.token, 'gi'), '******************').slice(0, 1970))}\n\`\`\``);
 
 		}
 		catch (error) {
-			message.reply(`**Error:** \`\`\`js\n${String(error.stack.slice(0, 1970))}\n\`\`\``);
+			message.reply(`**Error**: \`\`\`js\n${String(error.stack.slice(0, 1970))}\n\`\`\``);
 		}
 	}
 };

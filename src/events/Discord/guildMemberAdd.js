@@ -17,7 +17,6 @@ module.exports = class {
 		  break;
 		}
 
-
 		const server = await this.client.guildDB.findOne({ guildID: member.guild.id });
 		if (server.welcome.status == true) {
 			const channel = this.client.channels.cache.get(server.welcome.channel);

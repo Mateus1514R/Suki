@@ -20,7 +20,6 @@ module.exports = class SukiClient extends Client {
 		this.commands = new Collection();
 		this.aliases = new Collection();
 		this.cooldowns = new Collection();
-
 		this.guildDB = guildDB;
 		this.userDB = userDB;
 		this.botDB = botDB;

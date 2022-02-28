@@ -1,6 +1,5 @@
-const { Embed, Util } = require('discord.js');
+const { Embed, Util, Collection } = require('discord.js');
 const moment = require('moment');
-const { Collection } = require('discord.js');
 const e = require('../../utils/Emojis');
 
 module.exports = class messageCreate {
@@ -67,8 +66,11 @@ module.exports = class messageCreate {
 	  setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 		if(command) {
-			const embedError = new this.client.embed(message.author)
+			const embedError = new Embed()
 			    .setAuthor({ name: `${this.client.user.username} | Logs`, iconURL: this.client.user.displayAvatarURL({ dynamic: true }) })
+				.setTimestamp()
+				.setColor(Util.resolveColor('Purple'))
+				.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
 				.setDescription(`Comando **${cmd.name}** executado no servidor **${message.guild.name}** (\`${message.guild.id}\`)`)
 				.addFields(
 					{
