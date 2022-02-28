@@ -1,5 +1,6 @@
 const Command = require('../../structures/Command');
-const { MessageActionRow, MessageButton } = require('discord.js');
+const { ActionRow, Embed, Util, ButtonStyle } = require('discord.js');
+const { ButtonComponent } = require('@discordjs/builders');
 
 module.exports = class Avatar extends Command {
 	constructor (client) {
@@ -19,17 +20,20 @@ module.exports = class Avatar extends Command {
 
 		const avatar = user.displayAvatarURL({ dynamic: true, size: 2048 });
 
-		const embed = new this.client.embed(message.author)
+		const embed = new Embed()
 			.setAuthor({ name: user.username, iconURL: user.avatarURL({ dynamic: true }) })
 			.setDescription(`${lang.commands.avatar.embed}`)
-			.setImage(avatar);
+			.setImage(avatar)
+			.setTimestamp()
+			.setColor(Util.resolveColor('Purple'))
+			.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) });
 
-		const row = new MessageActionRow()
+		const row = new ActionRow()
 			.addComponents(
-				new MessageButton()
+				new ButtonComponent()
 					.setURL(`${avatar}`)
 					.setLabel('Download')
-					.setStyle('LINK')
+					.setStyle(ButtonStyle.Link)
 			);
 
 		message.reply({ embeds: [embed], components: [row] });

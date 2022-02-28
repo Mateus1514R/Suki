@@ -1,4 +1,4 @@
-const { MessageButton, MessageActionRow } = require('discord.js');
+const { ButtonComponent, ActionRow, ButtonStyle, Embed, Util } = require('discord.js');
 const Command = require('../../structures/Command');
 
 module.exports = class Queue extends Command {
@@ -32,24 +32,27 @@ module.exports = class Queue extends Command {
 
 		});
 
-		const button_next = new MessageButton()
+		const button_next = new ButtonComponent()
 			.setCustomId('Button_1')
 			.setLabel('Next')
-			.setStyle('SECONDARY');
+			.setStyle(ButtonStyle.Primary);
 
-		const button_back = new MessageButton()
+		const button_back = new ButtonComponent()
 			.setCustomId('Button_2')
 			.setLabel('Back')
-			.setStyle('SECONDARY');
+			.setStyle(ButtonStyle.Primary);
 
 		if(pages <= 1) button_next.setDisabled(true);
 
-		const row = new MessageActionRow()
-			.addComponents(button_next, button_back);
+		const row = new ActionRow()
+			.setComponents(button_next, button_back);
 
-		const embed = new this.client.embed(message.author)
+		const embed = new Embed()
 			.setAuthor({ name: 'Queue', iconURL: message.guild.iconURL({}) })
-			.setDescription(`**${player.queue.length <= 0 ? `${lang.commands.queue.noMusics}` : this.collection.slice((page - 1) * 10, page * 10).join('\n')}\n\n${lang.commands.queue.music}: [${player.current.title}](${player.current.uri})**`);
+			.setDescription(`**${player.queue.length <= 0 ? `${lang.commands.queue.noMusics}` : this.collection.slice((page - 1) * 10, page * 10).join('\n')}\n\n${lang.commands.queue.music}: [${player.current.title}](${player.current.uri})**`)
+			.setTimestamp()
+			.setColor(Util.resolveColor('Purple'))
+			.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) });
 
 		await message.reply({ embeds: [embed], components: [row] }).then((msg) => {
 

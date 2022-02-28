@@ -1,5 +1,5 @@
+const { Embed, Util, Collection } = require('discord.js');
 const moment = require('moment');
-const { Collection } = require('discord.js');
 const e = require('../../utils/Emojis');
 
 module.exports = class messageCreate {
@@ -23,7 +23,8 @@ module.exports = class messageCreate {
 			prefix = server.prefix;
 		}
 
-		let lang = server.lang;
+		let lang = server.lang || 0;
+
 		switch(lang) {
 			case 1:
 				lang = this.client.langs.pt;
@@ -38,7 +39,7 @@ module.exports = class messageCreate {
 		}
 
 		if (message.content.indexOf(prefix) !== 0) return;
-		const args = message.content.slice(prefix.length).split(/ +/);
+		const args = message.content.slice(prefix.length).trim().split(/ +/g);
 		const command = args.shift().toLowerCase();
 		const cmd =
       this.client.commands.get(command) ||
@@ -65,8 +66,11 @@ module.exports = class messageCreate {
 	  setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 		if(command) {
-			const embedError = new this.client.embed(message.author)
+			const embedError = new Embed()
 			    .setAuthor({ name: `${this.client.user.username} | Logs`, iconURL: this.client.user.displayAvatarURL({ dynamic: true }) })
+				.setTimestamp()
+				.setColor(Util.resolveColor('Purple'))
+				.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
 				.setDescription(`Comando **${cmd.name}** executado no servidor **${message.guild.name}** (\`${message.guild.id}\`)`)
 				.addFields(
 					{
@@ -88,9 +92,12 @@ module.exports = class messageCreate {
 				await cmd.execute({ message, args, lang });
 			}
 			catch (err) {
-				const erro = new this.client.embed(message.author)
+				const erro = new Embed()
 					.setTitle(`${lang.events.messageCreate.embed.title}`)
-					.setDescription(`${lang.events.messageCreate.embed.description}`);
+					.setDescription(`${lang.events.messageCreate.embed.description}`)
+					.setTimestamp()
+					.setColor(Util.resolveColor('Purple'))
+					.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) });
 				await message.reply({ embeds: [erro] });
 				console.log(err);
 			}

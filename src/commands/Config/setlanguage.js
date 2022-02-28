@@ -1,7 +1,7 @@
 /* eslint-disable no-return-await */
 const Command = require('../../structures/Command');
-const { MessageActionRow, MessageButton } = require('discord.js');
 const e = require('../../utils/Emojis');
+const { ActionRow, ButtonStyle, Embed, Util, ButtonComponent } = require('discord.js');
 
 module.exports = class Language extends Command {
 	constructor (client) {
@@ -15,33 +15,38 @@ module.exports = class Language extends Command {
 	}
 
 	async execute ({ message, lang }) {
-		if (!message.member.permissions.has('MANAGE_GUILD') && !this.client.developers.some(x => x === message.author.id)) {
-			return message.reply(`${e.Error} | ${message.author}, ${lang.commands.lang.noPerm}`);
+		if (!message.member.permissions.has('ManageGuild') && !this.client.developers.some(x => x === message.author.id)) {
+			return message.reply(
+				`${e.Error} | ${message.author}, ${lang.commands.lang.noPerm}`
+			);
 		}
 
 		const user = this.client.users.cache.get('847865068657836033');
 		const user1 = this.client.users.fetch('417153124147396615');
 
-		let brazil = new MessageButton();
+		let brazil = new ButtonComponent();
 		brazil.setCustomId('brazil');
 		brazil.setLabel('Português');
-		brazil.setStyle('PRIMARY');
-		brazil.setEmoji('🇧🇷');
+		brazil.setStyle(ButtonStyle.Primary);
+		brazil.setEmoji({ name: '🇧🇷' });
 
-		let us = new MessageButton();
+		let us = new ButtonComponent();
 		us.setCustomId('us');
 		us.setLabel('English');
-		us.setStyle('PRIMARY');
-		us.setEmoji('🇺🇸');
+		us.setStyle(ButtonStyle.Primary);
+		us.setEmoji({ name: '🇺🇸' });
 
 		const filter = i => ['us', 'brazil'].includes(i.customId);
 
-		let embed = new this.client.embed(message.author);
+		let embed = new Embed();
 		embed.setTitle(`${lang.commands.lang.embed.title}`);
 		embed.setDescription(`${lang.commands.lang.embed.desc}`);
-		embed.addField('🇺🇸 English (United States)', String(`${lang.commands.lang.embed.translated} \`${user.username}\``), true);
-		embed.addField('🇧🇷 Português (Brasil)', String(`${lang.commands.lang.embed.translated} \`${user.username}\`, \`${user1.username}\``), true);
-		embed.addField(`${lang.commands.lang.embed.help}`, `https://crowdin.com/project/suki`, false);
+		embed.addField({ name: '🇺🇸 English (United States)', value: String(`${lang.commands.lang.embed.translated} \`${user.username}\``), inline: true });
+		embed.addField({ name: '🇧🇷 Português (Brasil)', value: String(`${lang.commands.lang.embed.translated} \`${user.username}\`, \`${user1.username}\``), inline: true });
+		embed.addField({ name: `${lang.commands.lang.embed.help}`, value: `https://crowdin.com/project/suki`, inline: false });
+		embed.setTimestamp();
+		embed.setColor(Util.resolveColor('Purple'));
+		embed.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) });
 
 		const collector = message.channel.createMessageComponentCollector({ filter, time: 120000, idle: 120000 });
 
@@ -52,21 +57,16 @@ module.exports = class Language extends Command {
 		switch (guildDBData.lang) {
 			case 0:
 				us.setDisabled(true);
-				us.setStyle('DANGER');
+				us.setStyle(ButtonStyle.Danger);
 				break;
 
 			case 1:
 				brazil.setDisabled(true);
-				brazil.setStyle('DANGER');
+				brazil.setStyle(ButtonStyle.Danger);
 				break;
 		}
 
-		let row = new MessageActionRow();
-		row.addComponents([brazil, us]);
-
-
-		let disabledRow = new MessageActionRow();
-		disabledRow.addComponents([brazil, us]);
+		let row = new ActionRow().setComponents(brazil, us);
 
 		let msg = await message.reply({ embeds: [embed], components: [row] });
 
@@ -102,6 +102,7 @@ module.exports = class Language extends Command {
 					});
 					await msg.delete();
 					message.reply({ content: `🇺🇸 Now I will speak English on this server.` });
+
 					collector.stop();
 					break;
 			}

@@ -1,11 +1,5 @@
-/* eslint-disable no-unused-vars */
 const Command = require('../../structures/Command');
 const e = require('../../utils/Emojis');
-
-const yaml = require('js-yaml');
-const { readFileSync } = require('fs');
-
-const env = yaml.load(readFileSync('./envirovments.yml', 'utf8'));
 
 module.exports = class Ping extends Command {
 	constructor (client) {
@@ -22,9 +16,6 @@ module.exports = class Ping extends Command {
 		const startDB = process.hrtime();
 		await this.client.userDB.findOne({ idU: message.author.id });
 		const stopDB = process.hrtime(startDB);
-
-		const startLL = process.hrtime();
-		const stopLL = process.hrtime(startLL);
 
 		const lavalinkUSAPing = await this.client.music.nodes.find(n => n.identifier === 'Suki 1').ping();
 		const lavalinkEuPing = await this.client.music.nodes.find(n => n.identifier === 'Suki 2').ping();

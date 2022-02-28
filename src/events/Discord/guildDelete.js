@@ -1,4 +1,4 @@
-const { MessageEmbed, Guild } = require('discord.js');
+const { Embed, Guild } = require('discord.js');
 const e = require('../../utils/Emojis');
 
 const yaml = require('js-yaml');
@@ -14,7 +14,7 @@ module.exports = class guildDelete {
 	async execute (guild = Guild) {
 		this.client.guildDB.findOneAndDelete({ guildID: guild.id });
 
-		const embed = new MessageEmbed()
+		const embed = new Embed()
 			.setAuthor({
 				name: `${this.client.user.username} - Removido`,
 				iconURL: this.client.user.avatarURL(),

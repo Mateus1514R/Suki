@@ -11,7 +11,6 @@ const env = yaml.load(readFileSync('./envirovments.yml', 'utf8'));
 const guildDB = require('../models/guildDB');
 const userDB = require('../models/userDB');
 const botDB = require('../models/botDB');
-const Embed = require('../structures/ClientEmbed');
 
 const readdir = promisify(require('fs').readdir);
 
@@ -31,7 +30,6 @@ module.exports = class SukiClient extends Client {
 			en: require('../Locales/en-US.js'),
 		};
 
-		this.embed = Embed;
 		this.getUser = this.findUser;
 		this.sendLogs = this.commandLogs;
 		this.developers = ['847865068657836033', '689265428769669155', '431768491759239211', '680943469228982357'];

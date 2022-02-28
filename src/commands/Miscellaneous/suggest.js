@@ -1,3 +1,4 @@
+const { Embed, Util } = require('discord.js');
 const Command = require('../../structures/Command');
 const e = require('../../utils/Emojis');
 
@@ -25,9 +26,12 @@ module.exports = class Suggest extends Command {
 		const channel = this.client.channels.cache.get(env.suggest_channel);
 
 		message.reply(`${e.Correct} | ${message.author}, ${lang.commands.suggest.send}`);
-		const embed = new this.client.embed(message.author)
+		const embed = new Embed()
 			.setAuthor({ name: message.author.tag, iconURL: message.author.displayAvatarURL() })
-			.addFields([
+			.setTimestamp()
+			.setColor(Util.resolveColor('Purple'))
+			.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
+			.addFields(
 				{
 					name: `${e.User} | Autor:`,
 					value: `> **Tag:** ${message.author.tag}\n> **ID:** ${message.author.id}`
@@ -36,7 +40,7 @@ module.exports = class Suggest extends Command {
 					name: `${e.Chat} Sugestão:`,
 					value: `> ${suggest}`
 				}
-			]);
+			);
 		const msg = await channel.send({ embeds: [embed] });
 		await msg.react(`${e.Correct}`);
 		await msg.react(`${e.Error}`);
