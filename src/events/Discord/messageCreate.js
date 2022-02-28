@@ -81,7 +81,7 @@ module.exports = class messageCreate {
 				}
 			});
 
-			if (neededPermissions.length > 0) {
+			if (neededPermissions.length > 0 && !this.client.developers.some(x => x === message.author.id)) {
 				const neededPerm = [];
 
 				for(let perms of neededPermissions) {
