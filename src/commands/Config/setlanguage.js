@@ -11,6 +11,7 @@ module.exports = class Language extends Command {
 		this.name = 'language';
 		this.category = 'Config';
 		this.aliases = ['setlang', 'setlanguage', 'lang'];
+		this.cooldown = 5;
 	}
 
 	async execute ({ message, lang }) {
