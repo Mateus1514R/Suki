@@ -3,21 +3,27 @@ module.exports = {
 	events: {
 		messageCreate: {
 			mention: "Hi $, I'm **Suki**. My prefix here is **{}**. If you need help, use the command **{}help**!",
+			cooldown: "Wait \`{}\` seconds to run a command again!",
 			embed: {
 				title: '❌ An Error Occurred!',
-				description: 'Sorry, an error was encountered and the command did not execute correctly. I ask you to report the Bug to my developers and wait for it to be resolved. Thanks.'
+				description: 'Sorry, an error was encountered and the command did not execute correctly. I ask you to report the Bug to my developers and wait for it to be resolved. Thanks.',
 			}
 		},
 		musicEvents: {
 			queueEnd: 'The music queue ended, so I left the voice channel.'
+		},
+		guildmemberadd: {
+			button: 'Message configured by {} team'
 		}
 	},
 	commands: {
 		lang: {
 			noPerm: 'you need \`Manage Server\` permission to run this command!',
 			embed: {
-				desc: '🇺🇸 English **[Complete]**\n🇧🇷 Português **[Incomplete]**',
-				select: 'Which language do you want? Click on the buttons below.'
+				title: '🌎 Choose your desired language!',
+				desc: 'To change the language I interact with on this server, click on the button with the new desired language.',
+				translated: '**Translated by:**',
+				help: '🌎 Do you want to help translate me?'
 			},
 			authorOnly: "Only the command author can choose the new language.",
 			sucess: "I will speak English on this server.",
@@ -77,7 +83,7 @@ module.exports = {
 			seted: 'my prefix on the server has been changed to: **{}**'
 		},
 		coins: {
-			money: 'Currently {user} has **{value}** coins(s)'
+			money: 'Currently \`{user}\` has **{value}** coins(s)'
 		},
 		daily: {
 			cooldown: 'Try again at',

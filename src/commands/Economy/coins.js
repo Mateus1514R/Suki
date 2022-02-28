@@ -19,7 +19,7 @@ module.exports = class Coins extends Command {
 
 		const user = await this.client.userDB.findOne({ _id: USER.id });
 
-		return message.reply(`${e.Crystal} | ${lang.commands.coins.money.replace('{user}', String(USER)).replace('{value}', user.coins.toLocaleString())}`);
+		return message.reply(`${e.Crystal} | ${lang.commands.coins.money.replace('{user}', String(USER.tag)).replace('{value}', user.coins.toLocaleString())}`);
 
 	}
 };

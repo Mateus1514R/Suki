@@ -20,6 +20,9 @@ module.exports = class Language extends Command {
 			);
 		}
 
+		const user = this.client.users.cache.get('847865068657836033');
+		const user1 = this.client.users.fetch('417153124147396615');
+
 		let brazil = new ButtonComponent();
 		brazil.setCustomId('brazil');
 		brazil.setLabel('Português');
@@ -32,17 +35,14 @@ module.exports = class Language extends Command {
 		us.setStyle(ButtonStyle.Primary);
 		us.setEmoji({ name: '🇺🇸' });
 
-		let x = new ButtonComponent();
-		x.setCustomId('x');
-		x.setLabel(String(`${lang.commands.lang.cancel}`));
-		x.setStyle(ButtonStyle.Primary);
-		x.setEmoji({ name: '❌' });
-
-		const filter = i => ['x', 'us', 'brazil'].includes(i.customId);
+		const filter = i => ['us', 'brazil'].includes(i.customId);
 
 		let embed = new Embed();
-		embed.setDescription(String(`${lang.commands.lang.embed.desc}`));
-		embed.setAuthor({ name: `${lang.commands.lang.embed.select}`, iconURL: message.author.displayAvatarURL({ dynamic: true, size: 4096 }) });
+		embed.setTitle(`${lang.commands.lang.embed.title}`);
+		embed.setDescription(`${lang.commands.lang.embed.desc}`);
+		embed.addField({ name: '🇺🇸 English (United States)', value: String(`${lang.commands.lang.embed.translated} \`${user.username}\``), inline: true });
+		embed.addField({ name: '🇧🇷 Português (Brasil)', value: String(`${lang.commands.lang.embed.translated} \`${user.username}\`, \`${user1.username}\``), inline: true });
+		embed.addField({ name: `${lang.commands.lang.embed.help}`, value: `https://crowdin.com/project/suki`, inline: false });
 		embed.setTimestamp();
 		embed.setColor(Util.resolveColor('Purple'));
 		embed.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) });
@@ -65,10 +65,7 @@ module.exports = class Language extends Command {
 				break;
 		}
 
-		let row = new ActionRow().setComponents(brazil, us, x);
-
-
-		let disabledRow = new ActionRow().setComponents(brazil, us, x);
+		let row = new ActionRow().setComponents(brazil, us);
 
 		let msg = await message.reply({ embeds: [embed], components: [row] });
 
@@ -88,13 +85,8 @@ module.exports = class Language extends Command {
 							lang: 1
 						}
 					});
-					await msg.edit({
-						embeds: [{
-							description: '🇧🇷 Agora eu falarei em Português neste servidor.',
-							color: Util.resolveColor('Purple')
-						}],
-						components: [disabledRow]
-					});
+					await msg.delete();
+					message.reply({ content: '🇧🇷 Agora eu falarei em Português neste servidor.' });
 					collector.stop();
 					break;
 
@@ -107,26 +99,9 @@ module.exports = class Language extends Command {
 							lang: 0
 						}
 					});
-					await msg.edit({
-						embeds: [{
-							description: `🇺🇸 Now I will speak English on this server.`,
-							color: Util.resolveColor('Purple')
-						}],
-						components: [disabledRow]
-					});
+					await msg.delete();
+					message.reply({ content: `🇺🇸 Now I will speak English on this server.` });
 
-					collector.stop();
-					break;
-
-				case 'x':
-					await button.deferUpdate().catch();
-					await msg.edit({
-						embeds: [{
-							description: `${lang.commands.lang.closed}`,
-							color: Util.resolveColor('Purple')
-						}],
-						components: [disabledRow]
-					});
 					collector.stop();
 					break;
 			}

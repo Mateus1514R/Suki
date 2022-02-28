@@ -1,6 +1,6 @@
-const { Embed, Util } = require('discord.js');
+const { Embed, Util, Collection } = require('discord.js');
 const moment = require('moment');
-
+const e = require('../../utils/Emojis');
 
 module.exports = class messageCreate {
 	constructor (client) {
@@ -8,6 +8,9 @@ module.exports = class messageCreate {
 	}
 
 	async execute (message) {
+		const { cooldowns } = this.client;
+		if(!message.guild || message.author.bot) return;
+
 		const GetMention = (id) => new RegExp(`^<@!?${id}>( |)$`);
 
 		const server = await this.client.guildDB.findOne({ guildID: message.guild.id });
@@ -42,10 +45,48 @@ module.exports = class messageCreate {
       this.client.commands.get(command) ||
       this.client.commands.get(this.client.aliases.get(command));
 
-		if(!cmd) return;
+	  if (!cmd) return;
+
+	  if (!cooldowns.has(cmd)) cooldowns.set(cmd, new Collection());
+
+	  const now = Date.now();
+	  const timestamps = cooldowns.get(cmd);
+	  const cooldownAmount = (cmd.cooldown || 3) * 1000;
+
+	  if (timestamps.has(message.author.id)) {
+			const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+
+			if (now < expirationTime) {
+		  const timeLeft = (expirationTime - now) / 1000;
+		  return message.reply({ content: `${e.Error} ${String(lang.events.messageCreate.cooldown).replace('{}', timeLeft.toFixed(1)) }` });
+			}
+	  }
+	  timestamps.set(message.author.id, now);
+
+	  setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 		if(command) {
-			this.client.sendLogs(`\`---\`\nData: **${moment(Date.now()).format('L LT')}**\nComando **${cmd.name}** executado no servidor **${message.guild.name}** (\`${message.guild.id}\`)\nArgs: \`${args.join(' ')}\`\nUsuário: **${message.author.tag}** (\`${message.author.id}\`)\n\`---\``);
+			const embedError = new Embed()
+			    .setAuthor({ name: `${this.client.user.username} | Logs`, iconURL: this.client.user.displayAvatarURL({ dynamic: true }) })
+				.setTimestamp()
+				.setColor(Util.resolveColor('Purple'))
+				.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
+				.setDescription(`Comando **${cmd.name}** executado no servidor **${message.guild.name}** (\`${message.guild.id}\`)`)
+				.addFields(
+					{
+						name: 'Args',
+						value: `\`${args.join(' ')}\``
+					},
+					{
+						name: 'Usuário',
+						value: `**${message.author.tag}** (\`${message.author.id}\`)`
+					},
+					{
+						name: 'Data',
+						value: `**${moment(Date.now()).format('L LT')}**`
+					},
+				);
+			this.client.sendLogs(embedError);
 
 			try {
 				await cmd.execute({ message, args, lang });

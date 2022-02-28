@@ -30,9 +30,9 @@ module.exports = class Pay extends Command {
 
 		if(!targetDB) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.neverUsed}!`);
 
-		if (authorDB.value < value) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.noDiamonds}!`);
+		if (authorDB.coins < value) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.noCoins}`);
 
-	 message.reply(`${e.Correct} | ${message.author}, ${lang.commands.pay.payed.replace('{user}', String(user.username)).replace('{}', value.toLocaleString())}`);
+	 message.reply(`${e.Correct} | ${message.author}, ${lang.commands.pay.payed}`.replace('{user}', String(user.username)).replace('{}', value.toLocaleString()));
 
 		await this.client.userDB.findOneAndUpdate({ _id: message.author.id },
 			{

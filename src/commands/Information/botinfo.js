@@ -2,7 +2,6 @@ const Command = require('../../structures/Command');
 const e = require('../../utils/Emojis');
 const moment = require('moment');
 const { ActionRow, Embed, ButtonComponent, ButtonStyle, Util } = require('discord.js');
-const Discord = require('discord.js');
 
 module.exports = class BotInfo extends Command {
 	constructor (client) {
@@ -53,7 +52,7 @@ module.exports = class BotInfo extends Command {
 				},
 				{
 					name: `${lang.commands.botinfo.embed.name2}:`,
-					value: `${e.Archive} | ${lang.commands.botinfo.embed.commands}: **${commands}**\n${e.Loading} | RAM: **${memory}MB**\n${e.Time} | Uptime: **${uptime}**\n${e.NodeJS} | Node.js: **${version}**\n${e.Discord} | Discord.js: **v${Discord.Version}**\n${e.Version} | ${lang.commands.botinfo.embed.platform}: **${system}**\n`,
+					value: `${e.Archive} | ${lang.commands.botinfo.embed.commands}: **${commands}**\n${e.Loading} | RAM: **${memory}MB**\n${e.Time} | Uptime: **${uptime}**\n${e.NodeJS} | Node.js: **${version}**\n${e.Discord} | Discord.js: **14.0.0-dev**\n${e.Version} | ${lang.commands.botinfo.embed.platform}: **${system}**\n`,
 					inline: true,
 				});
 

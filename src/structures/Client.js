@@ -19,6 +19,7 @@ module.exports = class SukiClient extends Client {
 		super(options);
 		this.commands = new Collection();
 		this.aliases = new Collection();
+		this.cooldowns = new Collection();
 		this.guildDB = guildDB;
 		this.userDB = userDB;
 		this.botDB = botDB;
@@ -96,10 +97,10 @@ module.exports = class SukiClient extends Client {
 	async commandLogs (content) {
 		const webhookClient = new WebhookClient({
 			token: String(env.logs_token),
-			id: '946563655003144212',
+			id: env.logs_id,
 		});
 		webhookClient.send({
-			content: String(content),
+			embeds: [content],
 		});
 	}
 };

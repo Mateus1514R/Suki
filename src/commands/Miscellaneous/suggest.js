@@ -2,6 +2,11 @@ const { Embed, Util } = require('discord.js');
 const Command = require('../../structures/Command');
 const e = require('../../utils/Emojis');
 
+const yaml = require('js-yaml');
+const { readFileSync } = require('fs');
+
+const env = yaml.load(readFileSync('./envirovments.yml', 'utf8'));
+
 module.exports = class Suggest extends Command {
 	constructor (client) {
 		super(client);
@@ -18,7 +23,7 @@ module.exports = class Suggest extends Command {
 		const suggest = args.slice(0).join(' ');
 		if(!suggest) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.suggest.noArgs}`);
 
-		const channel = this.client.channels.cache.get('946386176871383120');
+		const channel = this.client.channels.cache.get(env.suggest_channel);
 
 		message.reply(`${e.Correct} | ${message.author}, ${lang.commands.suggest.send}`);
 		const embed = new Embed()

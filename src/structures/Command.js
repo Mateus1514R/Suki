@@ -6,5 +6,6 @@ module.exports = class Command {
 		this.category = 'Categoria';
 		this.description = 'Descrição';
 		this.aliases = [];
+		this.cooldown = 3;
 	}
 };

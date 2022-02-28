@@ -36,7 +36,7 @@ module.exports = class guildDelete {
 				}
 			);
 
-		const channel = this.client.channels.cache.get(`${env.servers_log}`);
+		const channel = this.client.channels.cache.get(env.servers_log);
 
 		channel.send({ embeds: [embed] });
 	}
