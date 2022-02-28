@@ -9,10 +9,10 @@ module.exports = class Test extends Command {
 		this.category = 'Developer';
 		this.description = 'testa codigo';
 		this.aliases = ['t', 'teste', 'testar'];
+		this.staffOnly = true;
 	}
 
 	async execute ({ message, args }) {
-		if(!this.client.developers.some(x => x === message.author.id)) {return;}
 
 		const user = await this.client.getUser(args[0], message);
 

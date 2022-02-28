@@ -7,7 +7,9 @@ module.exports = {
 			embed: {
 				title: '❌ An Error Occurred!',
 				description: 'Sorry, an error was encountered and the command did not execute correctly. I ask you to report the Bug to my developers and wait for it to be resolved. Thanks.',
-			}
+			},
+			noUserPerm: 'You need \`{}\` permission to run this command',
+			noBotPerm: 'I need the {} permission to run this command'
 		},
 		musicEvents: {
 			queueEnd: 'The music queue ended, so I left the voice channel.'
@@ -18,7 +20,6 @@ module.exports = {
 	},
 	commands: {
 		lang: {
-			noPerm: 'you need \`Manage Server\` permission to run this command!',
 			embed: {
 				title: '🌎 Choose your desired language!',
 				desc: 'To change the language I interact with on this server, click on the button with the new desired language.',
@@ -31,7 +32,6 @@ module.exports = {
 			cancel: 'Cancel'
 		},
 		welcome: {
-			noPerm: 'you need \`Manage Server\` permission to run this command!',
 			embedHelp: {
 				title: '🚪 | Entry Log System',
 				fields: {
@@ -77,7 +77,6 @@ module.exports = {
 			}
 		},
 		prefix: {
-			noPerm: 'you need \`Manage Server\` permission to run this command!',
 			noArgs: 'to change my prefix on your server, use **{}prefix <Prefix>**.',
 			threeLength: 'the prefix must have a maximum of **3** characters.',
 			seted: 'my prefix on the server has been changed to: **{}**'
@@ -242,6 +241,7 @@ module.exports = {
 			},
 			categorys: {
 				config: 'Commands related to bot configuration in the guild.',
+				developer: 'Developers commands',
 				economy: 'Commands to use the Bot economy.',
 				info: 'Commands for some useful miscellaneous information.',
 				music: 'Commands for listening to music using the Bot.',

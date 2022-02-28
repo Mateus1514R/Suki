@@ -18,7 +18,9 @@ module.exports = class Help extends Command {
 		const { commands } = this.client;
 
 		const block = [];
-		block.push('Developer');
+		if(!this.client.developers.some(x => x === message.author.id)) {
+			block.push('Developer');
+		}
 
 		const list = commands
 			.map((x) => x.category)
@@ -98,6 +100,19 @@ module.exports = class Help extends Command {
 						emoji: {
 							name: 'Bot',
 							id: '945748531594014752',
+							animated: false
+						},
+					});
+					break;
+				}
+				case 'Developer': {
+					menu.addOptions({
+						label: option.label ? option.label : option.value,
+						description: `${lang.commands.help.categorys.developer}`,
+						value: option.value,
+						emoji: {
+							name: 'Dev',
+							id: '945747642573520936',
 							animated: false
 						},
 					});

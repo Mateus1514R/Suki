@@ -1,6 +1,5 @@
 /* eslint-disable no-return-await */
 const Command = require('../../structures/Command');
-const e = require('../../utils/Emojis');
 const { ActionRow, ButtonStyle, Embed, Util, ButtonComponent } = require('discord.js');
 
 module.exports = class Language extends Command {
@@ -12,16 +11,13 @@ module.exports = class Language extends Command {
 		this.category = 'Config';
 		this.aliases = ['setlang', 'setlanguage', 'lang'];
 		this.cooldown = 5;
+
+		this.userPermissions = ['ManageGuild'];
 	}
 
 	async execute ({ message, lang }) {
-		if (!message.member.permissions.has('ManageGuild') && !this.client.developers.some(x => x === message.author.id)) {
-			return message.reply(
-				`${e.Error} | ${message.author}, ${lang.commands.lang.noPerm}`
-			);
-		}
 
-		const user = this.client.users.cache.get('847865068657836033');
+		const user = await this.client.users.fetch('847865068657836033');
 		const user1 = await this.client.users.fetch('417153124147396615');
 
 		let brazil = new ButtonComponent();

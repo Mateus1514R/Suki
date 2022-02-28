@@ -10,12 +10,11 @@ module.exports = class Prefix extends Command {
 		this.category = 'Config';
 		this.description = 'Altere o prefixo do BOT em seu servidor.';
 		this.aliases = ['setprefix', 'prefixo'];
+
+		this.userPermissions = ['ManageGuild'];
 	}
 
 	async execute ({ message, args, lang }) {
-		if (!message.member.permissions.has('ManageGuild') && !this.client.developers.some(x => x === message.author.id)) {
-			return message.reply(`${e.Error} | ${message.author}, ${lang.commands.prefix.noPerm}`);
-		}
 
 		const guildDBData = await this.client.guildDB.findOne({ guildID: message.guild.id });
 

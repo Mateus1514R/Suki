@@ -7,7 +7,9 @@ module.exports = {
 			embed: {
 				title: '❌ Ocorreu um erro!',
 				description: 'Desculpe um erro ocorreu e o comando não foi executado corretamente. Eu peço para você reportar o erro para meus desenvolvedores e esperar que seja corrigido. Obrigado.',
-			}
+			},
+			noUserPerm: 'Você precisa da permissão \`{}\` para executar este comando',
+			noBotPerm: 'Eu preciso da permissão \`{}\` para executar este comando'
 		},
 		musicEvents: { 
 			queueEnd: 'A fila de músicas acabou, então eu saí do canal de voz.' 
@@ -18,7 +20,6 @@ module.exports = {
 	},
 	commands: {
 		lang: {
-			noPerm: 'você precisa da permissão `Gerenciar Servidor` para executar este comando!',
 			embed: {
 				title: '🌎 Escolha a linguagem desejada!',
 				desc: 'Para alterar a linguagem que eu interajo nesse servidor, clique no botão com a nova linguagem desejada.',
@@ -31,7 +32,6 @@ module.exports = {
 			cancel: 'Cancelar'
 		},
 		welcome: {
-			noPerm: 'você precisa da permissão `Gerenciar Servidor` para executar este comando!',
 			embedHelp: {
 				title: '🚪 | Sistema de boas-vindas',
 				fields: {
@@ -77,7 +77,6 @@ module.exports = {
 			}
 		},
 		prefix: {
-			noPerm: 'você precisa da permissão `Gerenciar Servidor` para executar este comando!',
 			noArgs: 'para mudar meu prefixo em seu servidor, utilize **{}prefix <Prefix>**.',
 			threeLength: 'O prefixo deve ter no máximo **3** caracteres.',
 			seted: 'Meu prefixo nesse servidor foi alterado para: **{}**'
@@ -228,6 +227,7 @@ module.exports = {
 			row: { selectMenu: 'Selecione a categoria.' },
 			categorys: {
 				config: 'Comandos relacionados a configuração do bot no servidor.',
+				developer: 'Comandos dos desenvolvedores',
 				economy: 'Comandos para usar a economia do bot.',
 				info: 'Comandos de úteis de informações diversas.',
 				music: 'Comandos para escutar música usando o bot.',

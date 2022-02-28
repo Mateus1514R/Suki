@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const { Embed, Util, Collection } = require('discord.js');
 const moment = require('moment');
 const e = require('../../utils/Emojis');
@@ -46,6 +47,55 @@ module.exports = class messageCreate {
       this.client.commands.get(this.client.aliases.get(command));
 
 	  if (!cmd) return;
+
+	  if(message.guild) {
+		  let needPermissions = [];
+
+		  cmd.botPermissions.forEach((perm) => {
+			  if(['SPEAK', 'CONNECT'].includes(perm)) {
+				  if(!message.member.voice.channel) return;
+				  if (!message.member.voice.channel.permissionsFor(message.guild.me).has(perm)) {
+					  needPermissions.push(perm);
+				  }
+				}
+				else if (!message.channel.permissionsFor(message.guild.me).has(perm)) {
+					needPermissions.push(perm);
+				}
+		  });
+
+		  if (needPermissions.length > 0) {
+				const needPerm = [];
+
+				for(let perms of needPermissions) {
+				  if(!message.member.permissions.has(perms)) {
+					  needPerm.push(perms);
+				  }
+			 }
+				return message.reply(`${e.Error} ${lang.events.messageCreate.noBotPerm}`.replace('{}', needPerm.join(', ')));
+			}
+
+			let neededPermissions = [];
+			cmd.userPermissions.forEach((perm) => {
+				if (!message.channel.permissionsFor(message.member).has(perm)) {
+					neededPermissions.push(perm);
+				}
+			});
+
+			if (neededPermissions.length > 0) {
+				const neededPerm = [];
+
+				for(let perms of neededPermissions) {
+					  if(!message.member.permissions.has(perms)) {
+						  neededPerm.push(perms);
+					  }
+				 }
+				return message.reply(`${e.Error} ${lang.events.messageCreate.noUserPerm}`.replace('{}', neededPerm.join(', ')));
+			}
+	  }
+
+	  if (cmd.staffOnly && !this.client.developers.some(x => x === message.author.id)) {
+			return;
+		}
 
 	  if (!cooldowns.has(cmd)) cooldowns.set(cmd, new Collection());
 

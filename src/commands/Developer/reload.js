@@ -11,10 +11,10 @@ module.exports = class Reload extends Command {
 		this.category = 'Developer';
 		this.description = 'Reinicie um comando.';
 		this.aliases = ['rl'];
+		this.staffOnly = true;
 	}
 
 	async execute ({ message, lang }) {
-		if(!this.client.developers.some(x => x === message.author.id)) {return;}
 
 		this.client.commands.sweep(() => true);
 

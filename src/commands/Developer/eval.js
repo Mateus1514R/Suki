@@ -10,10 +10,10 @@ module.exports = class Eval extends Command {
 		this.category = 'Developer';
 		this.description = 'Executa código';
 		this.aliases = ['ev', 'e'];
+		this.staffOnly = true;
 	}
 
 	async execute ({ message, args }) {
-		if(!this.client.developers.some(x => x === message.author.id)) {return;}
 
 		if(!args[0]) {return;}
 

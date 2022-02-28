@@ -12,10 +12,10 @@ module.exports = class Shell extends Command {
 		this.category = 'Developer';
 		this.description = 'Executa código na sua máquina';
 		this.aliases = ['sh'];
+		this.staffOnly = true;
 	}
 
 	async execute ({ message, args, lang }) {
-		if(!this.client.developers.some(x => x === message.author.id)) {return;}
 
 		if(!args[0]) {return;}
 
