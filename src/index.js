@@ -32,6 +32,9 @@ client.music = new Vulkava({
 			region: 'USA',
 			resumeKey: 'Suki',
 			resumeTimeout: 5 * 60000,
+			maxRetryAttempts: 10,
+			retryAttemptsInterval: 3000,
+			secure: false
 		},
 		{
 			id: 'Suki 2',
@@ -41,6 +44,9 @@ client.music = new Vulkava({
 			region: 'EU',
 			resumeKey: 'Suki',
 			resumeTimeout: 5 * 60000,
+			maxRetryAttempts: 10,
+			retryAttemptsInterval: 3000,
+			secure: false
 		}
 	],
 	sendWS: (guildId, payload) => {
