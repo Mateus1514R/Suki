@@ -1,5 +1,10 @@
-const { MessageEmbed, Guild } = require('discord.js');
+const { Embed, Guild, Util } = require('discord.js');
 const e = require('../../utils/Emojis');
+
+const yaml = require('js-yaml');
+const { readFileSync } = require('fs');
+
+const env = yaml.load(readFileSync('./envirovments.yml', 'utf8'));
 
 module.exports = class guildCreate {
 	constructor (client) {
@@ -10,14 +15,20 @@ module.exports = class guildCreate {
 		this.client.guildDB.create({
 			guildID: guild.id,
 			prefix: 's!',
+			welcome: {
+				channel: '',
+				message: '',
+				status: false,
+			},
+			lang: 0
 		});
 
-		const embed = new MessageEmbed()
+		const embed = new Embed()
 			.setAuthor({
 				name: `${this.client.user.username} - Adicionado`,
 				iconURL: this.client.user.avatarURL(),
 			})
-			.setColor('#7A0BC0')
+			.setColor(Util.resolveColor('Purple'))
 			.setTimestamp()
 			.addFields(
 				{
@@ -34,8 +45,8 @@ module.exports = class guildCreate {
 				}
 			);
 
-		this.client.channels.cache
-			.get(process.env.SERVER_LOGS)
-			.send({ embeds: [embed] });
+		const channel = this.client.channels.cache.get(env.servers_log);
+
+		channel.send({ embeds: [embed] });
 	}
 };

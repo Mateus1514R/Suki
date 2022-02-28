@@ -1,39 +1,64 @@
-const { config } = require('dotenv');
 const Client = require('./structures/Client');
 const { connect } = require('mongoose');
 const c = require('colors');
 const { Vulkava } = require('vulkava');
+const yaml = require('js-yaml');
+const { readFileSync } = require('fs');
+const { GatewayIntentBits } = require('discord.js');
 
-config();
+const env = yaml.load(readFileSync('./envirovments.yml', 'utf8'));
 
 const client = new Client({
-	intents: [
-		'GUILDS',
-		'GUILD_MEMBERS',
-		'GUILD_PRESENCES',
-		'GUILD_MESSAGES',
-		'GUILD_VOICE_STATES',
-	],
-	allowedMentions: { parse: ['users'], repliedUser: true },
+	intents: [GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.GuildMembers],
+	failIfNotExists: false,
+	rest: {
+		retries: 3,
+	},
+	allowedMentions: {
+		repliedUser: true,
+		parse: ['users'],
+	},
 });
 
 client.music = new Vulkava({
 	nodes: [
 		{
 			id: 'Suki 1',
-			hostname: process.env.LAVALINKHOST,
+			hostname: String(env.usalavalinkhost),
 			port: 80,
-			password: process.env.LAVALINKPASSWORD,
+			password: String(env.lavalinkpassword),
+			region: 'USA',
 			resumeKey: 'Suki',
 			resumeTimeout: 5 * 60000,
+			maxRetryAttempts: 10,
+			retryAttemptsInterval: 3000,
+			secure: false
 		},
+		{
+			id: 'Suki 2',
+			hostname: String(env.eulavalinkhost),
+			port: 80,
+			password: String(env.lavalinkpassword),
+			region: 'EU',
+			resumeKey: 'Suki',
+			resumeTimeout: 5 * 60000,
+			maxRetryAttempts: 10,
+			retryAttemptsInterval: 3000,
+			secure: false
+		}
 	],
 	sendWS: (guildId, payload) => {
 		client.guilds.cache.get(guildId)?.shard.send(payload);
 	},
+	spotify: {
+		clientId: String(env.spotifyclientid),
+		clientSecret: String(env.spotifyclientsecret)
+	}
 });
 
-connect(process.env.MONGODB_CONNECT, {})
+connect(env.mongodb_connect, {})
 	.then(() => {
 		console.log(c.green('✅ [DataBase] - Iniciada com sucesso.'));
 	})
@@ -51,4 +76,4 @@ process.on('unhandledRejection', (err) => {
 
 client.onLoad(client);
 
-client.login(process.env.TOKEN);
+client.login(env.token);

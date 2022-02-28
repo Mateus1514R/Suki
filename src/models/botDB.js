@@ -3,11 +3,11 @@ const { Schema, model } = require('mongoose');
 let botDB = new Schema({
 	botID: {
 		required: true,
-		type: String
+		type: String,
 	},
 	blacklist: {
-		type: Array
-	}
+		type: Array,
+	},
 });
 
 let Bot = model('Bot', botDB);

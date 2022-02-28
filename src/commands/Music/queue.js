@@ -1,11 +1,13 @@
-const { MessageButton, MessageActionRow } = require('discord.js');
-const Command = require('../../structures/Command');
 const Collection = require('../../structures/Collection')
+const { ButtonComponent, ActionRow, ButtonStyle, Embed, Util } = require('discord.js');
+const Command = require('../../structures/Command');
 
 module.exports = class Queue extends Command {
 	constructor (client) {
 		super(client);
 		this.client = client;
+
+		this.collection = [];
 
 		this.name = 'queue';
 		this.category = 'Music';

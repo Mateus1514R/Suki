@@ -1,5 +1,10 @@
-const { MessageEmbed, Guild } = require('discord.js');
+const { Embed, Guild, Util } = require('discord.js');
 const e = require('../../utils/Emojis');
+
+const yaml = require('js-yaml');
+const { readFileSync } = require('fs');
+
+const env = yaml.load(readFileSync('./envirovments.yml', 'utf8'));
 
 module.exports = class guildDelete {
 	constructor (client) {
@@ -9,12 +14,12 @@ module.exports = class guildDelete {
 	async execute (guild = Guild) {
 		this.client.guildDB.findOneAndDelete({ guildID: guild.id });
 
-		const embed = new MessageEmbed()
+		const embed = new Embed()
 			.setAuthor({
 				name: `${this.client.user.username} - Removido`,
 				iconURL: this.client.user.avatarURL(),
 			})
-			.setColor('#7A0BC0')
+			.setColor(Util.resolveColor('Purple'))
 			.setTimestamp()
 			.addFields(
 				{
@@ -31,8 +36,8 @@ module.exports = class guildDelete {
 				}
 			);
 
-		this.client.channels.cache
-			.get(process.env.SERVER_LOGS)
-			.send({ embeds: [embed] });
+		const channel = this.client.channels.cache.get(env.servers_log);
+
+		channel.send({ embeds: [embed] });
 	}
 };

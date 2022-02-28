@@ -12,26 +12,26 @@ module.exports = class Shell extends Command {
 		this.category = 'Developer';
 		this.description = 'Executa código na sua máquina';
 		this.aliases = ['sh'];
+		this.staffOnly = true;
 	}
 
-	async execute ({ message, args }) {
-		if(!this.client.developers.some(x => x === message.author.id)) {return;}
+	async execute ({ message, args, lang }) {
 
 		if(!args[0]) {return;}
 
 		exec(args.join(' '), async (_err, stdout, stderr) => {
 			if (!stdout && !stderr) {
-				message.reply('Sem output!');
+				message.reply(`${lang.commands.shell.error}`);
 				return;
 			}
 
 			const res = (stdout || stderr).replace(ANSI_REGEX, '');
 
 			if (stderr) {
-				await message.reply({ content: `Stderr: \`\`\`sh\n${res}\n\`\`\`` });
+				await message.reply({ content: `Stderr: \`\`\`sh\n${res.slice(0, 2000)}\n\`\`\`` });
 			}
 			else {
-				await message.reply({ content: `**Stdout:**\`\`\`sh\n${res}\n\`\`\`` });
+				await message.reply({ content: `**Stdout:**\`\`\`sh\n${res.slice(0, 2000)}\n\`\`\`` });
 			}
 		});
 	}

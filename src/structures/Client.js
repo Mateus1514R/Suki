@@ -3,10 +3,14 @@ const { promisify } = require('util');
 const klaw = require('klaw');
 const path = require('path');
 
+const yaml = require('js-yaml');
+const { readFileSync } = require('fs');
+
+const env = yaml.load(readFileSync('./envirovments.yml', 'utf8'));
+
 const guildDB = require('../models/guildDB');
 const userDB = require('../models/userDB');
 const botDB = require('../models/botDB');
-const Embed = require('../structures/ClientEmbed');
 
 const readdir = promisify(require('fs').readdir);
 
@@ -15,11 +19,16 @@ module.exports = class SukiClient extends Client {
 		super(options);
 		this.commands = new Collection();
 		this.aliases = new Collection();
+		this.cooldowns = new Collection();
 		this.guildDB = guildDB;
 		this.userDB = userDB;
 		this.botDB = botDB;
 
-		this.embed = Embed;
+		this.langs = {
+			pt: require('../Translations/pt-BR.js'),
+			en: require('../Locales/en-US.js'),
+		};
+
 		this.getUser = this.findUser;
 		this.sendLogs = this.commandLogs;
 		this.developers = ['847865068657836033', '689265428769669155', '431768491759239211', '680943469228982357'];
@@ -70,32 +79,29 @@ module.exports = class SukiClient extends Client {
 
 		let user;
 
-		if(/<@!?\d{17,18}>/.test(args)) {
+		if (/<@!?\d{17,18}>/.test(args)) {
 			user = await message.client.users.fetch(args.match(/\d{17,18}/)?.[0]);
-
 		}
 		else {
-
 			try {
 				user = await message.guild.members.search({ query: args }).then((x) => x.first().user);
-
 			}
-			catch {};
+			catch {}
 			try {
 				user = await message.client.users.fetch(args).catch(null);
 			}
 			catch {}
 		}
-		if(user) return user;
-	};
+		if (user) return user;
+	}
 
 	async commandLogs (content) {
 		const webhookClient = new WebhookClient({
-		  token: process.env.LOGS_TOKEN,
-		  id: process.env.LOGS_ID
+			token: String(env.logs_token),
+			id: env.logs_id,
 		});
 		webhookClient.send({
-		  content: String(content)
+			embeds: [content],
 		});
-	  }
+	}
 };

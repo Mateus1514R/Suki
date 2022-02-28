@@ -14,28 +14,24 @@ module.exports = class Daily extends Command {
 		this.aliases = ['diario'];
 	}
 
-	async execute ({ message }) {
+	async execute ({ message, lang }) {
 		const userDBData = await this.client.userDB.findOne({
 			_id: message.author.id,
 		});
 
-		let cooldown = 8.64e7;
 		let coins = Math.floor(Math.random() * 3000);
 		let daily = userDBData.daily;
-		let time = cooldown - (Date.now() - daily);
+		let time = 8.64e7 - (Date.now() - daily);
 
-		if (daily !== null && cooldown - (Date.now() - daily) > 0) {
+		if (daily !== null && 8.64e7 - (Date.now() - daily) > 0) {
 			return message.reply(
-				`${e.Error} | ${message.author}, aguarde **${moment
-					.duration(time)
-					.format('h[h] m[m] e s[s]')}** até pegar o prêmio diário novamente.`
-			);
+				`${e.Error} | ${message.author}, ${lang.commands.daily.cooldown} \`${this.formatTime(this.convertMilliseconds(time))}\``);
 		}
 		else {
 			message.reply(
 				`${e.Correct} | ${
 					message.author
-				}, você resgatou seu prêmio diário e conseguiu **${coins.toLocaleString()}** coins.`
+				}, ${lang.commands.daily.won.replace('{amount}', coins.toLocaleString())}!`
 			);
 
 			if (userDBData) {
@@ -52,4 +48,21 @@ module.exports = class Daily extends Command {
 			}
 		}
 	}
+
+	formatTime (time) {
+		if (!time) return;
+		return moment.duration(time).format('d[d] h[h] m[m] s[s]');
+	  }
+
+	 convertMilliseconds (ms) {
+		const seconds = ~~(ms / 1000);
+		const minutes = ~~(seconds / 60);
+		const hours = ~~(minutes / 60);
+
+		return {
+		  hours: hours % 24,
+		  minutes: minutes % 60,
+		  seconds: seconds % 60,
+		};
+	  }
 };

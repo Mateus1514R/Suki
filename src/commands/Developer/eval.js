@@ -10,19 +10,18 @@ module.exports = class Eval extends Command {
 		this.category = 'Developer';
 		this.description = 'Executa código';
 		this.aliases = ['ev', 'e'];
+		this.staffOnly = true;
 	}
 
 	async execute ({ message, args }) {
-		if(!this.client.developers.some(x => x === message.author.id)) {return;}
 
 		if(!args[0]) {return;}
 
 		const clean = (text) => {
 			if (text === 'string') {
-				text = text
+				text = text.slice(0, 1970)
 					.replace(/`/g, `\`${String.fromCharCode(8203)}`)
-					.replace(/@/g, `@${String.fromCharCode(8203)}`)
-					.replace(new RegExp(process.env.TOKEN, 'gi'), '****');
+					.replace(/@/g, `@${String.fromCharCode(8203)}`);
 			}
 			return text;
 		};
@@ -33,11 +32,11 @@ module.exports = class Eval extends Command {
 
 			if (evaled instanceof Promise) {evaled = await evaled;}
 
-			message.reply(`Output \`\`\`js\n${clean(inspect(evaled, { depth: 0 }))}\n\`\`\``);
+			message.reply(`**Output**: \`\`\`js\n${clean(inspect(evaled, { depth: 0 }).replace(new RegExp(this.client.token, 'gi'), '******************').slice(0, 1970))}\n\`\`\``);
 
 		}
 		catch (error) {
-			message.reply(`Error \`\`\`js\n${error}\n\`\`\``);
+			message.reply(`**Error:** \`\`\`js\n${String(error.stack.slice(0, 1970))}\n\`\`\``);
 		}
 	}
 };

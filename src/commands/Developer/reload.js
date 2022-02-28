@@ -11,10 +11,10 @@ module.exports = class Reload extends Command {
 		this.category = 'Developer';
 		this.description = 'Reinicie um comando.';
 		this.aliases = ['rl'];
+		this.staffOnly = true;
 	}
 
-	async execute ({ message }) {
-		if(!this.client.developers.some(x => x === message.author.id)) {return;}
+	async execute ({ message, lang }) {
 
 		this.client.commands.sweep(() => true);
 
@@ -27,16 +27,16 @@ module.exports = class Reload extends Command {
 
 				const pull = require(file);
 				if (pull.name) {
-					client.commands.set(pull.name, pull);
+					this.client.commands.set(pull.name, pull);
 				}
 				if (pull.aliases && Array.isArray(pull.aliases)) {
 					pull.aliases.forEach((alias) => {
-						client.aliases.set(alias, pull.name);
+						this.client.aliases.set(alias, pull.name);
 					});
 				}
 			});
 		});
-		message.reply(`${e.Dev} | ${message.author}, comandos recarregados com sucesso.`);
+		message.reply(`${e.Dev} | ${message.author}, ${lang.commands.reload.success}`);
 
 	}
 };

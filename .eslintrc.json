@@ -12,7 +12,8 @@
     "globals": {
       "client": true
     },
-    "extends": "eslint:recommended",
+    "extends": ["prettier"],
+    "plugins": ["prettier"],
     "rules": {
       "no-unused-vars": "error",
       "no-undef": "warn",
@@ -104,9 +105,11 @@
         "error",
         "always"
       ],
+      "quote-props": ["error", "consistent-as-needed"],
       "quotes": [
         "error",
-        "single"
+        "single",
+        { "avoidEscape": true, "allowTemplateLiterals": true }
       ],
       "semi": [
         "error",

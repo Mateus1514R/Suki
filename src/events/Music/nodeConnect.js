@@ -6,7 +6,14 @@ module.exports = class {
 	}
 
 	async execute (node) {
-		console.log(c.green('✅ [Vulkava] - Node conectado.'));
+		console.log(c.green(`✅ [Lavalink] - ${node.identifier} conectado!`));
+
+		for (const player of [...this.client.music.players.values()].filter(p => p.node === node).values()) {
+			const position = player.position;
+			player.connect();
+			player.play({ startTime: position });
+		  }
+
 		setInterval(() => {
 			node.send({
 				op: 'ping',

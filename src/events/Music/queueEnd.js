@@ -5,10 +5,21 @@ module.exports = class {
 		this.client = client;
 	}
 
-	async run (player) {
+	async execute (player) {
 		const channel = this.client.channels.cache.get(player.textChannelId);
 
+		let lang = await this.client.guildDB.findOne({ guildId: channel.guild.id }) || 0;
+
+		switch(lang.lang) {
+		  case 1:
+		  lang = this.client.langs.pt;
+		  break;
+		  case 0:
+		  lang = this.client.langs.en;
+		  break;
+		}
+
 		player.destroy();
-		await channel.send(`${e.Music} A fila de música acabou, portanto eu sai do canal de voz.`);
+		await channel.send(`${e.Music} **${lang.events.musicEvents.queueEnd}**`);
 	}
 };

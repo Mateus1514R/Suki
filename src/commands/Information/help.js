@@ -1,4 +1,4 @@
-const { MessageSelectMenu, MessageActionRow } = require('discord.js');
+const { SelectMenuComponent, ActionRow, Embed, Util } = require('discord.js');
 const e = require('../../utils/Emojis');
 
 const Command = require('../../structures/Command');
@@ -14,11 +14,13 @@ module.exports = class Help extends Command {
 		this.aliases = ['ajuda'];
 	}
 
-	async execute ({ message, args }) {
+	async execute ({ message, args, lang }) {
 		const { commands } = this.client;
 
 		const block = [];
-		block.push('Developer');
+		if(!this.client.developers.some(x => x === message.author.id)) {
+			block.push('Developer');
+		}
 
 		const list = commands
 			.map((x) => x.category)
@@ -29,8 +31,9 @@ module.exports = class Help extends Command {
 
 		for (let value of list) {
 			menuOptions.push({
+				lang: lang,
 				value: value,
-				description: `Comandos da categoria **${value}**.`,
+				description: `${lang.commands.help.cmdCategory} **${value}**.`,
 				commandList: commands
 					.filter((x) => x.category === value)
 					.sort((a, b) => a.name.localeCompare(b.name))
@@ -39,14 +42,16 @@ module.exports = class Help extends Command {
 			});
 		}
 
-		const AJUDA = new this.client.embed(message.author)
+		const AJUDA = new Embed()
 			.setAuthor({
-				name: `${this.client.user.username} - Central de Ajuda`,
+				name: `${this.client.user.username} - ${lang.commands.help.embed1.author}`,
 				iconURL: this.client.user.displayAvatarURL({ size: 2048 })
 			})
-			.setColor('#7A0BC0');
+			.setTimestamp()
+			.setColor(Util.resolveColor('Purple'))
+			.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) });
 
-		if (!args[0]) return this.menu({ menuOptions, message });
+		if (!args[0]) return this.menu({ menuOptions, message, lang });
 
 		const name = args[0].toLowerCase();
 		const command =
@@ -55,19 +60,19 @@ module.exports = class Help extends Command {
 
 		if (!command) {
 			return message.reply(
-				`${e.Error} | ${message.author}, não encontrei o comando solicitado.`
+				`${e.Error} | ${message.author}, ${lang.commands.help.noCommand}`
 			);
 		}
 
 		AJUDA.addFields({
-			name: 'Informações do Comando:',
-			value: `> ${e.Dev} | Nome do Comando: **${command.name}**\n> ${e.Link} | Aliases: **${
+			name: String(`${lang.commands.help.helper.info}`),
+			value: `> ${e.Dev} | ${lang.commands.help.helper.name}: **${command.name}**\n> ${e.Link} | Aliases: **${
 				!command.aliases.length
-					? 'Este comando não tem aliases.'
+					? `${lang.commands.help.helper.noAliases}`
 					: command.aliases.join(', ')
-			}**\n> ${e.Archive} | Descrição: **${
+			}**\n> ${e.Archive} | ${lang.commands.help.helper.desc}: **${
 				!command.description.length
-					? 'Este comando não tem descrição.'
+					? `${lang.commands.help.helper.noDesc}`
 					: command.description
 			}**`,
 		});
@@ -75,14 +80,14 @@ module.exports = class Help extends Command {
 		await message.reply({ embeds: [AJUDA] });
 	}
 
-	async menu ({ menuOptions, message, }) {
-		const row = new MessageActionRow();
+	async menu ({ menuOptions, message, lang = String }) {
+		const row = new ActionRow();
 
-		const menu = new MessageSelectMenu()
+		const menu = new SelectMenuComponent()
 			.setCustomId('MenuSelection')
 			.setMaxValues(1)
 			.setMinValues(1)
-			.setPlaceholder('Selecione a categoria.');
+			.setPlaceholder(String(`${lang.commands.help.row.selectMenu}`));
 
 		menuOptions.forEach((option) => {
 			switch (option.value) {
@@ -90,45 +95,78 @@ module.exports = class Help extends Command {
 					menu.addOptions({
 						label: option.label ? option.label : option.value,
 						description:
-                'Comandos relacionados a configuração do bot na guilda.',
+                `${lang.commands.help.categorys.config}`,
 						value: option.value,
-						emoji: e.Bot,
+						emoji: {
+							name: 'Bot',
+							id: '945748531594014752',
+							animated: false
+						},
+					});
+					break;
+				}
+				case 'Developer': {
+					menu.addOptions({
+						label: option.label ? option.label : option.value,
+						description: `${lang.commands.help.categorys.developer}`,
+						value: option.value,
+						emoji: {
+							name: 'Dev',
+							id: '945747642573520936',
+							animated: false
+						},
 					});
 					break;
 				}
 				case 'Economy': {
 					menu.addOptions({
 						label: option.label ? option.label : option.value,
-						description: 'Comandos para utilizar a economia do Bot.',
+						description: `${lang.commands.help.categorys.economy}`,
 						value: option.value,
-						emoji: e.Crystal,
+						emoji: {
+							name: 'Crystal',
+							id: '945777633545830421',
+							animated: false
+						},
 					});
 					break;
 				}
 				case 'Information': {
 					menu.addOptions({
 						label: option.label ? option.label : option.value,
-						description: 'Comandos de algumas uteis informações diversas.',
+						description: `${lang.commands.help.categorys.info}`,
 						value: option.value,
-						emoji: e.Archive,
+						emoji: {
+							name: 'Archive',
+							id: '945671657987649536',
+							animated: false
+						},
 					});
 					break;
 				}
 				case 'Music': {
 					menu.addOptions({
 						label: option.label ? option.label : option.value,
-						description: 'Comandos para ouvir música utilizando o Bot.',
+						description: `${lang.commands.help.categorys.music}`,
 						value: option.value,
-						emoji: e.Music,
+						emoji: {
+							name: 'Music',
+							id: '946176382814261358',
+							animated: false
+						},
 					});
 					break;
 				}
 				case 'Miscellaneous': {
 					menu.addOptions({
 						label: option.label ? option.label : option.value,
-						description: 'Comandos sem categoria especifica.',
+						description: `${lang.commands.help.categorys.misc}`,
 						value: option.value,
-						emoji: e.World,
+						emoji: {
+							name: 'World',
+							id: '945481188326400011',
+							animated: false
+						},
 					});
 					break;
 				}
@@ -137,19 +175,17 @@ module.exports = class Help extends Command {
 
 		const server = await this.client.guildDB.findOne({ guildID: message.guild.id });
 
-		const EMBED = new this.client.embed(message.author)
-
+		const EMBED = new Embed()
 			.setAuthor({
-				name: `${this.client.user.username} - Central de Ajuda`,
+				name: `${this.client.user.username} - ${lang.commands.help.embed2.author}`,
 				iconURL: this.client.user.displayAvatarURL({ size: 2048 })
 			})
-			.setColor('#7A0BC0')
-			.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true, size: 2048 }) })
-			.setDescription(
-				`Olá ${message.author}, seja bem vindo a minha central de ajuda, aqui você terá acesso a todas as minhas funcionalidades disponíveis para seu uso!\n\nPara receber mais informação de algum comando, utilize **${!server.prefix ? 's!' : server.prefix}ajuda <comando>**.\nSelecione no menu abaixo a categoria que deseja ver.`
-			);
+			.setTimestamp()
+			.setColor(Util.resolveColor('Purple'))
+			.setFooter({ text: `${message.author.tag}`, iconURL: message.author.displayAvatarURL({ dynamic: true }) })
+			.setDescription(String(`${lang.commands.help.embed2.description}`).replace('{author}', message.author).replace('{prefix}', !server. prefix ? 's!' : server.prefix));
 
-		row.addComponents(menu);
+		row.setComponents(menu);
 
 		const msg = await message.reply({
 			embeds: [EMBED],
@@ -168,7 +204,7 @@ module.exports = class Help extends Command {
 		collector.on('collect', async (r) => {
 			if (r.user.id !== message.author.id) {
 				return r.reply({
-					content: `${e.Error} | ${r.user}, você precisa executar o comando para isso.`,
+					content: `${e.Error} | ${r.user}, ${lang.commands.help.noPerm}`,
 					ephemeral: true,
 				});
 			}
@@ -176,13 +212,13 @@ module.exports = class Help extends Command {
 			const menuOptionData = menuOptions.find((v) => v.value === r.values[0]);
 
 			EMBED.setDescription(
-				`Você está **vendo** os **comandos** da categoria **\`${menuOptionData.value}\`**`
+				`${lang.commands.help.commands} **\`${menuOptionData.value}\`**`
 			);
-			EMBED.fields = [];
-			EMBED.addField(
-				'Comandos:',
-				menuOptionData.commandList
-			);
+			EMBED.data.fields = [];
+			EMBED.addField({
+				name: String(`${lang.commands.help.field}`),
+				value: menuOptionData.commandList
+			});
 
 			await msg.edit({ embeds: [EMBED] }, true);
 			await r.deferUpdate();

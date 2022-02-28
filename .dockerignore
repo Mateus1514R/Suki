@@ -1,0 +1,8 @@
+node_modules/
+.github/
+.vscode/
+
+**.md
+!README.md
+renovate.json
+*.lock

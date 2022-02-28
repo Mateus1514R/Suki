@@ -12,14 +12,14 @@ module.exports = class Coins extends Command {
 		this.aliases = ['atm'];
 	}
 
-	async execute ({ message, args }) {
+	async execute ({ message, args, lang }) {
 
 		let USER = await this.client.getUser(args[0], message);
 		if(!USER) USER = message.author;
 
 		const user = await this.client.userDB.findOne({ _id: USER.id });
 
-		return message.reply(`${e.Crystal} | ${message.author}, ${USER == message.author ? 'você possui' : `o(a) ${USER.username} possui`} **${user.coins}** coins.`);
+		return message.reply(`${e.Crystal} | ${lang.commands.coins.money.replace('{user}', String(USER.tag)).replace('{value}', user.coins.toLocaleString())}`);
 
 	}
 };

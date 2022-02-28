@@ -7,19 +7,22 @@ Made by Niskii#6694 & vxk 🖤#1834
 
 ### 💻 Setup
 - Install nodejs 16 or higher [here](https://nodejs.org)
-- Rename env.example file to .env
+- Create a file called envirovments.yml
 
-> ⚙️ .env
+> ⚙️ envirovments.yml
 
-```js
-TOKEN=YOUR BOT TOKEN
-MONGODB_CONNECT=YOUR MONGOOSE CONNECTION
-LOGS_TOKEN=WEBHOOK LOGS TOKEN
-LOGS_ID=WEBHOOK LOGS ID
-SERVERS_LOG=SERVER LOGS ID
-LAVALINKHOST=LAVALINK HOST
-LAVALINKPASSWORD=LAVALINK PASSWORD
-SUGGEST_ID=CHANNEL SUGGEST ID
+```yml
+token: YOUR BOT TOKEN
+mongodb_connect: YOUR MONGOOSE CONNECTION
+logs_token: WEBHOOK LOGS TOKEN
+logs_id: WEBHOOK LOGS ID
+servers_log: SERVER LOGS ID
+suggest_channel: SUGGEST CHANNEL ID
+usalavalinkhost: USA LAVALINK HOST
+eulavalinkhost: EU LAVALINK HOST
+lavalinkpassword: LAVALINK PASSWORD
+spotifyclientid: SPOTIFY API CLIENT ID
+spotifyclientsecret: SPOTIFY API CLIENT SECRET
 ```
 
 ### ⬆️ Starting:
@@ -39,5 +42,9 @@ Ah! So you would like to contribute to my repository, right? Great! We love new 
 - Read [CONTRIBUTING.md](https://github.com/sukicorp/Suki/blob/main/.github/CONTRIBUTING.md) to make the pull request correctly
 - Once they're done, make a pull request to the master branch if you are contributing to the new version or the main branch if you are contributing to the stable and running version
 
+### 🌎 Translating:
+- If you want to contribute and help translating Suki, go to [our Crowdin page](https://crowdin.com/project/suki)!
+- For more information, visit [Suki's Locales repository](https://github.com/sukicorp/SukiLocales)
+
 ### ⛔ Issues:
-If you have any problems, pleas open a [Issue](https://github.com/sukicorp/Suki/issues) or [contact us](https://discord.gg/xBe7hABxMD)
+If you have any problems, please open a [Issue](https://github.com/sukicorp/Suki/issues) or [contact us](https://discord.gg/xBe7hABxMD)

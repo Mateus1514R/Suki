@@ -1,0 +1,21 @@
+name: Automatically merge Crowdin pull requests
+on:
+  pull_request:
+    branches: [ crowdin ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+          
+    - name: Automatically Merge Pull Request
+      uses: sudo-bot/action-pull-request-merge@v1.1.0
+      with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ github.event.pull_request.number }}
+          allowed-usernames-regex: ^Niskii3$
+          merge-method: squash
+          merge-title: "🤖 Automatically merge translations from Crowdin 🌎"

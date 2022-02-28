@@ -1,7 +1,8 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 const Command = require('../../structures/Command');
 const e = require('../../utils/Emojis');
 
-module.exports = class Daily extends Command {
+module.exports = class Pay extends Command {
 	constructor (client) {
 		super(client);
 		this.client = client;
@@ -12,34 +13,39 @@ module.exports = class Daily extends Command {
 		this.aliases = ['doar', 'pagar', 'enviar'];
 	}
 
-	async execute ({ message, args }) {
+	async execute ({ message, args, lang }) {
 
-		const user = this.client.userDB.findOne({ _id: message.author.id });
+		const user = await this.client.getUser(args[0], message);
 
-		const USER = this.client.users.cache.get(args[0]) || message.mentions.users.first();
-		if(!USER) return message.reply(`${e.Error} | ${message.author}, você precisa inserir o usuário que deseja fazer o pagamento.`);
-		if(USER.id == message.author.id) return message.reply(`${e.Error} | ${message.author}, você não pode enviar dinheiro para si mesmo.`);
+		const authorDB = await this.client.userDB.findOne({ _id: message.author.id });
 
-		const alvoDB = await this.client.userDB.findOne({ _id: USER.id });
+		if(!user) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.noMention}`);
 
-		const money = parseInt(args[1]);
-		if(!money) return message.reply(`${e.Error} | ${message.author}, você precisa inserir a quantia de dinheiro que deseja enviar ao usuário.`);
-		if(isNaN(money)) return message.reply(`${e.Error} | ${message.author}, você precisa inserir uma quantia válida.`);
-		if(money <= 0) return message.reply(`${e.Error} | ${message.author}, a quantia deve ser maior que 0.`);
-		if(money > user.coins) return message.reply(`${e.Error} | ${message.author}, você não possui dinheiro suficiente para realizar o pagamento.`);
+		const targetDB = await this.client.userDB.findOne({ _id: user.id });
 
-		if(alvoDB) {
-			alvoDB.coins = alvoDB.coins + money;
-			await alvoDB.save();
-		}
-		else {
-			await this.client.userDB.create({
-				_id: USER.id,
-				coins: money,
+		if (user.id == message.author.id) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.payYourSelf}!`);
+
+		const value = parseInt(args[1]);
+
+		if (!args[1] || value < 0 || isNaN(value)) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.validValue}`);
+
+		if(!targetDB) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.neverUsed}!`);
+
+		if (authorDB.coins < value) return message.reply(`${e.Error} | ${message.author}, ${lang.commands.pay.noCoins}`);
+
+	 	message.reply(`${e.Correct} | ${message.author}, ${lang.commands.pay.payed}`.replace('{}', value.toLocaleString()).replace('{user}', String(user.username)));
+
+		await this.client.userDB.findOneAndUpdate({ _id: message.author.id },
+			{
+			  $set: {
+					coins: authorDB.coins - value
+			  }
 			});
-		}
-
-		return message.reply(`${e.Correct} | ${message.author}, pagamento de **${money.toLocaleString()} coins** feito com sucesso para \`${USER.username}\`.`);
-
+		  await this.client.userDB.findOneAndUpdate({ _id: user.id },
+			{
+			  $set: {
+					coins: targetDB.coins + value
+			  }
+			});
 	}
 };

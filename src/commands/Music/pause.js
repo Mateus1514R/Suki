@@ -1,31 +1,31 @@
-const Command = require('../../structures/Command')
+const Command = require('../../structures/Command');
 
 module.exports = class Pause extends Command {
 	constructor (client) {
-		super(client)
+		super(client);
 		this.client = client;
 
-		this.name = 'pause'
-		this.category = 'Music'
-		this.description = ''
-		this.aliases = ['']
+		this.name = 'pause';
+		this.category = 'Music';
+		this.description = '';
+		this.aliases = [''];
 	}
 
-	async execute ({ message }) {
+	async execute ({ message, lang }) {
 
-    const player = this.client.music.players.get(message.guild.id)
+		const player = this.client.music.players.get(message.guild.id);
 
-		if(!player) return message.reply('Não tem nada tocando neste servidor!')
+		if(!player) return message.reply(`${lang.commands.pause.noPlayer}`);
 
-		if(!message.member.voice.channel) return message.reply('Você não está em um canal de voz')
-    
-		if(message.client.music.players.get(message.guild.id) != null && message.member.voice.channel.id != message.guild.me.voice.channel.id) return message.reply('Você precisa estar no mesmo canal que eu estou para modificar a fila!')
+		if(!message.member.voice.channel) return message.reply(`${lang.commands.pause.channelError}`);
 
-    if(player.paused) return message.reply('A música já se encontra pausada.')
+		if(message.client.music.players.get(message.guild.id) != null && message.member.voice.channel.id != message.guild.me.voice.channel.id) return message.reply(`${lang.commands.pause.channelError2}`);
 
-    player.pause(true)
+		if(player.paused) return message.reply(`${lang.commands.pause.alteradyPause}`);
 
-    message.reply('Música pausada com sucesso')
+		player.pause(true);
 
-  }
-}
+		message.reply(`${lang.commands.pause.success}`);
+
+	}
+};
