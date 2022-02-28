@@ -11,6 +11,7 @@ module.exports = class Language extends Command {
 		this.name = 'language';
 		this.category = 'Config';
 		this.aliases = ['setlang', 'setlanguage', 'lang'];
+		this.cooldown = 5;
 	}
 
 	async execute ({ message, lang }) {
@@ -19,7 +20,7 @@ module.exports = class Language extends Command {
 		}
 
 		const user = this.client.users.cache.get('847865068657836033');
-		const user1 = this.client.users.cache.get('417153124147396615');
+		const user1 = this.client.users.fetch('417153124147396615');
 
 		let brazil = new MessageButton();
 		brazil.setCustomId('brazil');

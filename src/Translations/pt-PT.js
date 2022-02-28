@@ -3,6 +3,7 @@ module.exports = {
 	events: {
 		messageCreate: {
 			mention: "Hi $, I'm **Suki**. My prefix here is **{}**. If you need help, use the command **{}help**!",
+			cooldown: "Wait \`{}\` seconds to run a command again!",
 			embed: {
 				title: '❌ An Error Occurred!',
 				description: 'Sorry, an error was encountered and the command did not execute correctly. I ask you to report the Bug to my developers and wait for it to be resolved. Thanks.'

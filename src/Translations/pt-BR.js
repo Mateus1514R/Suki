@@ -3,9 +3,10 @@ module.exports = {
 	events: {
 		messageCreate: {
 			mention: 'Oi $, eu sou a **Suki**. Meu prefixo neste servidor é **{}**. Se você precisar de ajuda, use o comando **{}help**!',
+			cooldown: "Aguarde \`{}\` segundos para executar o comando novamente!",
 			embed: {
 				title: '❌ Ocorreu um erro!',
-				description: 'Desculpe um erro ocorreu e o comando não foi executado corretamente. Eu peço para você reportar o erro para meus desenvolvedores e esperar que seja corrigido. Obrigado.'
+				description: 'Desculpe um erro ocorreu e o comando não foi executado corretamente. Eu peço para você reportar o erro para meus desenvolvedores e esperar que seja corrigido. Obrigado.',
 			}
 		},
 		musicEvents: { 
