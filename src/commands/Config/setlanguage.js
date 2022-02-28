@@ -22,7 +22,7 @@ module.exports = class Language extends Command {
 		}
 
 		const user = this.client.users.cache.get('847865068657836033');
-		const user1 = this.client.users.fetch('417153124147396615');
+		const user1 = await this.client.users.fetch('417153124147396615');
 
 		let brazil = new ButtonComponent();
 		brazil.setCustomId('brazil');
