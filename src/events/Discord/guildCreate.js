@@ -1,4 +1,4 @@
-const { Embed, Guild } = require('discord.js');
+const { Embed, Guild, Util } = require('discord.js');
 const e = require('../../utils/Emojis');
 
 const yaml = require('js-yaml');
@@ -28,7 +28,7 @@ module.exports = class guildCreate {
 				name: `${this.client.user.username} - Adicionado`,
 				iconURL: this.client.user.avatarURL(),
 			})
-			.setColor('#7A0BC0')
+			.setColor(Util.resolveColor('Purple'))
 			.setTimestamp()
 			.addFields(
 				{
