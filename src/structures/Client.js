@@ -20,9 +20,12 @@ module.exports = class SukiClient extends Client {
 		super(options);
 		this.commands = new Collection();
 		this.aliases = new Collection();
+		this.cooldowns = new Collection();
+
 		this.guildDB = guildDB;
 		this.userDB = userDB;
 		this.botDB = botDB;
+
 		this.langs = {
 			pt: require('../Translations/pt-BR.js'),
 			en: require('../Locales/en-US.js'),

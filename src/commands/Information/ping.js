@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 const Command = require('../../structures/Command');
-const fetch = require('node-fetch');
 const e = require('../../utils/Emojis');
 
 const yaml = require('js-yaml');
@@ -25,14 +24,12 @@ module.exports = class Ping extends Command {
 		const stopDB = process.hrtime(startDB);
 
 		const startLL = process.hrtime();
-		await fetch('http://lavalinkeua.herokuapp.com/version', {
-			headers: { Authorization: `${env.lavalinkpassword}` }
-		});
 		const stopLL = process.hrtime(startLL);
 
-		const lavalinkPing = Math.round((stopLL[0] * 1e9 + stopLL[1]) / 1e6);
+		const lavalinkUSAPing = await this.client.music.nodes.find(n => n.identifier === 'Suki 1').ping();
+		const lavalinkEuPing = await this.client.music.nodes.find(n => n.identifier === 'Suki 2').ping();
 		const pingDB = Math.round((stopDB[0] * 1e9 + stopDB[1]) / 1e6);
 
-		message.reply(`🏓 | ${e.World} | API Ping: **${this.client.ws.ping}ms**\n${e.Database} | Database Ping: **${pingDB}ms**\n${e.Lava} | Lavalink Ping: **${lavalinkPing}ms**`);
+		message.reply(`${e.World} | API Ping: **${this.client.ws.ping}ms**\n${e.Database} | Database Ping: **${pingDB}ms**\n${e.Lava} | Lavalink Ping: **${lavalinkUSAPing}ms & ${lavalinkEuPing}ms**`);
 	}
 };
