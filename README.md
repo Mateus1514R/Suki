@@ -15,8 +15,9 @@ Made by Niskii#6694 & vxk 🖤#1834
 token: YOUR BOT TOKEN
 mongodb_connect: YOUR MONGOOSE CONNECTION
 logs_token: WEBHOOK LOGS TOKEN
+logs_id: WEBHOOK LOGS ID
 servers_log: SERVER LOGS ID
-suggest_id: CHANNEL SUGGEST ID
+suggest_channel: SUGGEST CHANNEL ID
 usalavalinkhost: USA LAVALINK HOST
 eulavalinkhost: EU LAVALINK HOST
 lavalinkpassword: LAVALINK PASSWORD
