@@ -36,7 +36,7 @@ module.exports = class Eval extends Command {
 
 		}
 		catch (error) {
-			message.reply(`**Error**: \`\`\`js\n${String(error.stack.slice(0, 1970))}\n\`\`\``);
+			message.reply(`**Error:** \`\`\`js\n${String(error.stack.slice(0, 1970))}\n\`\`\``);
 		}
 	}
 };
