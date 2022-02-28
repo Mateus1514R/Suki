@@ -10,7 +10,7 @@ module.exports = class {
 
 		let lang = await this.client.guildDB.findOne({ guildId: channel.guild.id }) || 0;
 
-		switch(lang) {
+		switch(lang.lang) {
 		  case 1:
 		  lang = this.client.langs.pt;
 		  break;

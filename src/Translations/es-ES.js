@@ -10,6 +10,9 @@ module.exports = {
 		},
 		musicEvents: {
 			queueEnd: 'The music queue ended, so I left the voice channel.'
+		},
+		guildmemberadd: {
+			button: 'Message configured by {} team'
 		}
 	},
 	commands: {

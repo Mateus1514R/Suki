@@ -98,7 +98,7 @@ module.exports = class SukiClient extends Client {
 	async commandLogs (content) {
 		const webhookClient = new WebhookClient({
 			token: String(env.logs_token),
-			id: '946563655003144212',
+			id: env.logs_id,
 		});
 		webhookClient.send({
 			embeds: [content],

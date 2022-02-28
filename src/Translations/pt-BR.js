@@ -8,7 +8,12 @@ module.exports = {
 				description: 'Desculpe um erro ocorreu e o comando não foi executado corretamente. Eu peço para você reportar o erro para meus desenvolvedores e esperar que seja corrigido. Obrigado.'
 			}
 		},
-		musicEvents: { queueEnd: 'A fila de músicas acabou, então eu saí do canal de voz.' }
+		musicEvents: { 
+			queueEnd: 'A fila de músicas acabou, então eu saí do canal de voz.' 
+		},
+		guildmemberadd: {
+			button: 'Mensagem configurada pela equipe {}'
+		}
 	},
 	commands: {
 		lang: {

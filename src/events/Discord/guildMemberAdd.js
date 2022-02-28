@@ -1,4 +1,4 @@
-const { MessageActionRow, MessageButton } = require('discord.js');
+const { MessageActionRow, MessageButton, Guild } = require('discord.js');
 const e = require('../../utils/Emojis');
 
 module.exports = class {
@@ -6,17 +6,27 @@ module.exports = class {
 		this.client = client;
 	}
 
-	async execute (member) {
-		let guild = member.guild;
+	async execute (member = Guild) {
+		let lang = await this.client.guildDB.findOne({ guildID: member.guild.id }) || 0;
 
-		const server = await this.client.guildDB.findOne({ guildID: guild.id });
+		switch(lang.lang) {
+		  case 1:
+		  lang = this.client.langs.pt;
+		  break;
+		  case 0:
+		  lang = this.client.langs.en;
+		  break;
+		}
+
+
+		const server = await this.client.guildDB.findOne({ guildID: member.guild.id });
 		if (server.welcome.status == true) {
 			const channel = this.client.channels.cache.get(server.welcome.channel);
 
 			const row = new MessageActionRow().addComponents(
 				new MessageButton()
 					.setCustomId('configured')
-					.setLabel(`Message configured by ${guild.name} team`)
+					.setLabel(String(`${lang.events.guildmemberadd.button}`.replace('{}', member.guild.name)))
 					.setStyle('SECONDARY')
 					.setEmoji(e.Lock)
 					.setDisabled(true)
@@ -26,8 +36,8 @@ module.exports = class {
 				content: server.welcome.message
 					.replace('[user]', `<@${member.id}>`)
 					.replace('[name]', `${member.user.username}`)
-					.replace('[total]', guild.memberCount)
-					.replace('[guild]', guild.name),
+					.replace('[total]', member.guild.memberCount)
+					.replace('[guild]', member.guild.name),
 				components: [row],
 			});
 
